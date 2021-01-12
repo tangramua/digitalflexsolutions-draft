@@ -4,4 +4,4 @@ public
 .env
 .cache
 .git
-.idea/
+.idea
