@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 import { useStaticQuery, graphql } from "gatsby"
 import { MdPhone, MdPlace, MdSearch } from "react-icons/md";
 import { Container, Row, Col } from '../../../../components/ui/wrapper'
-import Text from '../../../../components/ui/text'
-import Anchor from '../../../../components/ui/anchor'
+// import Text from '../../../../components/ui/text'
+// import Anchor from '../../../../components/ui/anchor'
 import Logo from '../../../../components/logo'
 import Clickable from '../../../../components/ui/clickable'
 import { MainMenu, MobileMenu } from '../../../../components/menu'
@@ -29,60 +29,61 @@ import {
 
 const Header = ({ props, ...styles }) => {
     const menuData = useStaticQuery(graphql`
-        query MenuContentfulQuery {
-          allContentfulNavigation(filter: {codeId: {eq: "top-navigation"}}) {
-            edges {
-              node {
-                id
-                internalName
-                navigationItems {
-                  internalName
+    query MenuContentfulQuery {
+      allContentfulNavigation(filter: {codeId: {eq: "top-navigation"}}) {
+        edges {
+          node {
+            id
+            internalName
+            navigationItems {
+              externalName
+              mainLink {
+                externalName
+                page {
+                  externalName
+                  slug
+                }
+              }
+              navigationLinks {
+                ... on ContentfulLink {
+                  id
+                  externalName
+                  page {
+                    externalName
+                    slug
+                  }
+                }
+                ... on ContentfulNavigationItem {
+                  id
+                  externalName
                   mainLink {
-                    internalName
+                    externalName
                     page {
-                      internalName
+                      externalName
                       slug
                     }
                   }
                   navigationLinks {
-                    internalName
-                    page {
-                      internalName
-                      slug
+                    ... on ContentfulLink {
+                      id
+                      externalName
+                      page {
+                        externalName
+                        slug
+                      }
                     }
-                  }
-                  id
+                  }                  
                 }
               }
+              id
+              isMegaMenu
             }
           }
         }
+      }
+    }
     `)
 
-    // const headerData = useStaticQuery(graphql`
-    //     query HeaderThreeDataQuery {
-    //         allMenuJson {
-    //             edges {
-    //                 node {
-    //                     id
-    //                     text
-    //                     link
-    //                     submenu {
-    //                         link
-    //                         text
-    //                     }
-    //                     megamenu {
-    //                         title
-    //                         submenu {
-    //                             link
-    //                             text
-    //                         }
-    //                     }
-    //                 }
-    //             }
-    //         }
-    //     }
-    // `);
     const [flyoutOpen, setFlyoutOpen] = useState(false);
     const [offCanvasOpen, setOffcanvasOpen] = useState(false);
     const [fixedHeaderHeight, setFixedHeaderHeight] = useState(0);
@@ -119,7 +120,6 @@ const Header = ({ props, ...styles }) => {
     }, [sticky, totalHeaderHeight]);
 
     const { noticeStyle, phoneElStyle, searchElStyle, logoStyle, burgerBtnElStyle, transparent } = styles;
-    // const menuArr = headerData.allMenuJson.edges;
     const menuArr = menuData.allContentfulNavigation.edges[0].node.navigationItems;
 
     return (

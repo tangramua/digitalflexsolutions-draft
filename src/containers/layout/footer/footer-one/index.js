@@ -65,37 +65,36 @@ const Footer = ({ copyrightStyle, ...props }) => {
                         </Col>
                         <Col lg={3} md={4} sm={6}>
                             <FooterWidget responsive={{ medium: { mb: '31px' } }}>
-                                <Heading as="h6" mt="-3px" mb="20px">IT Services</Heading>
+                                <Heading as="h6" mt="-3px" mb="20px">Quick links</Heading>
                                 <FooterWidgetList>
-                                    <li><Anchor path="/" color="textColor" hoverstyle="2">Managed IT</Anchor></li>
-                                    <li><Anchor path="/" color="textColor" hoverstyle="2">IT Support</Anchor></li>
-                                    <li><Anchor path="/" color="textColor" hoverstyle="2">IT Consultancy</Anchor></li>
-                                    <li><Anchor path="/" color="textColor" hoverstyle="2">Cloud Computing</Anchor></li>
-                                    <li><Anchor path="/" color="textColor" hoverstyle="2">Cyber Security</Anchor></li>
+                                    <li><Anchor path="/" color="textColor" hoverstyle="2">Home</Anchor></li>
+                                    <li><Anchor path="/service" color="textColor" hoverstyle="2">Services</Anchor></li>
+                                    <li><Anchor path="/technology" color="textColor" hoverstyle="2">Technology</Anchor></li>
+                                    <li><Anchor path="/about-us" color="textColor" hoverstyle="2">About Us</Anchor></li>
+                                    <li><Anchor path="/contact-as" color="textColor" hoverstyle="2">Contact Us</Anchor></li>
                                 </FooterWidgetList>
                             </FooterWidget>
                         </Col>
                         <Col lg={3} md={4} sm={6}>
                             <FooterWidget responsive={{ medium: { mb: '27px' } }}>
-                                <Heading as="h6" mt="-3px" mb="20px">Quick links</Heading>
+                                <Heading as="h6" mt="-3px" mb="20px">Services</Heading>
                                 <FooterWidgetList>
-                                    <li><Anchor path="/" color="textColor" hoverstyle="2">Pick up locations</Anchor></li>
-                                    <li><Anchor path="/" color="textColor" hoverstyle="2">Terms of Payment</Anchor></li>
-                                    <li><Anchor path="/" color="textColor" hoverstyle="2">Privacy Policy</Anchor></li>
-                                    <li><Anchor path="/" color="textColor" hoverstyle="2">Where to Find Us</Anchor></li>
+                                    <li><Anchor path="/" color="textColor" hoverstyle="2">Digital Promotion Services</Anchor></li>
+                                    <li><Anchor path="/" color="textColor" hoverstyle="2">DPA - Digital Process Automation</Anchor></li>
+                                    <li><Anchor path="/" color="textColor" hoverstyle="2">Business Analytics</Anchor></li>
+                                    <li><Anchor path="/" color="textColor" hoverstyle="2">Chatbot Services</Anchor></li>
                                 </FooterWidgetList>
                             </FooterWidget>
                         </Col>
                         <Col lg={3} md={4} sm={6}>
                             <FooterWidget>
-                                <Heading as="h6" mt="-3px" mb="20px">Support</Heading>
-                                <FooterWidgetList>
-                                    <li><Anchor path="/" color="textColor" hoverstyle="2">Forum Support</Anchor></li>
-                                    <li><Anchor path="/" color="textColor" hoverstyle="2">Help &amp; FAQ</Anchor></li>
-                                    <li><Anchor path="/" color="textColor" hoverstyle="2">Contact Us</Anchor></li>
-                                    <li><Anchor path="/" color="textColor" hoverstyle="2">Pricing and plans</Anchor></li>
-                                    <li><Anchor path="/" color="textColor" hoverstyle="2">Cookies Policy</Anchor></li>
-                                </FooterWidgetList>
+                                <Heading as="h6" mt="-3px" mb="20px">Contact Us</Heading>
+                                <TextWidget>
+                                    {address && <Text mb="10px">{address}</Text>}
+                                    {email && <Text mb="10px"><Anchor path={`mailto:${email}`} color="textColor" hoverstyle="2">{email}</Anchor></Text>}
+                                    {phone && <Text mb="10px"><Anchor path={`tel:${phone}`} fontWeight="800" color="#333" hoverstyle="2">{phone}</Anchor></Text>}
+                                    {website && <Text mb="10px"><Anchor path={website} hoverstyle="2">{website}</Anchor></Text>}
+                                </TextWidget>
                             </FooterWidget>
                         </Col>
                     </Row>

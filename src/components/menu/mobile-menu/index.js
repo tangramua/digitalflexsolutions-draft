@@ -34,20 +34,12 @@ export const MobileMenu = ({ menuData, headingStyle }) => {
     }
 
     const menuarr = menuData;
-    console.log('mobile menuarr', menuarr)
-
     return (
         <MobileMenuWrap>
             <NavBar>
                 {menuarr.map((menu, i) => {
-                    // const submenu = menu.node.submenu ? menu.node.submenu : null;
-                    // const megamenu = menu.node.megamenu ? menu.node.megamenu : null;
-
                     const submenu = menu.navigationLinks ? menu.navigationLinks : null
-                    // const submenu = null
                     const megamenu =  null;
-
-                    console.log('mobile submenu', menu.navigationLinks)
 
                     const menuIndex = i;
                     return (
@@ -58,7 +50,7 @@ export const MobileMenu = ({ menuData, headingStyle }) => {
                             className="menu-item"
                             id={`menu-item-${menuIndex}`}>
 
-                            <NavLink path={menu.mainLink.page.slug}>{menu.mainLink.internalName}</NavLink>
+                            <NavLink path={menu.mainLink.page.slug}>{menu.mainLink.externalName}</NavLink>
                             {(submenu || megamenu) && (
                                 <ExpandButton onClick={(e) => onClickHandler(e, `#menu-item-${menuIndex}`)} />
                             )}
@@ -66,7 +58,11 @@ export const MobileMenu = ({ menuData, headingStyle }) => {
                             {submenu && (
                                 <Submenu>
                                     {submenu.map((subitem, j) => {
-                                        const submenuLevelTwo = subitem.submenu;
+                                        const submenuLevelTwo = subitem.navigationLinks ? subitem.navigationLinks : null;
+
+                                        const submenuLink = subitem.navigationLinks ? subitem.mainLink.page.slug : subitem.page.slug
+                                        const submenuText = subitem.navigationLinks ? subitem.mainLink.externalName : subitem.externalName
+
                                         const submenuIndex = j;
                                         return (
                                             <NavItem
@@ -74,7 +70,7 @@ export const MobileMenu = ({ menuData, headingStyle }) => {
                                                 className="menu-item"
                                                 id={`submenu-item-${menuIndex}${submenuIndex}`}>
 
-                                                <NavLink path={subitem.page.slug}>{subitem.internalName}</NavLink>
+                                                <NavLink path={submenuLink}>{submenuText}</NavLink>
                                                 {submenuLevelTwo && <ExpandButton onClick={(e) => onClickHandler(e, `#submenu-item-${menuIndex}${submenuIndex}`)} />}
                                                 {submenuLevelTwo && (
                                                     <Submenu>
@@ -85,7 +81,7 @@ export const MobileMenu = ({ menuData, headingStyle }) => {
                                                                     key={`submenu-${menu.id}-${submenuIndex}-${subsubmenuIndex}`}
                                                                     className="menu-item"
                                                                     id={`submenu-item-${menuIndex}${submenuIndex}${subsubmenuIndex}`}>
-                                                                    <NavLink path={subitemLevelTwo.mainLink.page.slug}>{subitemLevelTwo.mainLink.internalName}</NavLink>
+                                                                    <NavLink path={subitemLevelTwo.page.slug}>{subitemLevelTwo.externalName}</NavLink>
                                                                 </NavItem>
                                                             )
                                                         })}
@@ -131,95 +127,6 @@ export const MobileMenu = ({ menuData, headingStyle }) => {
             </NavBar>
         </MobileMenuWrap>
     )
-
-    // return (
-    //     <MobileMenuWrap>
-    //         <NavBar>
-    //             {menuarr.map((menu, i) => {
-    //                 const submenu = menu.node.submenu ? menu.node.submenu : null;
-    //                 const megamenu = menu.node.megamenu ? menu.node.megamenu : null;
-    //                 const menuIndex = i;
-    //                 return (
-    //                     <NavItem
-    //                         key={`mainmenu-${menu.node.id}`}
-    //                         hasSubmenu={submenu}
-    //                         hasMegamenu={megamenu}
-    //                         className="menu-item"
-    //                         id={`menu-item-${menuIndex}`}>
-    //
-    //                         <NavLink path={menu.node.link}>{menu.node.text}</NavLink>
-    //                         {(submenu || megamenu) && (
-    //                             <ExpandButton onClick={(e) => onClickHandler(e, `#menu-item-${menuIndex}`)} />
-    //                         )}
-    //
-    //                         {submenu && (
-    //                             <Submenu>
-    //                                 {submenu.map((subitem, j) => {
-    //                                     const submenuLevelTwo = subitem.submenu;
-    //                                     const submenuIndex = j;
-    //                                     return (
-    //                                         <NavItem
-    //                                             key={`submenu-${menu.node.id}-${submenuIndex}`}
-    //                                             className="menu-item"
-    //                                             id={`submenu-item-${menuIndex}${submenuIndex}`}>
-    //
-    //                                             <NavLink path={subitem.link}>{subitem.text}</NavLink>
-    //                                             {submenuLevelTwo && <ExpandButton onClick={(e) => onClickHandler(e, `#submenu-item-${menuIndex}${submenuIndex}`)} />}
-    //                                             {submenuLevelTwo && (
-    //                                                 <Submenu>
-    //                                                     {submenuLevelTwo.map((subitemLevelTwo, k) => {
-    //                                                         const subsubmenuIndex = k;
-    //                                                         return (
-    //                                                             <NavItem
-    //                                                                 key={`submenu-${menu.node.id}-${submenuIndex}-${subsubmenuIndex}`}
-    //                                                                 className="menu-item"
-    //                                                                 id={`submenu-item-${menuIndex}${submenuIndex}${subsubmenuIndex}`}>
-    //                                                                 <NavLink path={subitemLevelTwo.link}>{subitemLevelTwo.text}</NavLink>
-    //                                                             </NavItem>
-    //                                                         )
-    //                                                     })}
-    //                                                 </Submenu>
-    //                                             )}
-    //                                         </NavItem>
-    //                                     )
-    //                                 })}
-    //                             </Submenu>
-    //                         )}
-    //                         {megamenu && (
-    //                             <Megamenu>
-    //                                 {megamenu.map((megaitem, i) => {
-    //                                     const megaSubmenu = megaitem.submenu;
-    //                                     const megaIndex = i;
-    //                                     return (
-    //                                         <NavItem key={`megamenu-${menu.node.id}-${megaIndex}`} id={`megamenu-${menu.node.id}-${megaIndex}`}>
-    //                                             <Heading {...headingStyle}>
-    //                                                 <span>{megaitem.title}</span>
-    //                                                 <ExpandButton onClick={(e) => onClickHandler(e, `#megamenu-${menu.node.id}-${megaIndex}`)} />
-    //                                             </Heading>
-    //                                             {megaSubmenu && (
-    //                                                 <Submenu>
-    //                                                     {megaSubmenu.map((megaSubitem, i) => {
-    //                                                         return (
-    //                                                             <NavItem key={`megasubmenu-${megaIndex}-${i}`}>
-    //                                                                 <NavLink path={megaSubitem.link}>
-    //                                                                     <span>{megaSubitem.text}</span>
-    //                                                                 </NavLink>
-    //                                                             </NavItem>
-    //                                                         )
-    //                                                     })}
-    //                                                 </Submenu>
-    //                                             )}
-    //                                         </NavItem>
-    //                                     )
-    //                                 })}
-    //                             </Megamenu>
-    //                         )}
-    //                     </NavItem>
-    //                 )
-    //             })}
-    //         </NavBar>
-    //     </MobileMenuWrap>
-    // )
 }
 
 MobileMenu.defaultProps = {

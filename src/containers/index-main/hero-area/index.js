@@ -1,15 +1,17 @@
 import React, { Fragment, useState } from 'react'
 import PropTypes from 'prop-types'
 import { useStaticQuery, graphql } from "gatsby"
-import parse from 'html-react-parser'
-import { Container, Row, Col } from '../../../components/ui/wrapper'
-import Heading from '../../../components/ui/heading'
-import Text from '../../../components/ui/text'
-import Button from '../../../components/ui/button'
-import VideoButton from '../../../components/ui/video-button'
-import Image from '../../../components/image'
-import ModalVideo from '../../../components/ui/modal-video'
-import { HeroWrapper, HeroBtnGroup, HeroTextBox, ImageBox } from './hero-area.style'
+// import parse from 'html-react-parser'
+// import { Container, Row, Col } from '../../../components/ui/wrapper'
+// import Heading from '../../../components/ui/heading'
+// import Text from '../../../components/ui/text'
+// import Button from '../../../components/ui/button'
+// import VideoButton from '../../../components/ui/video-button'
+// import Image from '../../../components/image'
+// import ModalVideo from '../../../components/ui/modal-video'
+// import { HeroWrapper, HeroBtnGroup, HeroTextBox, ImageBox } from './hero-area.style'
+
+import Img from 'gatsby-image'
 
 const HeroArea = (props) => {
     const HeroData = useStaticQuery(graphql`
@@ -59,36 +61,7 @@ const HeroArea = (props) => {
         video_channel = video_link.split(".")[1];
     }
     return (
-        <Fragment>
-            <HeroWrapper fluid={bg_image.childImageSharp.fluid}>
-                <Container>
-                    <Row alignitems="center">
-                        <Col lg={8} md={7}>
-                            <HeroTextBox>
-                                {subtitle && <Heading {...subtitleStyle}>{subtitle}</Heading>}
-                                {title && <Heading {...titleStyle}>{parse(title)}</Heading>}
-                                {text && <Text {...textStyle}>{text}</Text>}
-                                <HeroBtnGroup>
-                                    {link && <Button to={link} {...btnStyle}>Free Sample</Button>}
-                                    {video_link && <VideoButton onClick={modalVideoOpen} {...videoBtnStyle} text="How we work" />}
-                                </HeroBtnGroup>
-                            </HeroTextBox>
-                        </Col>
-                        <Col lg={4} md={5}>
-                            <ImageBox>
-                                <Image fluid={image.childImageSharp.fluid} />
-                            </ImageBox>
-                        </Col>
-                    </Row>
-                </Container>
-            </HeroWrapper>
-            <ModalVideo
-                channel={video_channel}
-                videoId={video_id}
-                isOpen={videoOpen}
-                onClose={modalVideoClose}
-            />
-        </Fragment>
+            <Img fluid={bg_image.childImageSharp.fluid} alt="" />
     )
 }
 

@@ -7,41 +7,37 @@ import Heading from '../../ui/heading'
 
 export const MainMenu = ({ headingStyle, menuData, ...props }) => {
     const menuarr = menuData;
-    console.log('menuData', menuarr)
+    // console.log('menuData', menuarr)
 
     return (
         <MainMenuWrap {...props}>
             <NavBar>
                 {menuarr.map(menu => {
-                    // const submenu = menu.node.submenu ? menu.node.submenu : null;
-                    // const megamenu = menu.node.megamenu ? menu.node.megamenu : null;
-
                     const submenu = menu.navigationLinks ? menu.navigationLinks : null
-                    // const submenu = null
-                    const megamenu =  null;
+                    const megamenu = null
+
+                    // const megamenu =  menu.navigationLinks && menu.isMegaMenu ? menu.navigationLinks : null
 
                     return (
                         <NavItem key={`mainmenu-${menu.id}`} hasSubmenu={submenu} hasMegamenu={megamenu}>
                             <NavLink path={menu.mainLink.page.slug} hassubmenu={(submenu || megamenu) ? "true" : "false"}>
-                                <span>{menu.mainLink.internalName}</span>
+                                <span>{menu.mainLink.externalName}</span>
                                 {(submenu || megamenu) && <MdKeyboardArrowDown className="icon" />}
                             </NavLink>
                             {submenu && (
                                 <Submenu>
                                     {submenu.map((subitem, i) => {
-                                        // const hasSubmenuLevelTwo = subitem.isSubmenu;
-                                        // const submenuLevelTwo = subitem.submenu;
+                                        const hasSubmenuLevelTwo = !!subitem.navigationLinks;
+                                        const submenuLevelTwo = subitem.navigationLinks  ? subitem.navigationLinks : null;
 
-                                        const hasSubmenuLevelTwo = !!subitem.navigationItems;
-                                        const submenuLevelTwo = subitem.navigationItems && subitem.navigationItems.navigationLinks ? subitem.navigationItems.navigationLinks : null;
-                                        // const hasSubmenuLevelTwo = false;
-                                        // const submenuLevelTwo = null;
+                                        const submenuLink = hasSubmenuLevelTwo ? subitem.mainLink.page.slug : subitem.page.slug
+                                        const submenuText = hasSubmenuLevelTwo ? subitem.mainLink.externalName : subitem.externalName
 
                                         const submenuIndex = i;
                                         return (
                                             <NavItem key={`submenu-${menu.id}-${submenuIndex}`}>
-                                                <NavLink path={subitem.page.slug}>
-                                                    <span>{subitem.internalName}</span>
+                                                <NavLink path={submenuLink}>
+                                                    <span>{submenuText}</span>
                                                     {hasSubmenuLevelTwo && <MdKeyboardArrowRight className="icon" />}
                                                 </NavLink>
                                                 {submenuLevelTwo && (
@@ -50,7 +46,7 @@ export const MainMenu = ({ headingStyle, menuData, ...props }) => {
                                                             const subsubmenuIndex = j;
                                                             return (
                                                                 <NavItem key={`submenu-${menu.id}-${submenuIndex}-${subsubmenuIndex}`}>
-                                                                    <NavLink path={subitemLevelTwo.mainLink.page.slug}>{subitemLevelTwo.mainLink.internalName}</NavLink>
+                                                                    <NavLink path={subitemLevelTwo.page.slug}>{subitemLevelTwo.externalName}</NavLink>
                                                                 </NavItem>
                                                             )
                                                         })}
@@ -67,15 +63,15 @@ export const MainMenu = ({ headingStyle, menuData, ...props }) => {
                                         const megaSubmenu = megaitem.submenu;
                                         const megaIndex = i;
                                         return (
-                                            <NavItem key={`megamenu-${menu.node.id}-${megaIndex}`}>
-                                                <Heading {...headingStyle}>{megaitem.title}</Heading>
+                                            <NavItem key={`megamenu-${menu.id}-${megaIndex}`}>
+                                                <Heading {...headingStyle}>{megaitem.externalName}</Heading>
                                                 {megaSubmenu && (
                                                     <Submenu>
                                                         {megaSubmenu.map((megaSubitem, i) => {
                                                             return (
                                                                 <NavItem key={`megasubmenu-${megaIndex}-${i}`}>
-                                                                    <NavLink path={megaSubitem.link}>
-                                                                        <span>{megaSubitem.text}</span>
+                                                                    <NavLink path={megaSubitem.page.slug}>
+                                                                        <span>{megaSubitem.externalName}</span>
                                                                     </NavLink>
                                                                 </NavItem>
                                                             )
@@ -93,88 +89,6 @@ export const MainMenu = ({ headingStyle, menuData, ...props }) => {
             </NavBar>
         </MainMenuWrap>
     )
-
-
-    // return (
-    //     <MainMenuWrap {...props}>
-    //         <NavBar>
-    //             {menuarr.map(menu => {
-    //                 const submenu = menu.node.submenu ? menu.node.submenu : null;
-    //
-    //                 console.log('submenu', menu.node.submenu ? menu.node.submenu : null)
-    //
-    //                 const megamenu = menu.node.megamenu ? menu.node.megamenu : null;
-    //                 return (
-    //                     <NavItem key={`mainmenu-${menu.node.id}`} hasSubmenu={submenu} hasMegamenu={megamenu}>
-    //                         <NavLink path={menu.node.link} hassubmenu={(submenu || megamenu) ? "true" : "false"}>
-    //                             <span>{menu.node.text}</span>
-    //                             {(submenu || megamenu) && <MdKeyboardArrowDown className="icon" />}
-    //                         </NavLink>
-    //                         {submenu && (
-    //                             <Submenu>
-    //                                 {submenu.map((subitem, i) => {
-    //                                     const hasSubmenuLevelTwo = subitem.isSubmenu;
-    //                                     const submenuLevelTwo = subitem.submenu;
-    //
-    //                                     console.log('subitem', subitem)
-    //                                     console.log('submenuLevelTwo', subitem.submenu)
-    //
-    //                                     const submenuIndex = i;
-    //                                     return (
-    //                                         <NavItem key={`submenu-${menu.node.id}-${submenuIndex}`}>
-    //                                             <NavLink path={subitem.link}>
-    //                                                 <span>{subitem.text}</span>
-    //                                                 {hasSubmenuLevelTwo && <MdKeyboardArrowRight className="icon" />}
-    //                                             </NavLink>
-    //                                             {submenuLevelTwo && (
-    //                                                 <Submenu>
-    //                                                     {submenuLevelTwo.map((subitemLevelTwo, j) => {
-    //                                                         const subsubmenuIndex = j;
-    //                                                         return (
-    //                                                             <NavItem key={`submenu-${menu.node.id}-${submenuIndex}-${subsubmenuIndex}`}>
-    //                                                                 <NavLink path={subitemLevelTwo.link}>{subitemLevelTwo.text}</NavLink>
-    //                                                             </NavItem>
-    //                                                         )
-    //                                                     })}
-    //                                                 </Submenu>
-    //                                             )}
-    //                                         </NavItem>
-    //                                     )
-    //                                 })}
-    //                             </Submenu>
-    //                         )}
-    //                         {megamenu && (
-    //                             <Megamenu>
-    //                                 {megamenu.map((megaitem, i) => {
-    //                                     const megaSubmenu = megaitem.submenu;
-    //                                     const megaIndex = i;
-    //                                     return (
-    //                                         <NavItem key={`megamenu-${menu.node.id}-${megaIndex}`}>
-    //                                             <Heading {...headingStyle}>{megaitem.title}</Heading>
-    //                                             {megaSubmenu && (
-    //                                                 <Submenu>
-    //                                                     {megaSubmenu.map((megaSubitem, i) => {
-    //                                                         return (
-    //                                                             <NavItem key={`megasubmenu-${megaIndex}-${i}`}>
-    //                                                                 <NavLink path={megaSubitem.link}>
-    //                                                                     <span>{megaSubitem.text}</span>
-    //                                                                 </NavLink>
-    //                                                             </NavItem>
-    //                                                         )
-    //                                                     })}
-    //                                                 </Submenu>
-    //                                             )}
-    //                                         </NavItem>
-    //                                     )
-    //                                 })}
-    //                             </Megamenu>
-    //                         )}
-    //                     </NavItem>
-    //                 )
-    //             })}
-    //         </NavBar>
-    //     </MainMenuWrap>
-    // )
 }
 
 MainMenu.propTypes = {

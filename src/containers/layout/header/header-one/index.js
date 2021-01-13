@@ -29,61 +29,60 @@ import {
 
 const Header = (props) => {
     const menuData = useStaticQuery(graphql`
-        query HeaderOneMenuContentfulQuery {
-          allContentfulNavigation(filter: {codeId: {eq: "top-navigation"}}) {
-            edges {
-              node {
-                id
-                internalName
-                navigationItems {
-                  internalName
+    query HeaderOneMenuContentfulQuery {
+      allContentfulNavigation(filter: {codeId: {eq: "top-navigation"}}) {
+        edges {
+          node {
+            id
+            internalName
+            navigationItems {
+              externalName
+              mainLink {
+                externalName
+                page {
+                  externalName
+                  slug
+                }
+              }
+              navigationLinks {
+                ... on ContentfulLink {
+                  id
+                  externalName
+                  page {
+                    externalName
+                    slug
+                  }
+                }
+                ... on ContentfulNavigationItem {
+                  id
+                  externalName
                   mainLink {
-                    internalName
+                    externalName
                     page {
-                      internalName
+                      externalName
                       slug
                     }
                   }
                   navigationLinks {
-                    internalName
-                    page {
-                      internalName
-                      slug
+                    ... on ContentfulLink {
+                      id
+                      externalName
+                      page {
+                        externalName
+                        slug
+                      }
                     }
-                  }
-                  id
+                  }                  
                 }
               }
+              id
+              isMegaMenu
             }
           }
         }
+      }
+    }
     `)
-
-    // const menuData = useStaticQuery(graphql`
-    //     query MenuOneQuery {
-    //         allMenuJson {
-    //             edges {
-    //                 node {
-    //                     id
-    //                     text
-    //                     link
-    //                     submenu {
-    //                         link
-    //                         text
-    //                     }
-    //                     megamenu {
-    //                         title
-    //                         submenu {
-    //                             link
-    //                             text
-    //                         }
-    //                     }
-    //                 }
-    //             }
-    //         }
-    //     }
-    // `)
-    // const menuArr = menuData.allMenuJson.edges;
     const menuArr = menuData.allContentfulNavigation.edges[0].node.navigationItems;
 
     const [offCanvasOpen, setOffcanvasOpen] = useState(false);
