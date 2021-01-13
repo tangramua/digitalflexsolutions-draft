@@ -29,15 +29,42 @@ import {
 const AboutArea = ({ sectionTitleStyle }) => {
     const AboutData = useStaticQuery(graphql`
         query MainAboutQuery {
+            contentfulPage(codeId: {eq: "home-page"}) {
+    contentContainers {
+      externalName
+      content {
+        ... on ContentfulTextsMediaContainer {
+          id
+          externalName
+          textsList {
+            externalName
+            description {
+              description
+            }
+          }
+          mediaBlock {
+            altText
+            media {
+              fluid {
+                src
+                srcSet
+                srcSetWebp
+                srcWebp
+                base64
+                aspectRatio
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+                       
+            
             indexProcessingJson(id: {eq: "processing-about-content"}) {
                 title
                 subtitle
-                video_link
-                faq {
-                    id
-                    content
-                    title
-                }
+                video_link                
                 image1 {
                     childImageSharp {
                         fluid(maxWidth: 310, maxHeight: 190, quality: 100) {
@@ -86,7 +113,15 @@ const AboutArea = ({ sectionTitleStyle }) => {
             }
         }      
     `);
-    const { title, subtitle, video_link, faq, image1, image2, image3, image4, main_image } = AboutData.indexProcessingJson;
+    // console.log('AboutData', AboutData)
+
+    const { video_link, image1, image2, image3, image4, main_image } = AboutData.indexProcessingJson;
+
+    const textList = AboutData.contentfulPage.contentContainers[0].content[0].textsList
+    // console.log('textList', textList)
+    const title = AboutData.contentfulPage.contentContainers[0].externalName
+    const subtitle = AboutData.contentfulPage.contentContainers[0].content[0].externalName
+
     let video_arr, video_id, video_channel;
     if (video_link) {
         video_arr = video_link.split('=', -1);
@@ -113,20 +148,20 @@ const AboutArea = ({ sectionTitleStyle }) => {
                                     title={title}
                                     subtitle={subtitle}
                                 />
-                                {faq && (
+                                {textList && (
                                     <AccordionWrap>
                                         <Accordion allowZeroExpanded preExpanded={[0]}>
                                             {
-                                                faq.map((el, index) => {
+                                                textList.map((el, index) => {
                                                     return (
                                                         <AccordionItem id={el.id} key={index}>
                                                             <AccordionItemHeading>
                                                                 <AccordionItemButton>
-                                                                    {el.title}
+                                                                    {el.externalName}
                                                                 </AccordionItemButton>
                                                             </AccordionItemHeading>
                                                             <AccordionItemPanel>
-                                                                <p>{el.content}</p>
+                                                                <p>{el.description.description}</p>
                                                             </AccordionItemPanel>
                                                         </AccordionItem>
                                                     )

@@ -26,25 +26,69 @@ import {
 const Footer = ({ copyrightStyle, ...props }) => {
     const siteInfo = useStaticQuery(graphql`
         query FooterSiteQuery {
-            site {
-                siteMetadata {
-                    copyright
-                    contact {
-                        phone
-                        email
-                        address
-                        website
-                    }
-                    social {
-                        facebook
-                        twitter
-                        instagram
-                        linkedin
-                    }
-                }
+  site {
+    siteMetadata {
+      copyright
+      contact {
+        phone
+        email
+        address
+        website
+      }
+      social {
+        facebook
+        twitter
+        instagram
+        linkedin
+      }
+    }
+  }
+  allContentfulNavigation(filter: {codeId: {eq: "footer-navigation"}}) {
+    edges {
+      node {
+        internalName
+        navigationItems {
+          externalName
+          id
+          navigationLinks {
+            ... on ContentfulLink {
+              id
+              externalName
+              page {
+                slug
+              }
             }
-        }      
+          }
+        }
+      }
+    }
+  }
+}
     `)
+
+    // const siteInfo = useStaticQuery(graphql`
+    //     query FooterSiteQuery {
+    //         site {
+    //             siteMetadata {
+    //                 copyright
+    //                 contact {
+    //                     phone
+    //                     email
+    //                     address
+    //                     website
+    //                 }
+    //                 social {
+    //                     facebook
+    //                     twitter
+    //                     instagram
+    //                     linkedin
+    //                 }
+    //             }
+    //         }
+    //     }
+    // `)
+    // console.log('siteInfo', siteInfo)
+
     const { phone, email, address, website } = siteInfo.site.siteMetadata.contact;
     const { copyright } = siteInfo.site.siteMetadata;
     const { facebook, twitter, instagram, linkedin } = siteInfo.site.siteMetadata.social;
@@ -68,7 +112,7 @@ const Footer = ({ copyrightStyle, ...props }) => {
                                 <Heading as="h6" mt="-3px" mb="20px">Quick links</Heading>
                                 <FooterWidgetList>
                                     <li><Anchor path="/" color="textColor" hoverstyle="2">Home</Anchor></li>
-                                    <li><Anchor path="/service" color="textColor" hoverstyle="2">Services</Anchor></li>
+                                    <li><Anchor path="/services" color="textColor" hoverstyle="2">Services</Anchor></li>
                                     <li><Anchor path="/technology" color="textColor" hoverstyle="2">Technology</Anchor></li>
                                     <li><Anchor path="/about-us" color="textColor" hoverstyle="2">About Us</Anchor></li>
                                     <li><Anchor path="/contact-as" color="textColor" hoverstyle="2">Contact Us</Anchor></li>
@@ -90,10 +134,11 @@ const Footer = ({ copyrightStyle, ...props }) => {
                             <FooterWidget>
                                 <Heading as="h6" mt="-3px" mb="20px">Contact Us</Heading>
                                 <TextWidget>
-                                    {address && <Text mb="10px">{address}</Text>}
-                                    {email && <Text mb="10px"><Anchor path={`mailto:${email}`} color="textColor" hoverstyle="2">{email}</Anchor></Text>}
-                                    {phone && <Text mb="10px"><Anchor path={`tel:${phone}`} fontWeight="800" color="#333" hoverstyle="2">{phone}</Anchor></Text>}
-                                    {website && <Text mb="10px"><Anchor path={website} hoverstyle="2">{website}</Anchor></Text>}
+                                    {address && <Text mb="10px"><p>20-22 Wenlock Road</p></Text>}
+                                    {address && <Text mb="10px"><p>N1 7GU</p></Text>}
+                                    {address && <Text mb="10px"><p>London</p></Text>}
+                                    {phone && <Text mb="10px"><Anchor path={`tel:(+44)-01738-506283`} fontWeight="800" color="#333" hoverstyle="2">(+44)-01738-506283</Anchor></Text>}
+                                    {email && <Text mb="10px"><Anchor path={`mailto:info@digitalflexsolutions.com`} color="textColor" hoverstyle="2">info@digitalflexsolutions.com</Anchor></Text>}
                                 </TextWidget>
                             </FooterWidget>
                         </Col>
