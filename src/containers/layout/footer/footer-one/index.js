@@ -111,6 +111,11 @@ const Footer = ({ copyrightStyle, ...props }) => {
                             <FooterWidget responsive={{ medium: { mb: '31px' } }}>
                                 <Heading as="h6" mt="-3px" mb="20px">Quick links</Heading>
                                 <FooterWidgetList>
+                                    <li><Anchor path="/" color="textColor" hover={{color: 'linkcolor'}} hoverstyle="2">Home</Anchor></li>
+                                    <li><Anchor path="/service" color="textColor" hover={{color: 'linkcolor'}} hoverstyle="2">Services</Anchor></li>
+                                    <li><Anchor path="/technology" color="textColor" hover={{color: 'linkcolor'}} hoverstyle="2">Technology</Anchor></li>
+                                    <li><Anchor path="/about-us" color="textColor" hover={{color: 'linkcolor'}} hoverstyle="2">About Us</Anchor></li>
+                                    <li><Anchor path="/contact-as" color="textColor" hover={{color: 'linkcolor'}} hoverstyle="2">Contact Us</Anchor></li>
                                     <li><Anchor path="/" color="textColor" hoverstyle="2">Home</Anchor></li>
                                     <li><Anchor path="/services" color="textColor" hoverstyle="2">Services</Anchor></li>
                                     <li><Anchor path="/technology" color="textColor" hoverstyle="2">Technology</Anchor></li>
@@ -123,10 +128,10 @@ const Footer = ({ copyrightStyle, ...props }) => {
                             <FooterWidget responsive={{ medium: { mb: '27px' } }}>
                                 <Heading as="h6" mt="-3px" mb="20px">Services</Heading>
                                 <FooterWidgetList>
-                                    <li><Anchor path="/" color="textColor" hoverstyle="2">Digital Promotion Services</Anchor></li>
-                                    <li><Anchor path="/" color="textColor" hoverstyle="2">DPA - Digital Process Automation</Anchor></li>
-                                    <li><Anchor path="/" color="textColor" hoverstyle="2">Business Analytics</Anchor></li>
-                                    <li><Anchor path="/" color="textColor" hoverstyle="2">Chatbot Services</Anchor></li>
+                                    <li><Anchor path="/" color="textColor" hover={{color: 'linkcolor'}} hoverstyle="2">Digital Promotion Services</Anchor></li>
+                                    <li><Anchor path="/" color="textColor" hover={{color: 'linkcolor'}} hoverstyle="2">DPA - Digital Process Automation</Anchor></li>
+                                    <li><Anchor path="/" color="textColor" hover={{color: 'linkcolor'}} hoverstyle="2">Business Analytics</Anchor></li>
+                                    <li><Anchor path="/" color="textColor" hover={{color: 'linkcolor'}} hoverstyle="2">Chatbot Services</Anchor></li>
                                 </FooterWidgetList>
                             </FooterWidget>
                         </Col>
@@ -134,11 +139,10 @@ const Footer = ({ copyrightStyle, ...props }) => {
                             <FooterWidget>
                                 <Heading as="h6" mt="-3px" mb="20px">Contact Us</Heading>
                                 <TextWidget>
-                                    {address && <Text mb="10px"><p>20-22 Wenlock Road</p></Text>}
-                                    {address && <Text mb="10px"><p>N1 7GU</p></Text>}
-                                    {address && <Text mb="10px"><p>London</p></Text>}
-                                    {phone && <Text mb="10px"><Anchor path={`tel:(+44)-01738-506283`} fontWeight="800" color="#333" hoverstyle="2">(+44)-01738-506283</Anchor></Text>}
-                                    {email && <Text mb="10px"><Anchor path={`mailto:info@digitalflexsolutions.com`} color="textColor" hoverstyle="2">info@digitalflexsolutions.com</Anchor></Text>}
+                                    {address && <Text mb="10px">{address}</Text>}
+                                    {email && <Text mb="10px"><Anchor path={`mailto:${email}`} color="textColor" hover={{color: 'linkcolor'}} hoverstyle="2">{email}</Anchor></Text>}
+                                    {phone && <Text mb="10px"><Anchor path={`tel:${phone}`} fontWeight="800" color="#333" hover={{color: 'linkcolor'}} hoverstyle="2">{phone}</Anchor></Text>}
+                                    {website && <Text mb="10px"><Anchor path={website} hover={{color: 'linkcolor'}} color="textColor" hoverstyle="2">{website}</Anchor></Text>}
                                 </TextWidget>
                             </FooterWidget>
                         </Col>

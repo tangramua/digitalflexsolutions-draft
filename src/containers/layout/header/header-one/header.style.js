@@ -5,7 +5,7 @@ import {fadeInDown} from '../../../../assets/css/animations'
 export const HeaderWrap = styled.header `
     border-color: #E4E8F6;
     position: relative;
-    z-index: 999;
+    z-index: 999
 `;
 
 export const HeaderTop = styled.div `
@@ -25,7 +25,6 @@ export const FixedHeader = styled.div `
     width: 100%;
     height: auto;
     transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
-    background-color: #fff;
     z-index: 1;
     ${props => props.isSticky && css `
         position: fixed;

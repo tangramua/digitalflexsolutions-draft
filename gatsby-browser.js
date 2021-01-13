@@ -1,4 +1,5 @@
 const loadableReady = require('@loadable/component').loadableReady;
+require('./src/styles/global.css')
 const ReactDOM = require('react-dom')
 
 const transitionDelay = 500

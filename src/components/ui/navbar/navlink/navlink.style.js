@@ -5,7 +5,7 @@ import AnchorLink from 'react-anchor-link-smooth-scroll'
 export const NavLinkStyled = css`
     display: inline-block;
     position: relative;
-    color: ${props => props.theme.colors.black};
+    color: ${props => props.theme.colors.white};
     font-size: 16px;
     font-weight: 500;
     line-height: 1.18;
@@ -13,7 +13,6 @@ export const NavLinkStyled = css`
     ${props => props.hassubmenu === "false" && css`
         padding: 0;
     `}
-    
     &:before{
         position: absolute;
         content: '';
@@ -23,7 +22,7 @@ export const NavLinkStyled = css`
         height: 100%;
     }
     &.active{
-        color: ${props => props.theme.colors.themeColor};
+        color: ${props => props.theme.colors.linkcolor};
     }
     span{
         display: inline-block;
@@ -36,7 +35,7 @@ export const NavLinkStyled = css`
             bottom: 0;
             position: absolute;
             left: 0;
-            background-color: ${props => props.theme.colors.themeColor};
+            background-color: ${props => props.theme.colors.linkcolor};
             transition: ${props => props.theme.transition};
         }
     }
