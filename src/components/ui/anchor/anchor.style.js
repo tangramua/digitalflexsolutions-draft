@@ -61,6 +61,9 @@ export const LinkStyled = css `
             ${props => props.hover.color === 'secondary' && css `
                 color: ${props => props.theme.colors.secondary};
             `}
+            ${props => props.hover.color === 'linkcolor' && css `
+            color: ${props => props.theme.colors.linkcolor};
+        `}
             ${props => props.hover.color === 'textColor' && css `
                 color: ${props => props.theme.colors.textColor};
             `}

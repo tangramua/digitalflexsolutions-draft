@@ -15,6 +15,7 @@ export const TextWrapper = styled.p `
     ${props => (props.color !== 'primary' & props.color !== 'secondary' & props.color !== 'headingColor' ) && css `
         color: ${props => props.color || props.theme.colors.textColor};
     `};
+    
     font-size: ${props => props.fontSize};
     text-align: ${props => props.align};
     line-height: ${props => props.lineHeight};

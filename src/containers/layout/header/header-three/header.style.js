@@ -15,15 +15,15 @@ export const HeaderBottom = styled.div `
 
 export const FixedHeader = styled.div `
     position: absolute;
+    background-color: #000;
     left: 0;
     top: 0;
     width: 100%;
     height: auto;
     transition: ${props => props.theme.transition};
-    background-color: #fff;
     z-index: 1;
     ${props => props.isSticky && css `
-        background-color: #fff !important;
+        background-color: #000 !important;
         position: fixed;
         z-index: 999;
         box-shadow: 0 8px 20px 0 rgba(0,0,0,0.1);

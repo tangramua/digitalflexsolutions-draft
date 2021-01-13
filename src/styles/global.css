@@ -1,0 +1,17 @@
+/* a:hover{
+    color: #000000 !important;
+} */
+
+.copyright:hover {
+color: #696969 !important
+}
+
+a:hover {
+
+        color: #fd5b01 !important;
+    
+}
+
+a {
+    color: #fd5b01;
+}
