@@ -4,7 +4,9 @@ import { useStaticQuery, graphql } from "gatsby"
 // import { TiSocialFacebook, TiSocialTwitter, TiSocialInstagram, TiSocialLinkedin } from "react-icons/ti";
 import parse from 'html-react-parser'
 import { Container } from 'react-bootstrap'
-import Logo from '../../../../assets/images/logo/dark-logo-160x48.png'
+
+import Logo from '../../../../assets/images/logo/logo_white.png'
+// import Logo from '../../../../assets/images/logo/dark-logo-160x48.png'
 // import gplayImage from '../../../../assets//images/icons/aeroland-button-google-play.jpg'
 // import appImage from '../../../../assets//images/icons/aeroland-button-app-store.jpg'
 import { Row, Col } from '../../../../components/ui/wrapper'

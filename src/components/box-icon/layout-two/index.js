@@ -40,7 +40,7 @@ const BoxIcon = (props) => {
                     {desc && <BoxIconText {...textStyles}>{desc}</BoxIconText>}
                     <BoxIconBtn>
                         <Button to={path} as={Link} {...buttonStyles} icon={<MdTrendingFlat />}>
-                            Discover now
+                            Services now
                         </Button>
                     </BoxIconBtn>
                 </BoxIconContent>

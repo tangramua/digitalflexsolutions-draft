@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {Link} from 'gatsby'
-import LightLogo from '../../assets/images/logo/light-logo.png'
-import DarkLogo from '../../assets/images/logo/dark-logo.png'
+import LightLogo from '../../assets/images/logo/logo.png'
+import DarkLogo from '../../assets/images/logo/logo.png'
 import {LogoWrapper} from './logo.style';
 
 const Logo = props => {

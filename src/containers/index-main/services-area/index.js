@@ -13,6 +13,36 @@ const Services = ({
   buttonTwoStyle }) => {
   const serviceQueryData = useStaticQuery(graphql`
     query MainSecQuery {
+    contentfulListContainer(codeId: {eq: "industries-we-serve-list-container"}) {
+    externalName
+    externalName
+    title
+    listItems {
+      externalName
+      icon {
+        title
+        file {
+          url
+          contentType
+        }
+        contentful_id
+      }
+      textRef {
+        summary
+        externalName
+      }
+      id
+    }
+    codeId
+    buttons {
+      label
+      link {
+        page {
+          slug
+        }
+      }
+    }
+  }
       indexAppointmentJson(id: {eq: "appointment-services"}) {
             id
             title
@@ -38,9 +68,13 @@ const Services = ({
         }
     }
     `);
+  console.log('serviceQueryData**', serviceQueryData)
+  const contentData = serviceQueryData.contentfulListContainer
+  const secdata = contentData.buttons;
+  const serviceData = contentData.listItems;
 
-  const secdata = serviceQueryData.indexAppointmentJson;
-  const serviceData = serviceQueryData.allItServicesJson.edges;
+  // const secdata = serviceQueryData.indexAppointmentJson;
+  // const serviceData = serviceQueryData.allItServicesJson.edges;
 
   return (
     <ServicesWrapper>
@@ -49,21 +83,21 @@ const Services = ({
           <Col lg={12}>
             <SectionTitle
               {...sectionTitleStyle}
-              subtitle={secdata.subtitle}
-              title={secdata.title}
+              subtitle={contentData.externalName}
+              title={contentData.title}
             />
           </Col>
         </Row>
         <Row>
-          {serviceData.map(feature => {
+          {serviceData.map((feature, i) => {
             return (
-              <Col lg={4} md={6} key={feature.node.id}>
+              <Col lg={4} md={6} key={feature.id}>
                 <BoxIcon
-                  id={feature.node.id}
-                  title={feature.node.title}
-                  desc={feature.node.excerpt}
-                  icon={feature.node.icon}
-                  path={`/it-service/${feature.node.fields.slug}`}
+                  id={feature.id}
+                  title={feature.textRef.externalName}
+                  desc={feature.textRef.summary}
+                  icon={i < 6 ? serviceQueryData.allItServicesJson.edges[i].node.icon : serviceQueryData.allItServicesJson.edges[i-6].node.icon}
+                  path={`/services`}
                 />
               </Col>
             )
@@ -72,8 +106,8 @@ const Services = ({
         <Row>
           <Col lg={12}>
             <SectionBottom className="text-center">
-              <Button as={Link} to={secdata.path} {...buttonOneStyle}>Talk to a consultant</Button>
-              <Button as={Link} to={secdata.path} {...buttonTwoStyle}>Contact us now </Button>
+              <Button as={Link} to={secdata[0].link.page.slug} {...buttonOneStyle}>{secdata[0].label}</Button>
+              <Button as={Link} to={secdata[1].link.page.slug} {...buttonTwoStyle}>{secdata[1].label}</Button>
             </SectionBottom>
           </Col>
         </Row>

@@ -11,6 +11,44 @@ import { SectionWrap } from './features-area.style'
 const FeaturesArea = (props) => {
     const featuredDataQuery = useStaticQuery(graphql`
         query MainFeatureQueryData {
+            contentfulListContainer(codeId: {eq: "featured-flavours-list"}) {
+                externalName
+                externalName
+                title
+                listItems {
+                  externalName
+                  icon {
+                    title
+                    file {
+                      url
+                      contentType
+                    }
+                    contentful_id
+                  }
+                  textRef {
+                    summary
+                    externalName
+                  }
+                  id
+                }
+                codeId
+                buttons {
+                  label
+                  link {
+                    page {
+                      slug
+                    }
+                  }
+                }
+                subText
+                subLink {
+                  page {
+                    slug
+                  }
+                  externalName
+                }
+              }
+        
             indexInfotechnoJson(id: {eq: "infotechno-featured-content"}) {
                 title
                 subtitle
@@ -38,8 +76,17 @@ const FeaturesArea = (props) => {
             }
         }
     `);
-    const featureSecData = featuredDataQuery.indexInfotechnoJson;
-    const featureData = featuredDataQuery.allItServicesJson.edges;
+
+    console.log('featuredDataQuery**', featuredDataQuery)
+    const contentData = featuredDataQuery.contentfulListContainer
+    const featureSecData = contentData.buttons;
+    const featureData = contentData.listItems;
+    const headingLinkLabel = contentData.subLink && contentData.subLink.externalName ? contentData.subLink.externalName : 'Take the challenge!'
+
+    // const featureSecData = featuredDataQuery.indexInfotechnoJson;
+    // const featureData = featuredDataQuery.allItServicesJson.edges;
+
+
     const { featureBoxStyles, linkStyle, headingStyle } = props;
     return (
         <SectionWrap>
@@ -47,27 +94,27 @@ const FeaturesArea = (props) => {
                 <Row>
                     <Col lg={12}>
                         <SectionTitle
-                            subtitle={featureSecData.subtitle}
-                            title={featureSecData.title}
+                            subtitle={contentData.externalName}
+                            title={contentData.title}
                         />
                     </Col>
                 </Row>
                 <Row>
-                    {featureData.map(feature => (
-                        <Col lg={4} md={6} key={feature.node.id}>
+                    {featureData.map((feature, i) => (
+                        <Col lg={4} md={6} key={feature.id}>
                             <FeatureBox
                                 {...featureBoxStyles}
-                                title={feature.node.title}
-                                imageSrc={feature.node.icon.img.childImageSharp}
-                                desc={feature.node.excerpt}
-                                path={`/it-service/${feature.node.fields.slug}`}
+                                title={feature.textRef.externalName}
+                                imageSrc={i<3 ? featuredDataQuery.allItServicesJson.edges[i].node.icon.img.childImageSharp : featuredDataQuery.allItServicesJson.edges[i-3].node.icon.img.childImageSharp}
+                                desc={feature.textRef.summary}
+                                path={`/services`}
                             />
                         </Col>
                     ))}
                 </Row>
                 <Row>
                     <Col lg={12}>
-                        <Heading {...headingStyle}>Challenges are just opportunities in disguise. <Anchor {...linkStyle} path="/">Take the challenge!</Anchor></Heading>
+                        <Heading {...headingStyle}>{contentData.subText}<Anchor {...linkStyle} path={contentData.subLink.page.slug}>{headingLinkLabel}</Anchor></Heading>
                     </Col>
                 </Row>
             </Container>
