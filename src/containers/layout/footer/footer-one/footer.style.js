@@ -15,7 +15,7 @@ export const FooterWrap = styled.footer `
 // change
 export const FooterTop = styled.div `
     color: #9a9a9a;
-    background-color: #1e1c1c;
+    background-color: #232222;
     padding-top: 80px;
     padding-bottom: 80px;
     @media ${device.medium}{
@@ -31,9 +31,10 @@ export const FooterTop = styled.div `
 // change
 export const FooterBottom = styled.div `
     padding-bottom: 30px;
-    
+    padding-top: 10px;
     color: #9a9a9a;
-    background-color: #1e1c1c;
+    border-top: 1px solid rgb(51, 51, 51);
+        background-color: #232222;
 `;
 
 export const FooterWidget = styled.div `

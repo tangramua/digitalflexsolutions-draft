@@ -14,12 +14,14 @@ export const HeaderBottom = styled.div `
 `;
 
 export const FixedHeader = styled.div `
+height: 110px;
+    display: flex;
+    align-items: center;
     position: absolute;
     background-color: #000;
     left: 0;
     top: 0;
     width: 100%;
-    height: auto;
     transition: ${props => props.theme.transition};
     z-index: 1;
     ${props => props.isSticky && css `
@@ -53,6 +55,7 @@ export const FixedHeaderHeight = styled.div `
 export const HeaderMain = styled.div `
     display: flex;
     align-items: center;
+align-content: space-between;
     ${props => props.top && css `
         height: 50px;
     `}

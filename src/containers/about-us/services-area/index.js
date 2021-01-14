@@ -51,7 +51,7 @@ const Services = ({serviceBoxStyle, linkStyle, headingStyle}) => {
                 </Row>
                 <Row>
                     <Col lg={12}>
-                        <Heading {...headingStyle}>Challenges are just opportunities in disguise. <Anchor {...linkStyle} path="/it-services">Take the challenge!</Anchor></Heading>
+                        <Heading {...headingStyle}>Challenges are just opportunities in disguise. <Anchor {...linkStyle} color="headingColor" path="/it-services">Take the challenge!</Anchor></Heading>
                     </Col>
                 </Row>
             </Container>

@@ -31,11 +31,11 @@
                 "content": "We reduce redundant complex calculations and lengthy erroneous code texts with simpler ones to ensure Mitech would run seamlessly and the design is reserved in its best form when viewed from a wide range of mobile devices & browsers."
             }
         ],
-        "image1": "./images/about-us/home-processing-video-intro-slider-slide-01-image-02.jpg",
+        "image1": "./images/about-us/home-processing-video-intro-slider-slide-01-image-02.png",
         "image2": "./images/about-us/home-processing-video-intro-slider-slide-01-image-03.jpg",
-        "image3": "./images/about-us/home-processing-video-intro-slider-slide-01-image-04.jpg",
-        "image4": "./images/about-us/home-processing-video-intro-slider-slide-01-image-05.jpg",
-        "main_image": "./images/about-us/video-01-image-01-570x350.jpg"
+        "image3": "./images/about-us/home-processing-video-intro-slider-slide-01-image-04.png",
+        "image4": "./images/about-us/home-processing-video-intro-slider-slide-01-image-05.png",
+        "main_image": "./images/about-us/video-01-image-01-570x350.png"
     },
     {
         "id": "processing-features-content",

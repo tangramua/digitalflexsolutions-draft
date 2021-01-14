@@ -29,11 +29,12 @@ export const MainMenuWrap = styled.nav`
                     visibility: visible;
                     opacity: 1;
                     pointer-events: visible;
+                    background-color: #000
                 }
                 & > ${NavLinkWrap},
                 & > ${AnchorTag},
                 & > ${SmoothScroll}{
-                    color: ${props => props.hoverColor || props.theme.colors.themeColor};
+                    color: ${props => props.hoverColor || props.theme.colors.linkcolor};
                     span{
                         &:before{
                             width: 100%;
@@ -41,7 +42,7 @@ export const MainMenuWrap = styled.nav`
                         }
                     }
                     & > .icon{
-                        color: ${props => props.hoverColor || props.theme.colors.themeColor};
+                        color: ${props => props.hoverColor || props.theme.colors.linkcolor};
                     }
                 }
             }

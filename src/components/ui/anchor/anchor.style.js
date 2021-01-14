@@ -14,8 +14,11 @@ export const LinkStyled = css `
     ${props => props.color === 'headingColor' && css `
         color: ${props => props.theme.colors.headingColor};
     `}
+    ${props => props.color === 'footerTextColor' && css `
+        color: ${props => props.theme.colors.footerTextColor};
+    `}
     ${props => props.color !== 'primary' && props.color !== 'secondary' && props.color !== 'textColor' && props.color !== 'headingColor' && css `
-        color: ${props => props.color || props.theme.colors.themeColor};
+        color: ${props => props.color || props.theme.colors.white};
     `}
     font-size: ${props => props.fontSize};
     font-weight: ${props => props.fontweight};

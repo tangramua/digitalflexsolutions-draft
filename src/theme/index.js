@@ -4,6 +4,7 @@ export const theme = {
         themeColorBlack: '#333333',
         themeColorGreen: '#38cb89',
         textColor: '#696969',
+        footerTextColor: "#9a9a9a",
         linkcolor: '#fd5b01',
         headingColor: '#333333',
         headingColorTwo: '#d2a98e',
