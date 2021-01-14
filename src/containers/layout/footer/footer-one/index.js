@@ -112,15 +112,10 @@ const Footer = ({ copyrightStyle, ...props }) => {
                                 <Heading as="h6" mt="-3px" mb="20px">Quick links</Heading>
                                 <FooterWidgetList>
                                     <li><Anchor path="/" color="textColor" hover={{color: 'linkcolor'}} hoverstyle="2">Home</Anchor></li>
-                                    <li><Anchor path="/service" color="textColor" hover={{color: 'linkcolor'}} hoverstyle="2">Services</Anchor></li>
+                                    <li><Anchor path="/services" color="textColor" hover={{color: 'linkcolor'}} hoverstyle="2">Services</Anchor></li>
                                     <li><Anchor path="/technology" color="textColor" hover={{color: 'linkcolor'}} hoverstyle="2">Technology</Anchor></li>
                                     <li><Anchor path="/about-us" color="textColor" hover={{color: 'linkcolor'}} hoverstyle="2">About Us</Anchor></li>
                                     <li><Anchor path="/contact-as" color="textColor" hover={{color: 'linkcolor'}} hoverstyle="2">Contact Us</Anchor></li>
-                                    <li><Anchor path="/" color="textColor" hoverstyle="2">Home</Anchor></li>
-                                    <li><Anchor path="/services" color="textColor" hoverstyle="2">Services</Anchor></li>
-                                    <li><Anchor path="/technology" color="textColor" hoverstyle="2">Technology</Anchor></li>
-                                    <li><Anchor path="/about-us" color="textColor" hoverstyle="2">About Us</Anchor></li>
-                                    <li><Anchor path="/contact-as" color="textColor" hoverstyle="2">Contact Us</Anchor></li>
                                 </FooterWidgetList>
                             </FooterWidget>
                         </Col>
