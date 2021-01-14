@@ -14,7 +14,7 @@ export const HeadingWrapper = styled.h2 `
         color: ${props => props.theme.colors.textColor};
     `}
     ${props => (props.color !== 'primary' & props.color !== 'secondary' & props.color !== 'textColor') && css `
-        color: ${props => props.color || props.theme.colors.headingColor};
+        color: ${props => props.color || props.theme.colors.white};
     `}
     position: ${props => props.position};
     line-height: ${props => props.lineHeight};
@@ -41,7 +41,7 @@ export const HeadingWrapper = styled.h2 `
                 color: ${props => props.theme.colors.secondary};
             `}
             ${props => (props.child.color !== 'primary' & props.child.color !== 'secondary') && css `
-                color: ${props => props.child.color || props.theme.colors.headingColor};
+                color: ${props => props.child.color || props.theme.colors.white};
             `}
         }
     `}

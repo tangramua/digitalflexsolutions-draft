@@ -12,6 +12,9 @@ export const TextWrapper = styled.p `
     ${props => props.color === 'headingColor' && css `
         color: ${props => props.theme.colors.headingColor};
     `}
+    ${props => props.color === 'footerTextColor' && css `
+        color: ${props => props.theme.colors.footerTextColor};
+    `}
     ${props => (props.color !== 'primary' & props.color !== 'secondary' & props.color !== 'headingColor' ) && css `
         color: ${props => props.color || props.theme.colors.textColor};
     `};

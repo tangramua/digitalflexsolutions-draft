@@ -111,11 +111,11 @@ const Footer = ({ copyrightStyle, ...props }) => {
                             <FooterWidget responsive={{ medium: { mb: '31px' } }}>
                                 <Heading as="h6" mt="-3px" mb="20px">Quick links</Heading>
                                 <FooterWidgetList>
-                                    <li><Anchor path="/" color="textColor" hover={{color: 'linkcolor'}} hoverstyle="2">Home</Anchor></li>
-                                    <li><Anchor path="/services" color="textColor" hover={{color: 'linkcolor'}} hoverstyle="2">Services</Anchor></li>
-                                    <li><Anchor path="/technology" color="textColor" hover={{color: 'linkcolor'}} hoverstyle="2">Technology</Anchor></li>
-                                    <li><Anchor path="/about-us" color="textColor" hover={{color: 'linkcolor'}} hoverstyle="2">About Us</Anchor></li>
-                                    <li><Anchor path="/contact-as" color="textColor" hover={{color: 'linkcolor'}} hoverstyle="2">Contact Us</Anchor></li>
+                                    <li><Anchor path="/" color="footerTextColor" hover={{color: 'linkcolor'}} hoverstyle="2">Home</Anchor></li>
+                                    <li><Anchor path="/services" color="footerTextColor" hover={{color: 'linkcolor'}} hoverstyle="2">Services</Anchor></li>
+                                    <li><Anchor path="/technology" color="footerTextColor" hover={{color: 'linkcolor'}} hoverstyle="2">Technology</Anchor></li>
+                                    <li><Anchor path="/about-us" color="footerTextColor" hover={{color: 'linkcolor'}} hoverstyle="2">About Us</Anchor></li>
+                                    <li><Anchor path="/contact-as" color="footerTextColor" hover={{color: 'linkcolor'}} hoverstyle="2">Contact Us</Anchor></li>
                                 </FooterWidgetList>
                             </FooterWidget>
                         </Col>
@@ -123,10 +123,10 @@ const Footer = ({ copyrightStyle, ...props }) => {
                             <FooterWidget responsive={{ medium: { mb: '27px' } }}>
                                 <Heading as="h6" mt="-3px" mb="20px">Services</Heading>
                                 <FooterWidgetList>
-                                    <li><Anchor path="/" color="textColor" hover={{color: 'linkcolor'}} hoverstyle="2">Digital Promotion Services</Anchor></li>
-                                    <li><Anchor path="/" color="textColor" hover={{color: 'linkcolor'}} hoverstyle="2">DPA - Digital Process Automation</Anchor></li>
-                                    <li><Anchor path="/" color="textColor" hover={{color: 'linkcolor'}} hoverstyle="2">Business Analytics</Anchor></li>
-                                    <li><Anchor path="/" color="textColor" hover={{color: 'linkcolor'}} hoverstyle="2">Chatbot Services</Anchor></li>
+                                    <li><Anchor path="/" color="footerTextColor" hover={{color: 'linkcolor'}} hoverstyle="2">Digital Promotion Services</Anchor></li>
+                                    <li><Anchor path="/" color="footerTextColor" hover={{color: 'linkcolor'}} hoverstyle="2">DPA - Digital Process Automation</Anchor></li>
+                                    <li><Anchor path="/" color="footerTextColor" hover={{color: 'linkcolor'}} hoverstyle="2">Business Analytics</Anchor></li>
+                                    <li><Anchor path="/" color="footerTextColor" hover={{color: 'linkcolor'}} hoverstyle="2">Chatbot Services</Anchor></li>
                                 </FooterWidgetList>
                             </FooterWidget>
                         </Col>
@@ -134,10 +134,10 @@ const Footer = ({ copyrightStyle, ...props }) => {
                             <FooterWidget>
                                 <Heading as="h6" mt="-3px" mb="20px">Contact Us</Heading>
                                 <TextWidget>
-                                    {address && <Text mb="10px">{address}</Text>}
-                                    {email && <Text mb="10px"><Anchor path={`mailto:${email}`} color="textColor" hover={{color: 'linkcolor'}} hoverstyle="2">{email}</Anchor></Text>}
-                                    {phone && <Text mb="10px"><Anchor path={`tel:${phone}`} fontWeight="800" color="#333" hover={{color: 'linkcolor'}} hoverstyle="2">{phone}</Anchor></Text>}
-                                    {website && <Text mb="10px"><Anchor path={website} hover={{color: 'linkcolor'}} color="textColor" hoverstyle="2">{website}</Anchor></Text>}
+                                    {address && <Text mb="10px" color="footerTextColor">{address}</Text>}
+                                    {email && <Text mb="10px"><Anchor path={`mailto:${email}`} color="footerTextColor" hover={{color: 'linkcolor'}} hoverstyle="2">{email}</Anchor></Text>}
+                                    {phone && <Text mb="10px"><Anchor path={`tel:${phone}`}  color="footerTextColor" hover={{color: 'linkcolor'}} hoverstyle="2">{phone}</Anchor></Text>}
+                                    {website && <Text mb="10px"><Anchor path={website} hover={{color: 'linkcolor'}} color="footerTextColor" hoverstyle="2">{website}</Anchor></Text>}
                                 </TextWidget>
                             </FooterWidget>
                         </Col>
@@ -148,7 +148,7 @@ const Footer = ({ copyrightStyle, ...props }) => {
                 <Container>
                     <Row className="align-items-center">
                         <Col md={6} className="text-center text-md-left">
-                            {copyright && <Text {...copyrightStyle}>&copy; {new Date().getFullYear()} {parse(copyright)}</Text>}
+                            {copyright && <Text {...copyrightStyle} color="footerTextColor">&copy; {new Date().getFullYear()} {parse(copyright)}</Text>}
                         </Col>
                     </Row>
                 </Container>

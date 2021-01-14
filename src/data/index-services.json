@@ -14,11 +14,11 @@
         "desc": "Mitech takes into consideration every little detail to make sure the system run smoothly and responsively. Mitech employs a new technique called Minified Technology for securing customers’ database & building up highly confidential firewalls.",
         "path": "/about-us",
         "video_link": "https://www.youtube.com/watch?v=vqZuSUtczbU",
-        "image1": "./images/about-us/home-processing-video-intro-slider-slide-01-image-02.jpg",
+        "image1": "./images/about-us/home-processing-video-intro-slider-slide-01-image-02.png",
         "image2": "./images/about-us/home-processing-video-intro-slider-slide-01-image-03.jpg",
-        "image3": "./images/about-us/home-processing-video-intro-slider-slide-01-image-04.jpg",
-        "image4": "./images/about-us/home-processing-video-intro-slider-slide-01-image-05.jpg",
-        "main_image": "./images/about-us/video-01-image-01-570x350.jpg"
+        "image3": "./images/about-us/home-processing-video-intro-slider-slide-01-image-04.png",
+        "image4": "./images/about-us/home-processing-video-intro-slider-slide-01-image-05.png",
+        "main_image": "./images/about-us/video-01-image-01-570x350.png"
     },
     {
         "id": "services-services-contnet",
