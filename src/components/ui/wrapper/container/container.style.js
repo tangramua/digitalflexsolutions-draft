@@ -3,6 +3,7 @@ import {Container} from 'react-bootstrap'
 import {device} from '../../../../theme'
 
 export const Containerwrap = styled(Container) `
+    
     margin-top: ${props => props.mt};
     margin-bottom: ${props => props.mb};
     margin-left: ${props => props.ml};

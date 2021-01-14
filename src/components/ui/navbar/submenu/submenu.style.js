@@ -5,7 +5,7 @@ export const SubmenuWrap = styled.ul `
     top: 100%;
     left: 0;
     box-shadow: 0 2px 29px rgba(0,0,0,0.05);
-    border-bottom: 3px solid #086AD8;
+    border-bottom: 3px solid #fd5b01;
     background-color: #ffffff;
     transform: translateY(50px);
     transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);

@@ -9,7 +9,7 @@ const Logo = props => {
     return (
         <LogoWrapper {...props}>
             <Link to="/">
-                <img src={LightLogo} className="img-fluid light-logo" alt="logo"/>
+                <img src={LightLogo} className="img-fluid light-logo" alt="logo" />
                 <img src={DarkLogo} className="img-fluid dark-logo" alt="logo"/>
             </Link>
         </LogoWrapper>

@@ -28,7 +28,7 @@ export const OffCanvasInner = styled.div`
     height: 100%;
     float: right;
     cursor: default;
-    background: #086AD8;
+    background: #000;
     transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
     overflow: hidden;
     @media ${device.xsmall}{
