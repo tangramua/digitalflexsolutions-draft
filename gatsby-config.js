@@ -208,6 +208,18 @@ module.exports = {
         ]
       }
     },
+    `gatsby-plugin-react-helmet`,
+    {
+      resolve: `gatsby-plugin-amp`,
+      options: {
+        // canonicalBaseUrl: 'http://www.example.com/',
+        components: ['amp-form'],
+        excludedPaths: ['/404*'],
+        pathIdentifier: '/amp/',
+        relAmpHtmlPattern: '{{canonicalBaseUrl}}{{pathname}}{{pathIdentifier}}',
+        useAmpClientIdApi: true,
+      },
+    },
     {
       resolve: "gatsby-source-contentful",
       options: {

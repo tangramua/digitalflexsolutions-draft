@@ -12,10 +12,16 @@ import { useStaticQuery, graphql } from "gatsby"
 // import { HeroWrapper, HeroBtnGroup, HeroTextBox, ImageBox } from './hero-area.style'
 
 import Img from 'gatsby-image'
+import { Location } from '@reach/router'
 
 const HeroArea = (props) => {
     const HeroData = useStaticQuery(graphql`
         query MainHeroQuery {
+            site {
+                siteMetadata {
+                  siteUrl
+                }
+              }
             indexProcessingJson(id: {eq: "processing-hero-content"}) {
                 title
                 subtitle
@@ -28,6 +34,7 @@ const HeroArea = (props) => {
                         ...GatsbyImageSharpFluid_tracedSVG
                         presentationWidth
                         presentationHeight
+                        src
                       }
                     }
                 }
@@ -53,7 +60,9 @@ const HeroArea = (props) => {
     }
 
     const { title, subtitle, text, link, video_link, bg_image, image } = HeroData.indexProcessingJson;
-    const { subtitleStyle, titleStyle, textStyle, btnStyle, videoBtnStyle } = props;
+    const {src, presentationWidth, presentationHeight} = bg_image.childImageSharp.fluid
+    const { subtitleStyle, titleStyle, textStyle, btnStyle, videoBtnStyle, location } = props;
+    
     let video_arr, video_id, video_channel;
     if (video_link) {
         video_arr = video_link.split('=', -1);
@@ -61,7 +70,15 @@ const HeroArea = (props) => {
         video_channel = video_link.split(".")[1];
     }
     return (
-            <Img fluid={bg_image.childImageSharp.fluid} alt="" />
+        <Location>
+            {({ location }) => {
+                
+                    return location.pathname.includes("amp") ?
+                    <amp-img src={src} width={presentationWidth} height={presentationHeight} alt={"data.image.altText"} />: 
+                    <Img fluid={bg_image.childImageSharp.fluid} alt="" /> 
+                
+            }}
+        </Location>     
     )
 }
 
@@ -70,7 +87,7 @@ HeroArea.propTypes = {
     titleStyle: PropTypes.object,
     textStyle: PropTypes.object,
     btnStyle: PropTypes.object,
-    videoBtnStyle: PropTypes.object
+    videoBtnStyle: PropTypes.object,
 }
 
 HeroArea.defaultProps = {

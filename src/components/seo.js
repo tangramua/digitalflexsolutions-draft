@@ -47,6 +47,8 @@ const SEO = ({ title, description, image, pathname }) => (
               <meta name="twitter:description" content={seo.description} />
             )}
             {seo.image && <meta name="twitter:image" content={seo.image} />}
+            <link rel="preload" as="script" href="https://cdn.ampproject.org/v0.js"></link>
+
           </Helmet>
         </>
       )
