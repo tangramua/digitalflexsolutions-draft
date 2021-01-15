@@ -68,7 +68,7 @@ const Services = ({
         }
     }
     `);
-  console.log('serviceQueryData**', serviceQueryData)
+  // console.log('serviceQueryData**', serviceQueryData)
   const contentData = serviceQueryData.contentfulListContainer
   const secdata = contentData.buttons;
   const serviceData = contentData.listItems;

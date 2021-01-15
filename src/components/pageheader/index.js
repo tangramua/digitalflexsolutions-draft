@@ -4,6 +4,7 @@ import { useStaticQuery, graphql } from "gatsby"
 import {PageHeaderWrap} from './page-header.style';
 
 const PageHeader = ({pageContext, location, title}) => {
+    // console.log('pageContext**', pageContext)
     const { breadcrumb: { crumbs } } = pageContext;
     const disableLinks = [
         "/elements", 

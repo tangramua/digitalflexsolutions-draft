@@ -3,26 +3,57 @@ import { Helmet } from "react-helmet"
 import PropTypes from "prop-types"
 import { StaticQuery, graphql } from "gatsby"
 const SEO = ({ title, description, image, pathname }) => (
+    // new
   <StaticQuery
     query={query}
-    render={({
-      site: {
-        siteMetadata: {
-          defaultTitle,
-          titleTemplate,
-          defaultDescription,
-          siteUrl,
-          defaultImage,
-          twitterUsername,
-        },
-      },
-    }) => {
-      const seo = {
-        title: title || defaultTitle,
-        description: description || defaultDescription,
-        image: `${siteUrl}${image || defaultImage}`,
-        url: `${siteUrl}${pathname || "/"}`,
-      }
+    render={(data) => {
+      const defaultTitle = data.allContentfulGlobalSettings ?
+          data.allContentfulGlobalSettings.edges.find(val => val.node.codeId === 'defaultTitle') ?
+              data.allContentfulGlobalSettings.edges.find(val => val.node.codeId === 'defaultTitle').node.value.value :
+              data.site.siteMetadata.defaultTitle :
+          data.site.siteMetadata.defaultTitle
+
+      const defaultDescription = data.allContentfulGlobalSettings ?
+          data.allContentfulGlobalSettings.edges.find(val => val.node.codeId === 'defaultDescription') ?
+              data.allContentfulGlobalSettings.edges.find(val => val.node.codeId === 'defaultDescription').node.value.value :
+              data.site.siteMetadata.defaultTitle :
+          data.site.siteMetadata.defaultTitle
+
+      const siteUrl = data.allContentfulGlobalSettings ?
+          data.allContentfulGlobalSettings.edges.find(val => val.node.codeId === 'siteUrl') ?
+              data.allContentfulGlobalSettings.edges.find(val => val.node.codeId === 'siteUrl').node.value.value :
+              data.site.siteMetadata.defaultTitle :
+          data.site.siteMetadata.defaultTitle
+
+      const titleTemplate = data.allContentfulGlobalSettings ?
+          data.allContentfulGlobalSettings.edges.find(val => val.node.codeId === 'defaultTitleTemplate') ?
+              data.allContentfulGlobalSettings.edges.find(val => val.node.codeId === 'defaultTitleTemplate').node.value.value :
+              data.site.siteMetadata.defaultTitle :
+          data.site.siteMetadata.defaultTitle
+
+      const defaultImage = data.allContentfulGlobalSettings ?
+          data.allContentfulGlobalSettings.edges.find(val => val.node.codeId === 'defaultImage') ?
+              data.allContentfulGlobalSettings.edges.find(val => val.node.codeId === 'defaultImage').node.value.value :
+              data.site.siteMetadata.defaultTitle :
+          data.site.siteMetadata.defaultTitle
+
+      const twitterUsername = data.allContentfulGlobalSettings ?
+          data.allContentfulGlobalSettings.edges.find(val => val.node.codeId === 'twitterUsername') ?
+              data.allContentfulGlobalSettings.edges.find(val => val.node.codeId === 'twitterUsername').node.value.value :
+              data.site.siteMetadata.defaultTitle :
+          data.site.siteMetadata.defaultTitle
+
+        const seo = {
+            title: title || defaultTitle,
+            description: description || defaultDescription,
+            image: `${siteUrl}${image || defaultImage}`,
+            url: `${siteUrl}${pathname || "/"}`,
+        }
+      // console.log('title**', title)
+      // console.log('description**', description)
+      // console.log('image**', image)
+      // console.log('pathname**', pathname)
+
       return (
         <>
           <Helmet title={titleTemplate} titleTemplate={`%s | ${seo.title}`}>
@@ -70,7 +101,24 @@ SEO.defaultProps = {
 }
 const query = graphql`
   query SEO {
-    site {
+    allContentfulGlobalSettings(filter: {codeId: {in: [
+    "defaultTitle",
+		"defaultDescription",
+		"siteUrl",
+		"defaultTitleTemplate",
+		"defaultImage",
+		"twitterUsername"
+  ]}}){
+    edges {
+      node {
+        codeId
+        value {
+          value
+        }
+      }
+    }
+  }
+  site {
       siteMetadata {
         defaultTitle: title
         titleTemplate

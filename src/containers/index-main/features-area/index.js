@@ -77,7 +77,7 @@ const FeaturesArea = (props) => {
         }
     `);
 
-    console.log('featuredDataQuery**', featuredDataQuery)
+    // console.log('featuredDataQuery**', featuredDataQuery)
     const contentData = featuredDataQuery.contentfulListContainer
     const featureSecData = contentData.buttons;
     const featureData = contentData.listItems;
