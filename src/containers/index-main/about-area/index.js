@@ -32,7 +32,9 @@ const AboutArea = ({ sectionTitleStyle }) => {
     query MainAboutQuery {
       contentfulPage(codeId: { eq: "home-page" }) {
         contentContainers {
-          externalName
+          title
+          subTitle
+          accentTitle
           content {
             ... on ContentfulTextsMediaContainer {
               id
@@ -45,64 +47,76 @@ const AboutArea = ({ sectionTitleStyle }) => {
               }
               mediaBlock {
                 altText
+                mainImage {
+                  fluid(maxWidth: 570, maxHeight: 350, quality: 100) {
+                    ...GatsbyContentfulFluid_withWebp
+                    aspectRatio
+                    base64
+                    sizes
+                    src
+                    srcSet
+                    srcSetWebp
+                    srcWebp
+                  }
+                }
+                image1 {
+                  fluid(maxWidth: 310, maxHeight: 190, quality: 100) {
+                    ...GatsbyContentfulFluid_withWebp
+                    aspectRatio
+                    base64
+                    sizes
+                    src
+                    srcSet
+                    srcSetWebp
+                    srcWebp
+                  }
+                }
+                image2 {
+                  fluid(maxWidth: 188, maxHeight: 115, quality: 100) {
+                    ...GatsbyContentfulFluid_withWebp
+                    aspectRatio
+                    base64
+                    sizes
+                    src
+                    srcSet
+                    srcSetWebp
+                    srcWebp
+                  }
+                }
+                image3 {
+                  fluid(maxWidth: 188, maxHeight: 115, quality: 100) {
+                    ...GatsbyContentfulFluid_withWebp
+                    aspectRatio
+                    base64
+                    sizes
+                    src
+                    srcSet
+                    srcSetWebp
+                    srcWebp
+                  }
+                }
+                image4 {
+                  fluid(maxWidth: 190, maxHeight: 190, quality: 100) {
+                    ...GatsbyContentfulFluid_withWebp
+                    aspectRatio
+                    base64
+                    sizes
+                    src
+                    srcSet
+                    srcSetWebp
+                    srcWebp
+                  }
+                }
               }
             }
           }
         }
       }
+
       indexProcessingJson(id: { eq: "processing-about-content" }) {
         title
         subtitle
         video_link
-        image1 {
-          childImageSharp {
-            fluid(maxWidth: 310, maxHeight: 190, quality: 100) {
-              ...GatsbyImageSharpFluid_withWebp
-              presentationWidth
-              presentationHeight
-              srcWebp
-              src
-            }
-          }
-        }
-        image2 {
-          childImageSharp {
-            fluid(maxWidth: 188, maxHeight: 115, quality: 100) {
-              ...GatsbyImageSharpFluid_withWebp
-              presentationWidth
-              presentationHeight
-            }
-          }
-        }
-        image3 {
-          childImageSharp {
-            fluid(maxWidth: 188, maxHeight: 115, quality: 100) {
-              ...GatsbyImageSharpFluid_withWebp
-              presentationWidth
-              presentationHeight
-            }
-          }
-        }
-        image4 {
-          childImageSharp {
-            fluid(maxWidth: 190, maxHeight: 190, quality: 100) {
-              ...GatsbyImageSharpFluid_withWebp
-              presentationWidth
-              presentationHeight
-            }
-          }
-        }
-        main_image {
-          childImageSharp {
-            fluid(maxWidth: 570, maxHeight: 350, quality: 100) {
-              ...GatsbyImageSharpFluid_withWebp
-              presentationWidth
-              presentationHeight
-              srcWebp
-              src
-            }
-          }
-        }
       }
     }
   `);
@@ -120,9 +134,8 @@ const AboutArea = ({ sectionTitleStyle }) => {
   const textList =
     AboutData.contentfulPage.contentContainers[0].content[0].textsList;
   // console.log('textList', textList)
-  const title = AboutData.contentfulPage.contentContainers[0].externalName;
-  const subtitle =
-    AboutData.contentfulPage.contentContainers[0].content[0].externalName;
+  const title = AboutData.contentfulPage.contentContainers[0].title;
+  const subtitle = AboutData.contentfulPage.contentContainers[0].subtitle;
 
   let video_arr, video_id, video_channel;
   if (video_link) {
@@ -197,10 +210,10 @@ const AboutArea = ({ sectionTitleStyle }) => {
                           />
                         )} */}
                         <Image
-                            fluid={image1.childImageSharp.fluid}
-                            isAbsolute
-                            alt="About Banner"
-                          />
+                          fluid={image1.childImageSharp.fluid}
+                          isAbsolute
+                          alt="About Banner"
+                        />
                       </ImageBox1>
                     )}
                     {image2 && (
@@ -221,7 +234,8 @@ const AboutArea = ({ sectionTitleStyle }) => {
                               main_image.childImageSharp.fluid.presentationWidth
                             }
                             height={
-                              main_image.childImageSharp.fluid.presentationHeight
+                              main_image.childImageSharp.fluid
+                                .presentationHeight
                             }
                             alt={"data.image.altText"}
                           />

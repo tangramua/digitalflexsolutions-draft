@@ -26,12 +26,14 @@ const SEO = ({ title, description, image, pathname }) => (
       return (
         <>
           <Helmet title={titleTemplate} titleTemplate={`%s | ${seo.title}`}>
-            <html lang="en" />
+            <html amp lang="en" />
+            <meta charset="utf-8"/>
             <meta name="description" content={seo.description} />
             <meta name="image" content={seo.image} />
             <meta property="og:type" content="website" />
             <meta property="og:image:width" content="400" />
             <meta property="og:image:height" content="300" />
+            <meta name="viewport" content="width=device-width" minimum-scale="1" initial-scale="1"/>
             {seo.url && <meta property="og:url" content={seo.url} />}
             {seo.title && <meta property="og:title" content={seo.title} />}
             {seo.description && (
