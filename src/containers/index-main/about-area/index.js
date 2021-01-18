@@ -45,16 +45,6 @@ const AboutArea = ({ sectionTitleStyle }) => {
               }
               mediaBlock {
                 altText
-                media {
-                  fluid {
-                    src
-                    srcSet
-                    srcSetWebp
-                    srcWebp
-                    base64
-                    aspectRatio
-                  }
-                }
               }
             }
           }
@@ -70,7 +60,8 @@ const AboutArea = ({ sectionTitleStyle }) => {
               ...GatsbyImageSharpFluid_withWebp
               presentationWidth
               presentationHeight
-              
+              srcWebp
+              src
             }
           }
         }
@@ -80,7 +71,6 @@ const AboutArea = ({ sectionTitleStyle }) => {
               ...GatsbyImageSharpFluid_withWebp
               presentationWidth
               presentationHeight
-              
             }
           }
         }
@@ -90,7 +80,6 @@ const AboutArea = ({ sectionTitleStyle }) => {
               ...GatsbyImageSharpFluid_withWebp
               presentationWidth
               presentationHeight
-              
             }
           }
         }
@@ -100,7 +89,6 @@ const AboutArea = ({ sectionTitleStyle }) => {
               ...GatsbyImageSharpFluid_withWebp
               presentationWidth
               presentationHeight
-              
             }
           }
         }
@@ -110,7 +98,8 @@ const AboutArea = ({ sectionTitleStyle }) => {
               ...GatsbyImageSharpFluid_withWebp
               presentationWidth
               presentationHeight
-              
+              srcWebp
+              src
             }
           }
         }
@@ -189,7 +178,7 @@ const AboutArea = ({ sectionTitleStyle }) => {
                   <AboutImageBox>
                     {image1 && (
                       <ImageBox1 className="animation_image one">
-                        {location.pathname.includes("amp") ? (
+                        {/* {location.pathname.includes("amp") ? (
                           <amp-img
                             src={image1.childImageSharp.fluid.src}
                             width={
@@ -206,7 +195,12 @@ const AboutArea = ({ sectionTitleStyle }) => {
                             isAbsolute
                             alt="About Banner"
                           />
-                        )}
+                        )} */}
+                        <Image
+                            fluid={image1.childImageSharp.fluid}
+                            isAbsolute
+                            alt="About Banner"
+                          />
                       </ImageBox1>
                     )}
                     {image2 && (
@@ -220,10 +214,24 @@ const AboutArea = ({ sectionTitleStyle }) => {
                     )}
                     {main_image && (
                       <MainImageBox>
-                        <Image
-                          fluid={main_image.childImageSharp.fluid}
-                          alt="About Banner"
-                        />
+                        {location.pathname.includes("amp") ? (
+                          <amp-img
+                            src={main_image.childImageSharp.fluid.src}
+                            width={
+                              main_image.childImageSharp.fluid.presentationWidth
+                            }
+                            height={
+                              main_image.childImageSharp.fluid.presentationHeight
+                            }
+                            alt={"data.image.altText"}
+                          />
+                        ) : (
+                          <Image
+                            fluid={main_image.childImageSharp.fluid}
+                            alt="About Banner"
+                          />
+                        )}
+
                         {video_link && (
                           <VideoBtnWrap>
                             <VideoButton

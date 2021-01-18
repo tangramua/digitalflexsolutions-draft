@@ -227,5 +227,6 @@ module.exports = {
         accessToken: `EYI12Ob4-gfLm5WYJxIiXvLGg5jxlEVSCTRgqNi87Wo`
       }
     },
+    `gatsby-plugin-preact`
   ]
 }
