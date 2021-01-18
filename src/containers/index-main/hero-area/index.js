@@ -74,7 +74,7 @@ const HeroArea = (props) => {
             {({ location }) => {
                 
                     return location.pathname.includes("amp") ?
-                    <amp-img src={src} width={presentationWidth} height={presentationHeight} alt={"data.image.altText"} />: 
+                    <amp-img src={src} width={presentationWidth} height={presentationHeight} alt={"data.image.altText"} layout="responsive"/>: 
                     <Img fluid={bg_image.childImageSharp.fluid} alt="" /> 
                 
             }}

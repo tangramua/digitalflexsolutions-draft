@@ -1,4 +1,5 @@
 import React from "react"
+import { useStaticQuery, graphql } from "gatsby";
 import SEO from "../../components/seo"
 import Layout from '../../containers/layout/layout'
 // import Header from '../containers/layout/header/header-one'
