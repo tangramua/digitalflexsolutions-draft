@@ -1,31 +1,30 @@
-import React, { Fragment, useState } from "react";
-import { useStaticQuery, graphql } from "gatsby";
-import PropTypes from "prop-types";
+import React, { Fragment, useState } from 'react'
+import { useStaticQuery, graphql } from 'gatsby'
+import PropTypes from 'prop-types'
 import {
-  Accordion,
-  AccordionItem,
-  AccordionItemHeading,
-  AccordionItemButton,
-  AccordionItemPanel,
-} from "react-accessible-accordion";
-import Image from "../../../components/image";
-import { Container, Row, Col } from "../../../components/ui/wrapper";
-import SectionTitle from "../../../components/ui/section-title";
-import AccordionWrap from "../../../components/ui/accordion";
-import VideoButton from "../../../components/ui/video-button";
-import ModalVideo from "../../../components/ui/modal-video";
+    Accordion,
+    AccordionItem,
+    AccordionItemHeading,
+    AccordionItemButton,
+    AccordionItemPanel,
+} from 'react-accessible-accordion';
+import Image from '../../../components/image'
+import { Container, Row, Col } from '../../../components/ui/wrapper'
+import SectionTitle from '../../../components/ui/section-title'
+import AccordionWrap from '../../../components/ui/accordion'
+import VideoButton from '../../../components/ui/video-button'
+import ModalVideo from '../../../components/ui/modal-video'
 import {
-  AboutAreaWrap,
-  AboutTextBox,
-  AboutImageBox,
-  ImageBox1,
-  ImageBox2,
-  ImageBox3,
-  ImageBox4,
-  MainImageBox,
-  VideoBtnWrap,
-} from "./about-area.style";
-import { Location } from "@reach/router";
+    AboutAreaWrap,
+    AboutTextBox,
+    AboutImageBox,
+    ImageBox1,
+    ImageBox2,
+    ImageBox3,
+    ImageBox4,
+    MainImageBox,
+    VideoBtnWrap
+} from './about-area.style'
 
 const AboutArea = ({ sectionTitleStyle, containerData }) => {
     // console.log('containerData**', containerData)
@@ -55,29 +54,21 @@ const AboutArea = ({ sectionTitleStyle, containerData }) => {
     const title = containerData.title
     const subtitle = containerData.subtitle
 
-  const textList =
-    AboutData.contentfulPage.contentContainers[0].content[0].textsList;
-  // console.log('textList', textList)
-  const title = AboutData.contentfulPage.contentContainers[0].title;
-  const subtitle = AboutData.contentfulPage.contentContainers[0].subtitle;
+    let video_arr, video_id, video_channel;
+    if (video_link) {
+        video_arr = video_link.split('=', -1);
+        video_id = video_arr[1];
+        video_channel = video_link.split(".")[1];
+    }
+    const [videoOpen, setVideoOpen] = useState(false);
+    const modalVideoOpen = () => {
+        setVideoOpen(true)
+    }
 
-  let video_arr, video_id, video_channel;
-  if (video_link) {
-    video_arr = video_link.split("=", -1);
-    video_id = video_arr[1];
-    video_channel = video_link.split(".")[1];
-  }
-  const [videoOpen, setVideoOpen] = useState(false);
-  const modalVideoOpen = () => {
-    setVideoOpen(true);
-  };
-
-  const modalVideoClose = () => {
-    setVideoOpen(false);
-  };
-  return (
-    <Location>
-      {({ location }) => (
+    const modalVideoClose = () => {
+        setVideoOpen(false)
+    }
+    return (
         <Fragment>
             <AboutAreaWrap>
                 <Container fluid>
@@ -167,20 +158,18 @@ const AboutArea = ({ sectionTitleStyle, containerData }) => {
                 onClose={modalVideoClose}
             />
         </Fragment>
-      )}
-    </Location>
-  );
-};
+    )
+}
 
 AboutArea.propTypes = {
-  sectionTitleStyle: PropTypes.object,
-};
+    sectionTitleStyle: PropTypes.object
+}
 
 AboutArea.defaultProps = {
-  sectionTitleStyle: {
-    mb: "40px",
-    align: "left",
-  },
-};
+    sectionTitleStyle: {
+        mb: '40px',
+        align: 'left'
+    }
+}
 
 export default AboutArea;

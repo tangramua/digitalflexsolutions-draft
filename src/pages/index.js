@@ -197,11 +197,6 @@ export const pageQuery = graphql`
             }
           }
         }
-        ... on ContentfulNormalContainer {
-          id
-          __typename
-          codeId
-        }
         ... on ContentfulStaticListContainer {
           id
           __typename
