@@ -1,5 +1,6 @@
 import React from "react"
 import SEO from "../../../components/seo"
+import SEOAMP from "../../../components/seo-amp"
 import Layout from '../../../containers/layout/layout'
 // import Header from '../containers/layout/header/header-one'
 import Header from '../../../containers/layout/header/header-three'
@@ -12,7 +13,7 @@ const Cart = ({ location, data }) => {
 
   return (
     <Layout location={location}>
-        <SEO title="About Us" />
+        <SEOAMP title="About Us" />
         <Header />
         <main className="site-wrapper-reveal">
         <amp-img src={src} width={width} height={height} alt={"data.image.altText"} />
