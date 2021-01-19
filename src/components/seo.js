@@ -26,7 +26,7 @@ const SEO = ({ title, description, image, pathname }) => (
       return (
         <>
           <Helmet title={titleTemplate} titleTemplate={`%s | ${seo.title}`}>
-            <html amp lang="en" />
+            <html lang="en" />
             <meta charset="utf-8"/>
             <meta name="description" content={seo.description} />
             <meta name="image" content={seo.image} />
@@ -49,7 +49,6 @@ const SEO = ({ title, description, image, pathname }) => (
               <meta name="twitter:description" content={seo.description} />
             )}
             {seo.image && <meta name="twitter:image" content={seo.image} />}
-            <link rel="preload" as="script" href="https://cdn.ampproject.org/v0.js"></link>
 
           </Helmet>
         </>

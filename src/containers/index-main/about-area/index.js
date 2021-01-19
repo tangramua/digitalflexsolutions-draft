@@ -210,7 +210,7 @@ const AboutArea = ({ sectionTitleStyle }) => {
                           />
                         )} */}
                         <Image
-                          fluid={image1.childImageSharp.fluid}
+                          fluid={image1.fluid}
                           isAbsolute
                           alt="About Banner"
                         />
@@ -219,7 +219,7 @@ const AboutArea = ({ sectionTitleStyle }) => {
                     {image2 && (
                       <ImageBox2 className="animation_image two">
                         <Image
-                          fluid={image2.childImageSharp.fluid}
+                          fluid={image2.fluid}
                           isAbsolute
                           alt="About Banner"
                         />
@@ -229,19 +229,19 @@ const AboutArea = ({ sectionTitleStyle }) => {
                       <MainImageBox>
                         {location.pathname.includes("amp") ? (
                           <amp-img
-                            src={main_image.childImageSharp.fluid.src}
+                            src={main_image.fluid.src}
                             width={
-                              main_image.childImageSharp.fluid.presentationWidth
+                              main_image.fluid.presentationWidth
                             }
                             height={
-                              main_image.childImageSharp.fluid
+                              main_image.fluid
                                 .presentationHeight
                             }
                             alt={"data.image.altText"}
                           />
                         ) : (
                           <Image
-                            fluid={main_image.childImageSharp.fluid}
+                            fluid={main_image.fluid}
                             alt="About Banner"
                           />
                         )}
@@ -259,7 +259,7 @@ const AboutArea = ({ sectionTitleStyle }) => {
                     {image3 && (
                       <ImageBox3 className="animation_image three">
                         <Image
-                          fluid={image3.childImageSharp.fluid}
+                          fluid={image3.fluid}
                           isAbsolute
                           alt="About Banner"
                         />
@@ -268,7 +268,7 @@ const AboutArea = ({ sectionTitleStyle }) => {
                     {image4 && (
                       <ImageBox4 className="animation_image four">
                         <Image
-                          fluid={image4.childImageSharp.fluid}
+                          fluid={image4.fluid}
                           isAbsolute
                           alt="About Banner"
                         />

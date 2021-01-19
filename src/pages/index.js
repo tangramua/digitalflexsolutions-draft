@@ -1,5 +1,6 @@
 import React from "react"
-import SEO from "../components/seo"
+import SEO  from "../components/seo"
+import SEOAMP  from "../components/seo-amp"
 import Layout from '../containers/layout/layout'
 
 // new 2
