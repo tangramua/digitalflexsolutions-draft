@@ -26,101 +26,33 @@ import {
     VideoBtnWrap
 } from './about-area.style'
 
-const AboutArea = ({ sectionTitleStyle }) => {
+const AboutArea = ({ sectionTitleStyle, containerData }) => {
+    // console.log('containerData**', containerData)
+
     const AboutData = useStaticQuery(graphql`
         query MainAboutQuery {
-            contentfulPage(codeId: {eq: "home-page"}) {
-    contentContainers {
-      externalName
-      content {
-        ... on ContentfulTextsMediaContainer {
-          id
-          externalName
-          textsList {
-            externalName
-            description {
-              description
-            }
-          }
-          mediaBlock {
-            altText
-            media {
-              fluid {
-                src
-                srcSet
-                srcSetWebp
-                srcWebp
-                base64
-                aspectRatio
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-                       
-            
             indexProcessingJson(id: {eq: "processing-about-content"}) {
                 title
                 subtitle
-                video_link                
-                image1 {
-                    childImageSharp {
-                        fluid(maxWidth: 310, maxHeight: 190, quality: 100) {
-                            ...GatsbyImageSharpFluid_withWebp
-                            presentationWidth
-                            presentationHeight
-                        }
-                    }
-                }
-                image2 {
-                    childImageSharp {
-                        fluid(maxWidth: 188, maxHeight: 115, quality: 100) {
-                            ...GatsbyImageSharpFluid_withWebp
-                            presentationWidth
-                            presentationHeight
-                        }
-                    }
-                }
-                image3 {
-                    childImageSharp {
-                        fluid(maxWidth: 188, maxHeight: 115, quality: 100) {
-                            ...GatsbyImageSharpFluid_withWebp
-                            presentationWidth
-                            presentationHeight
-                        }
-                    }
-                }
-                image4 {
-                    childImageSharp {
-                        fluid(maxWidth: 190, maxHeight: 190, quality: 100) {
-                            ...GatsbyImageSharpFluid_withWebp
-                            presentationWidth
-                            presentationHeight
-                        }
-                    }
-                }
-                main_image {
-                    childImageSharp {
-                        fluid(maxWidth: 570, maxHeight: 350, quality: 100) {
-                            ...GatsbyImageSharpFluid_withWebp
-                            presentationWidth
-                            presentationHeight
-                        }
-                    }
-                }
+                video_link   
             }
         }      
     `);
-    // console.log('AboutData', AboutData)
 
-    const { video_link, image1, image2, image3, image4, main_image } = AboutData.indexProcessingJson;
+    // const { video_link, image1, image2, image3, image4, main_image } = AboutData.indexProcessingJson;
+    const { video_link } = AboutData.indexProcessingJson;
 
-    const textList = AboutData.contentfulPage.contentContainers[0].content[0].textsList
-    // console.log('textList', textList)
-    const title = AboutData.contentfulPage.contentContainers[0].externalName
-    const subtitle = AboutData.contentfulPage.contentContainers[0].content[0].externalName
+    const mediBlock = containerData.content[0].mediaBlock
+
+    const image1 = mediBlock.image1
+    const image2 = mediBlock.image2
+    const image3 = mediBlock.image3
+    const image4 = mediBlock.image4
+    const main_image = mediBlock.mainImage
+
+    const textList = containerData.content[0].textsList
+    const title = containerData.title
+    const subtitle = containerData.subtitle
 
     let video_arr, video_id, video_channel;
     if (video_link) {
@@ -176,17 +108,22 @@ const AboutArea = ({ sectionTitleStyle }) => {
                             <AboutImageBox>
                                 {image1 && (
                                     <ImageBox1 className="animation_image one">
-                                        <Image fluid={image1.childImageSharp.fluid} isAbsolute alt="About Banner" />
+                                        <Image fluid={image1.fluid}
+                                               fluid={image1.fluid} presentationHeight ={190}
+                                               presentationWidth={310} isAbsolute alt="About Banner" />
                                     </ImageBox1>
                                 )}
                                 {image2 && (
                                     <ImageBox2 className="animation_image two">
-                                        <Image fluid={image2.childImageSharp.fluid} isAbsolute alt="About Banner" />
+                                        <Image fluid={image2.fluid} presentationHeight ={113}
+                                               presentationWidth={184} isAbsolute alt="About Banner" />
                                     </ImageBox2>
                                 )}
                                 {main_image && (
                                     <MainImageBox>
-                                        <Image fluid={main_image.childImageSharp.fluid} alt="About Banner" />
+                                        <Image fluid={main_image.fluid}
+                                               presentationHeight ={350}
+                                               presentationWidth={570} alt="About Banner" />
                                         {video_link && (
                                             <VideoBtnWrap>
                                                 <VideoButton
@@ -199,12 +136,14 @@ const AboutArea = ({ sectionTitleStyle }) => {
                                 )}
                                 {image3 && (
                                     <ImageBox3 className="animation_image three">
-                                        <Image fluid={image3.childImageSharp.fluid} isAbsolute alt="About Banner" />
+                                        <Image fluid={image3.fluid} resentationHeight ={115}
+                                               presentationWidth={188} isAbsolute alt="About Banner" />
                                     </ImageBox3>
                                 )}
                                 {image4 && (
                                     <ImageBox4 className="animation_image four">
-                                        <Image fluid={image4.childImageSharp.fluid} isAbsolute alt="About Banner" />
+                                        <Image fluid={image4.fluid} resentationHeight ={190}
+                                               presentationWidth={190} isAbsolute alt="About Banner" />
                                     </ImageBox4>
                                 )}
                             </AboutImageBox>

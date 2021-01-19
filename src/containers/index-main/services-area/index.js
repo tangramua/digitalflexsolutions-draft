@@ -10,71 +10,12 @@ import { ServicesWrapper, SectionBottom } from './services-area.style'
 const Services = ({
   sectionTitleStyle,
   buttonOneStyle,
-  buttonTwoStyle }) => {
-  const serviceQueryData = useStaticQuery(graphql`
-    query MainSecQuery {
-    contentfulListContainer(codeId: {eq: "industries-we-serve-list-container"}) {
-    externalName
-    externalName
-    title
-    listItems {
-      externalName
-      icon {
-        title
-        file {
-          url
-          contentType
-        }
-        contentful_id
-      }
-      textRef {
-        summary
-        externalName
-      }
-      id
-    }
-    codeId
-    buttons {
-      label
-      link {
-        page {
-          slug
-        }
-      }
-    }
-  }
-      indexAppointmentJson(id: {eq: "appointment-services"}) {
-            id
-            title
-            subtitle
-            path
-        }
-        allItServicesJson(sort: {order: DESC, fields: id}, filter: {is_featured: {eq: true}}) {
-          edges {
-            node {
-              fields {
-                slug
-              }
-              id
-              title
-              excerpt
-              icon {
-                svg {
-                  publicURL
-                }
-              }
-            }
-          }
-        }
-    }
-    `);
-  // console.log('serviceQueryData**', serviceQueryData)
-  const contentData = serviceQueryData.contentfulListContainer
-  const secdata = contentData.buttons;
-  const serviceData = contentData.listItems;
+  buttonTwoStyle,
+  containerData}) => {
 
-  // const secdata = serviceQueryData.indexAppointmentJson;
-  // const serviceData = serviceQueryData.allItServicesJson.edges;
+  const contentData = containerData.content[0]
+  const secdata = contentData.buttons
+  const serviceData = contentData.listItems
 
   return (
     <ServicesWrapper>
@@ -83,8 +24,8 @@ const Services = ({
           <Col lg={12}>
             <SectionTitle
               {...sectionTitleStyle}
-              subtitle={contentData.externalName}
-              title={contentData.title}
+              subtitle={containerData.subTitle}
+              title={containerData.title}
             />
           </Col>
         </Row>
@@ -96,8 +37,8 @@ const Services = ({
                   id={feature.id}
                   title={feature.textRef.externalName}
                   desc={feature.textRef.summary}
-                  icon={i < 6 ? serviceQueryData.allItServicesJson.edges[i].node.icon : serviceQueryData.allItServicesJson.edges[i-6].node.icon}
                   path={`/services`}
+                  icon={feature.icon.file.url}
                 />
               </Col>
             )
