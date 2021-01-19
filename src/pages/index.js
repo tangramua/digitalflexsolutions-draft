@@ -11,6 +11,7 @@ import HeroArea from '../containers/index-main/hero-area'
 import AboutArea from '../containers/index-main/about-area'
 import FeaturesArea from '../containers/index-main/features-area'
 import ServicesArea from '../containers/index-main/services-area'
+import {Col} from "../components/ui/wrapper/col";
 
 
 // //new
@@ -28,40 +29,218 @@ import ServicesArea from '../containers/index-main/services-area'
 // // import ContactArea from '../containers/global/contact-area/contact-three'
 // import ServicesArea from '../containers/index-appointment/services-area'
 
-const IndexPage = ({ location }) => (
+
+const IndexPage = ({location, data}) => {
+    // console.log('data**', data)
+    const areas = data.contentfulPage.contentContainers
+
+    return(
     <Layout location={location}>
-        <SEO title="Processing" />
+        <SEO title="Home" />
         <Header />
         <main className="site-wrapper-reveal">
             <HeroArea />
-            <AboutArea />
-            <ServicesArea/>
-            <FeaturesArea />
+            {areas.map((area, i) => {
+                switch (area.content[0].__typename) {
+                    case 'ContentfulTextsMediaContainer':
+                        return (<AboutArea containerData={area} />)
+                        break
+                    case 'ContentfulListContainer':
+                        return (<ServicesArea containerData={area} />)
+                        break
+                    case 'ContentfulStaticListContainer':
+                        return (<FeaturesArea containerData={area} />)
+                        break;
+                    default:
+                    return <div>OK</div>
+                }
+            })}
         </main>
         <Footer />
     </Layout>
-)
+    )
+}
 
-// const IndexPage = ({location}) => (
-//   <Layout location={location}>
-//     <SEO/>
-//     <Header transparent/>
-//     <main className="site-wrapper-reveal">
-//       <Hero/>
-//       <Feature/>
-//       <Demos/>
-//       <InnerDemos/>
-//       <CaseStudy/>
-//       <HeaderLayout/>
-//       <BlogLayout/>
-//       <Plugins/>
-//       <ExtraFeature/>
-//     </main>
-//     <Footer/>
-//   </Layout>
+// const IndexPage = ({ location }) => (
+//     <Layout location={location}>
+//         <SEO title="Processing" />
+//         <Header />
+//         <main className="site-wrapper-reveal">
+//             <HeroArea />
+//             <AboutArea />
+//             <ServicesArea/>
+//             <FeaturesArea />
+//         </main>
+//         <Footer />
+//     </Layout>
 // )
 
+
+
 export default IndexPage
+
+// new
+export const pageQuery = graphql`
+  query HomePageQuery {
+  contentfulPage(codeId: {eq: "home-page"}) {
+    contentContainers {
+      title
+      subTitle
+      accentTitle
+      codeId
+      content {
+        ... on ContentfulListContainer {
+          id
+          __typename
+          codeId
+          externalName
+            title
+            listItems {
+              externalName
+              icon {
+                title
+                file {
+                  url
+                  contentType
+                }
+                contentful_id
+              }
+              textRef {
+                summary
+                externalName
+              }
+              id
+            }
+            codeId
+            buttons {
+              label
+              link {
+                page {
+                  slug
+                }
+              }
+            }
+        }
+        ... on ContentfulTextsMediaContainer {
+          id
+          __typename
+          codeId
+            id
+          externalName
+          textsList {
+            externalName
+            description {
+              description
+            }
+          }
+          mediaBlock {
+            altText
+            mainImage {            
+                fluid(maxWidth: 570, maxHeight: 350, quality: 100) {
+                ...GatsbyContentfulFluid_withWebp
+                  aspectRatio
+                  base64
+                  sizes
+                  src
+                  srcSet
+                  srcSetWebp
+                  srcWebp
+                }
+            }
+            image1 {            
+                fluid(maxWidth: 310, maxHeight: 190, quality: 100) {
+                ...GatsbyContentfulFluid_withWebp
+                  aspectRatio
+                  base64
+                  sizes
+                  src
+                  srcSet
+                  srcSetWebp
+                  srcWebp
+                }
+            }
+            image2 {            
+                fluid(maxWidth: 188, maxHeight: 115, quality: 100) {
+                ...GatsbyContentfulFluid_withWebp
+                  aspectRatio
+                  base64
+                  sizes
+                  src
+                  srcSet
+                  srcSetWebp
+                  srcWebp
+                }
+            }
+            image3 {            
+                fluid(maxWidth: 188, maxHeight: 115, quality: 100) {
+                ...GatsbyContentfulFluid_withWebp
+                  aspectRatio
+                  base64
+                  sizes
+                  src
+                  srcSet
+                  srcSetWebp
+                  srcWebp
+                }
+            }
+            image4 {            
+                fluid(maxWidth: 190, maxHeight: 190, quality: 100) {
+                ...GatsbyContentfulFluid_withWebp
+                  aspectRatio
+                  base64
+                  sizes
+                  src
+                  srcSet
+                  srcSetWebp
+                  srcWebp
+                }
+            }
+          }
+        }
+        ... on ContentfulNormalContainer {
+          id
+          __typename
+          codeId
+        }
+        ... on ContentfulStaticListContainer {
+          id
+          __typename
+          codeId
+              id
+          listItems {
+            externalName
+            icon {
+              title
+              fixed(width: 100) {
+                 aspectRatio
+                 base64
+                 src
+                 srcSet
+                 srcSetWebp
+                 srcWebp
+               }                    
+              }
+              textRef {
+                 summary
+                 externalName
+              }
+              id
+             }
+             codeId                
+             subText
+             subLink {
+                  page {
+                    slug
+                  }
+                  externalName
+             }
+              
+        }
+      } 
+        
+    }
+  }
+  }`
 
 
 

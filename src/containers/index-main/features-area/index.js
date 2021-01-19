@@ -9,93 +9,19 @@ import FeatureBox from '../../../components/box-image/layout-one'
 import { SectionWrap } from './features-area.style'
 
 const FeaturesArea = (props) => {
-    const featuredDataQuery = useStaticQuery(graphql`
-        query MainFeatureQueryData {
-            contentfulListContainer(codeId: {eq: "featured-flavours-list"}) {
-                externalName
-                externalName
-                title
-                listItems {
-                  externalName
-                  icon {
-                    title
-                    file {
-                      url
-                      contentType
-                    }
-                    contentful_id
-                  }
-                  textRef {
-                    summary
-                    externalName
-                  }
-                  id
-                }
-                codeId
-                buttons {
-                  label
-                  link {
-                    page {
-                      slug
-                    }
-                  }
-                }
-                subText
-                subLink {
-                  page {
-                    slug
-                  }
-                  externalName
-                }
-              }
-        
-            indexInfotechnoJson(id: {eq: "infotechno-featured-content"}) {
-                title
-                subtitle
-            }
-            allItServicesJson(sort: {order: DESC, fields: id}, filter: {is_featured: {eq: true}}, limit: 3) {
-                edges {
-                  node {
-                    fields{
-                        slug
-                    }
-                    id
-                    title
-                    excerpt
-                    icon {
-                      img{
-                        childImageSharp{
-                            fixed(width:100, height: 108, quality: 100 ){
-                                ...GatsbyImageSharpFixed_tracedSVG
-                            }
-                        }
-                      }
-                    }
-                  }
-                }
-            }
-        }
-    `);
-
-    console.log('featuredDataQuery**', featuredDataQuery)
-    const contentData = featuredDataQuery.contentfulListContainer
-    const featureSecData = contentData.buttons;
+    const { featureBoxStyles, linkStyle, headingStyle, containerData } = props;
+    const contentData = containerData.content[0]
     const featureData = contentData.listItems;
     const headingLinkLabel = contentData.subLink && contentData.subLink.externalName ? contentData.subLink.externalName : 'Take the challenge!'
 
-    // const featureSecData = featuredDataQuery.indexInfotechnoJson;
-    // const featureData = featuredDataQuery.allItServicesJson.edges;
-
-
-    const { featureBoxStyles, linkStyle, headingStyle } = props;
     return (
         <SectionWrap>
             <Container>
                 <Row>
                     <Col lg={12}>
                         <SectionTitle
-                            subtitle={contentData.externalName}
-                            title={contentData.title}
+                            subtitle={containerData.subTitle}
+                            title={containerData.title}
                         />
                     </Col>
                 </Row>
@@ -105,7 +31,7 @@ const FeaturesArea = (props) => {
                             <FeatureBox
                                 {...featureBoxStyles}
                                 title={feature.textRef.externalName}
-                                imageSrc={i<3 ? featuredDataQuery.allItServicesJson.edges[i].node.icon.img.childImageSharp : featuredDataQuery.allItServicesJson.edges[i-3].node.icon.img.childImageSharp}
+                                imageSrc={feature.icon.fixed.src}
                                 desc={feature.textRef.summary}
                                 path={`/services`}
                             />

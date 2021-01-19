@@ -25,6 +25,8 @@ const AboutDesc = ({sectionTitleStyle, headingStyle, textStyle, descStyle, btnSt
         } 
     `);
     const {section_title: {title, subtitle}, heading, text, desc, path} = AboutDescData.aboutUsJson;
+
+    // console.log('heading**', heading)
     return (
         <AboutWrapper>
             <Container>

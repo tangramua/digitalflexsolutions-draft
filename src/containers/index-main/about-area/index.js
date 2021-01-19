@@ -27,109 +27,33 @@ import {
 } from "./about-area.style";
 import { Location } from "@reach/router";
 
-const AboutArea = ({ sectionTitleStyle }) => {
-  const AboutData = useStaticQuery(graphql`
-    query MainAboutQuery {
-      contentfulPage(codeId: { eq: "home-page" }) {
-        contentContainers {
-          title
-          subTitle
-          accentTitle
-          content {
-            ... on ContentfulTextsMediaContainer {
-              id
-              externalName
-              textsList {
-                externalName
-                description {
-                  description
-                }
-              }
-              mediaBlock {
-                altText
-                mainImage {
-                  fluid(maxWidth: 570, maxHeight: 350, quality: 100) {
-                    ...GatsbyContentfulFluid_withWebp
-                    aspectRatio
-                    base64
-                    sizes
-                    src
-                    srcSet
-                    srcSetWebp
-                    srcWebp
-                  }
-                }
-                image1 {
-                  fluid(maxWidth: 310, maxHeight: 190, quality: 100) {
-                    ...GatsbyContentfulFluid_withWebp
-                    aspectRatio
-                    base64
-                    sizes
-                    src
-                    srcSet
-                    srcSetWebp
-                    srcWebp
-                  }
-                }
-                image2 {
-                  fluid(maxWidth: 188, maxHeight: 115, quality: 100) {
-                    ...GatsbyContentfulFluid_withWebp
-                    aspectRatio
-                    base64
-                    sizes
-                    src
-                    srcSet
-                    srcSetWebp
-                    srcWebp
-                  }
-                }
-                image3 {
-                  fluid(maxWidth: 188, maxHeight: 115, quality: 100) {
-                    ...GatsbyContentfulFluid_withWebp
-                    aspectRatio
-                    base64
-                    sizes
-                    src
-                    srcSet
-                    srcSetWebp
-                    srcWebp
-                  }
-                }
-                image4 {
-                  fluid(maxWidth: 190, maxHeight: 190, quality: 100) {
-                    ...GatsbyContentfulFluid_withWebp
-                    aspectRatio
-                    base64
-                    sizes
-                    src
-                    srcSet
-                    srcSetWebp
-                    srcWebp
-                  }
-                }
-              }
+const AboutArea = ({ sectionTitleStyle, containerData }) => {
+    // console.log('containerData**', containerData)
+
+    const AboutData = useStaticQuery(graphql`
+        query MainAboutQuery {
+            indexProcessingJson(id: {eq: "processing-about-content"}) {
+                title
+                subtitle
+                video_link   
             }
-          }
-        }
-      }
+        }      
+    `);
 
-      indexProcessingJson(id: { eq: "processing-about-content" }) {
-        title
-        subtitle
-        video_link
-      }
-    }
-  `);
-  // console.log('AboutData', AboutData)
+    // const { video_link, image1, image2, image3, image4, main_image } = AboutData.indexProcessingJson;
+    const { video_link } = AboutData.indexProcessingJson;
 
-  const {
-    video_link,
-    image1,
-    image2,
-    image3,
-    image4,
-    main_image,
-  } = AboutData.indexProcessingJson;
+    const mediBlock = containerData.content[0].mediaBlock
+
+    const image1 = mediBlock.image1
+    const image2 = mediBlock.image2
+    const image3 = mediBlock.image3
+    const image4 = mediBlock.image4
+    const main_image = mediBlock.mainImage
+
+    const textList = containerData.content[0].textsList
+    const title = containerData.title
+    const subtitle = containerData.subtitle
 
   const textList =
     AboutData.contentfulPage.contentContainers[0].content[0].textsList;
@@ -155,136 +79,93 @@ const AboutArea = ({ sectionTitleStyle }) => {
     <Location>
       {({ location }) => (
         <Fragment>
-          <AboutAreaWrap>
-            <Container fluid>
-              <Row alignitems="center">
-                <Col lg={6}>
-                  <AboutTextBox>
-                    <SectionTitle
-                      {...sectionTitleStyle}
-                      title={title}
-                      subtitle={subtitle}
-                    />
-                    {textList && (
-                      <AccordionWrap>
-                        <Accordion allowZeroExpanded preExpanded={[0]}>
-                          {textList.map((el, index) => {
-                            return (
-                              <AccordionItem id={el.id} key={index}>
-                                <AccordionItemHeading>
-                                  <AccordionItemButton>
-                                    {el.externalName}
-                                  </AccordionItemButton>
-                                </AccordionItemHeading>
-                                <AccordionItemPanel>
-                                  <p>{el.description.description}</p>
-                                </AccordionItemPanel>
-                              </AccordionItem>
-                            );
-                          })}
-                        </Accordion>
-                      </AccordionWrap>
-                    )}
-                  </AboutTextBox>
-                </Col>
-                <Col lg={6}>
-                  <AboutImageBox>
-                    {image1 && (
-                      <ImageBox1 className="animation_image one">
-                        {/* {location.pathname.includes("amp") ? (
-                          <amp-img
-                            src={image1.childImageSharp.fluid.src}
-                            width={
-                              image1.childImageSharp.fluid.presentationWidth
-                            }
-                            height={
-                              image1.childImageSharp.fluid.presentationHeight
-                            }
-                            alt={"data.image.altText"}
-                          />
-                        ) : (
-                          <Image
-                            fluid={image1.childImageSharp.fluid}
-                            isAbsolute
-                            alt="About Banner"
-                          />
-                        )} */}
-                        <Image
-                          fluid={image1.fluid}
-                          isAbsolute
-                          alt="About Banner"
-                        />
-                      </ImageBox1>
-                    )}
-                    {image2 && (
-                      <ImageBox2 className="animation_image two">
-                        <Image
-                          fluid={image2.fluid}
-                          isAbsolute
-                          alt="About Banner"
-                        />
-                      </ImageBox2>
-                    )}
-                    {main_image && (
-                      <MainImageBox>
-                        {location.pathname.includes("amp") ? (
-                          <amp-img
-                            src={main_image.fluid.src}
-                            width={
-                              main_image.fluid.presentationWidth
-                            }
-                            height={
-                              main_image.fluid
-                                .presentationHeight
-                            }
-                            alt={"data.image.altText"}
-                          />
-                        ) : (
-                          <Image
-                            fluid={main_image.fluid}
-                            alt="About Banner"
-                          />
-                        )}
-
-                        {video_link && (
-                          <VideoBtnWrap>
-                            <VideoButton
-                              skin="primary"
-                              onClick={modalVideoOpen}
-                            />
-                          </VideoBtnWrap>
-                        )}
-                      </MainImageBox>
-                    )}
-                    {image3 && (
-                      <ImageBox3 className="animation_image three">
-                        <Image
-                          fluid={image3.fluid}
-                          isAbsolute
-                          alt="About Banner"
-                        />
-                      </ImageBox3>
-                    )}
-                    {image4 && (
-                      <ImageBox4 className="animation_image four">
-                        <Image
-                          fluid={image4.fluid}
-                          isAbsolute
-                          alt="About Banner"
-                        />
-                      </ImageBox4>
-                    )}
-                  </AboutImageBox>
-                </Col>
-              </Row>
-            </Container>
-          </AboutAreaWrap>
-          <ModalVideo
-            channel={video_channel}
-            videoId={video_id}
-            isOpen={videoOpen}
-            onClose={modalVideoClose}
-          />
+            <AboutAreaWrap>
+                <Container fluid>
+                    <Row alignitems="center">
+                        <Col lg={6}>
+                            <AboutTextBox>
+                                <SectionTitle
+                                    {...sectionTitleStyle}
+                                    title={title}
+                                    subtitle={subtitle}
+                                />
+                                {textList && (
+                                    <AccordionWrap>
+                                        <Accordion allowZeroExpanded preExpanded={[0]}>
+                                            {
+                                                textList.map((el, index) => {
+                                                    return (
+                                                        <AccordionItem id={el.id} key={index}>
+                                                            <AccordionItemHeading>
+                                                                <AccordionItemButton>
+                                                                    {el.externalName}
+                                                                </AccordionItemButton>
+                                                            </AccordionItemHeading>
+                                                            <AccordionItemPanel>
+                                                                <p>{el.description.description}</p>
+                                                            </AccordionItemPanel>
+                                                        </AccordionItem>
+                                                    )
+                                                })
+                                            }
+                                        </Accordion>
+                                    </AccordionWrap>
+                                )}
+                            </AboutTextBox>
+                        </Col>
+                        <Col lg={6}>
+                            <AboutImageBox>
+                                {image1 && (
+                                    <ImageBox1 className="animation_image one">
+                                        <Image fluid={image1.fluid}
+                                               fluid={image1.fluid} presentationHeight ={190}
+                                               presentationWidth={310} isAbsolute alt="About Banner" />
+                                    </ImageBox1>
+                                )}
+                                {image2 && (
+                                    <ImageBox2 className="animation_image two">
+                                        <Image fluid={image2.fluid} presentationHeight ={113}
+                                               presentationWidth={184} isAbsolute alt="About Banner" />
+                                    </ImageBox2>
+                                )}
+                                {main_image && (
+                                    <MainImageBox>
+                                        <Image fluid={main_image.fluid}
+                                               presentationHeight ={350}
+                                               presentationWidth={570} alt="About Banner" />
+                                        {video_link && (
+                                            <VideoBtnWrap>
+                                                <VideoButton
+                                                    skin="primary"
+                                                    onClick={modalVideoOpen}
+                                                />
+                                            </VideoBtnWrap>
+                                        )}
+                                    </MainImageBox>
+                                )}
+                                {image3 && (
+                                    <ImageBox3 className="animation_image three">
+                                        <Image fluid={image3.fluid} resentationHeight ={115}
+                                               presentationWidth={188} isAbsolute alt="About Banner" />
+                                    </ImageBox3>
+                                )}
+                                {image4 && (
+                                    <ImageBox4 className="animation_image four">
+                                        <Image fluid={image4.fluid} resentationHeight ={190}
+                                               presentationWidth={190} isAbsolute alt="About Banner" />
+                                    </ImageBox4>
+                                )}
+                            </AboutImageBox>
+                        </Col>
+                    </Row>
+                </Container>
+            </AboutAreaWrap>
+            <ModalVideo
+                channel={video_channel}
+                videoId={video_id}
+                isOpen={videoOpen}
+                onClose={modalVideoClose}
+            />
         </Fragment>
       )}
     </Location>

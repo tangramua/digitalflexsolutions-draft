@@ -45,6 +45,22 @@ const Footer = ({ copyrightStyle, ...props }) => {
       }
     }
   }
+  allContentfulGlobalSettings(filter: {codeId: {in: [
+    "phone",
+		"address",
+		"siteUrl",
+		"email",
+		"copyright"
+  ]}}){
+    edges {
+      node {
+        codeId
+        value {
+          value
+        }
+      }
+    }
+  }
   allContentfulNavigation(filter: {codeId: {eq: "footer-navigation"}}) {
     edges {
       node {
@@ -91,8 +107,45 @@ const Footer = ({ copyrightStyle, ...props }) => {
     // `)
     // console.log('siteInfo', siteInfo)
 
-    const { phone, email, address, website } = siteInfo.site.siteMetadata.contact;
-    const { copyright } = siteInfo.site.siteMetadata;
+    // const { phone, email, address, website } = siteInfo.site.siteMetadata.contact;
+    // const { copyright } = siteInfo.site.siteMetadata;
+
+    const phone = siteInfo.allContentfulGlobalSettings ?
+        siteInfo.allContentfulGlobalSettings.edges.find(val => val.node.codeId === 'phone') ?
+            siteInfo.allContentfulGlobalSettings.edges.find(val => val.node.codeId === 'phone').node.value.value :
+            siteInfo.site.siteMetadata.contact.phone :
+        siteInfo.site.siteMetadata.contact.phone
+
+    const email = siteInfo.allContentfulGlobalSettings ?
+        siteInfo.allContentfulGlobalSettings.edges.find(val => val.node.codeId === 'email') ?
+            siteInfo.allContentfulGlobalSettings.edges.find(val => val.node.codeId === 'email').node.value.value :
+            siteInfo.site.siteMetadata.contact.email :
+        siteInfo.site.siteMetadata.contact.email
+
+    const address = siteInfo.allContentfulGlobalSettings ?
+        siteInfo.allContentfulGlobalSettings.edges.find(val => val.node.codeId === 'address') ?
+            siteInfo.allContentfulGlobalSettings.edges.find(val => val.node.codeId === 'address').node.value.value :
+            siteInfo.site.siteMetadata.contact.address :
+        siteInfo.site.siteMetadata.contact.address
+
+    const website = siteInfo.allContentfulGlobalSettings ?
+        siteInfo.allContentfulGlobalSettings.edges.find(val => val.node.codeId === 'website') ?
+            siteInfo.allContentfulGlobalSettings.edges.find(val => val.node.codeId === 'website').node.value.value :
+            siteInfo.site.siteMetadata.contact.website :
+        siteInfo.site.siteMetadata.contact.website
+
+    const copyright = siteInfo.allContentfulGlobalSettings ?
+        siteInfo.allContentfulGlobalSettings.edges.find(val => val.node.codeId === 'copyright') ?
+            siteInfo.allContentfulGlobalSettings.edges.find(val => val.node.codeId === 'copyright').node.value.value :
+            siteInfo.site.siteMetadata.copyright :
+        siteInfo.site.siteMetadata.copyright
+
+    // const copyright = siteInfo ?
+    //     siteInfo.allContentfulGlobalSettings.edges.find(val => val.node.codeId === 'copyright')?
+    //         siteInfo.allContentfulGlobalSettings.edges.find(val => val.node.codeId === 'copyright'):
+    //         siteInfo.site.siteMetadata.copyright :
+    //     siteInfo.site.siteMetadata.copyright
+
     const { facebook, twitter, instagram, linkedin } = siteInfo.site.siteMetadata.social;
     return (
         <FooterWrap {...props}>
@@ -139,7 +192,6 @@ const Footer = ({ copyrightStyle, ...props }) => {
                                     {address && <Text mb="10px" color="footerTextColor">{address}</Text>}
                                     {email && <Text mb="10px"><Anchor path={`mailto:${email}`} color="footerTextColor" hover={{color: 'linkcolor'}} hoverstyle="2">{email}</Anchor></Text>}
                                     {phone && <Text mb="10px"><Anchor path={`tel:${phone}`}  color="footerTextColor" hover={{color: 'linkcolor'}} hoverstyle="2">{phone}</Anchor></Text>}
-                                    {website && <Text mb="10px"><Anchor path={website} hover={{color: 'linkcolor'}} color="footerTextColor" hoverstyle="2">{website}</Anchor></Text>}
                                 </TextWidget>
                             </FooterWidget>
                         </Col>
