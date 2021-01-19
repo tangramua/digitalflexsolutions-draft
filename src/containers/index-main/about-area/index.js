@@ -109,7 +109,7 @@ const AboutArea = ({ sectionTitleStyle, containerData }) => {
                                 {image1 && (
                                     <ImageBox1 className="animation_image one">
                                         <Image fluid={image1.fluid}
-                                               fluid={image1.fluid} presentationHeight ={190}
+                                               presentationHeight ={190}
                                                presentationWidth={310} isAbsolute alt="About Banner" />
                                     </ImageBox1>
                                 )}

@@ -6,52 +6,61 @@ import Heading from '../../../components/ui/heading'
 import Anchor from '../../../components/ui/anchor'
 import ServiceBox from '../../../components/box-image/layout-six'
 import {ServicesWrapper} from './services-area.style'
+import FeatureBox from "../../index-main/features-area";
 
-const Services = ({serviceBoxStyle, linkStyle, headingStyle}) => {
-    const featuredDataQuery = useStaticQuery(graphql `
-        query AboutServicesQueryData {
-            allItServicesJson(sort: {order: DESC, fields: id}, filter: {is_featured: {eq: true}}, limit: 3) {
-                edges {
-                  node {
-                    fields {
-                        slug
-                    }
-                    id
-                    title
-                    excerpt
-                    icon {
-                      img{
-                        childImageSharp{
-                            fixed(width:100, height: 108, quality: 100 ){
-                                ...GatsbyImageSharpFixed_tracedSVG
-                            }
-                        }
-                      }
-                    }
-                  }
-                }
-            }
-        }
-    `);
-    const services = featuredDataQuery.allItServicesJson.edges;
+// const Services = ({serviceBoxStyle, linkStyle, headingStyle, containerData}) => {
+    // const featuredDataQuery = useStaticQuery(graphql `
+    //     query AboutServicesQueryData {
+    //         allItServicesJson(sort: {order: DESC, fields: id}, filter: {is_featured: {eq: true}}, limit: 3) {
+    //             edges {
+    //               node {
+    //                 fields {
+    //                     slug
+    //                 }
+    //                 id
+    //                 title
+    //                 excerpt
+    //                 icon {
+    //                   img{
+    //                     childImageSharp{
+    //                         fixed(width:100, height: 108, quality: 100 ){
+    //                             ...GatsbyImageSharpFixed_tracedSVG
+    //                         }
+    //                     }
+    //                   }
+    //                 }
+    //               }
+    //             }
+    //         }
+    //     }
+    // `);
+    // const services = featuredDataQuery.allItServicesJson.edges;
+
+
+const Services = (props) => {
+    const { serviceBoxStyle, linkStyle, headingStyle, containerData } = props
+    const contentData = containerData.content[0]
+    const services = contentData.listItems
+    const headingLinkLabel = contentData.subLink && contentData.subLink.externalName ? contentData.subLink.externalName : 'Take the challenge!'
     return (
         <ServicesWrapper> 
             <Container>
                 <Row>
-                    {services && services.map(service => (
-                        <Col lg={4} md={6} key={service.node.id} {...serviceBoxStyle}>
+                    {services && services.map((service, i) => (
+                        <Col lg={4} md={6} key={service.id}>
                             <ServiceBox
-                                title={service.node.title}
-                                desc={service.node.excerpt}
-                                imageSrc={service.node.icon.img.childImageSharp}
-                                path={`/it-service/${service.node.fields.slug}`}
+                                {...serviceBoxStyle}
+                                title={service.textRef.externalName}
+                                imageSrc={service.icon.fixed.src}
+                                desc={service.textRef.summary}
+                                path={service.linkRef.page.slug}
                             />
                         </Col>
                     ))}
                 </Row>
                 <Row>
                     <Col lg={12}>
-                        <Heading {...headingStyle}>Challenges are just opportunities in disguise. <Anchor {...linkStyle} color="headingColor" path="/it-services">Take the challenge!</Anchor></Heading>
+                        <Heading {...headingStyle}>{contentData.subText}<Anchor {...linkStyle} path={contentData.subLink.page.slug}>{headingLinkLabel}</Anchor></Heading>
                     </Col>
                 </Row>
             </Container>
@@ -92,3 +101,14 @@ Services.defaultProps = {
 }
 
 export default Services;
+
+// {services && services.map(service => (
+//     <Col lg={4} md={6} key={service.node.id} {...serviceBoxStyle}>
+//         <ServiceBox
+//             title={service.node.title}
+//             desc={service.node.excerpt}
+//             imageSrc={service.node.icon.img.childImageSharp}
+//             path={`/it-service/${service.node.fields.slug}`}
+//         />
+//     </Col>
+// ))}

@@ -51,7 +51,7 @@ const IndexPage = ({location, data}) => {
                         return (<FeaturesArea containerData={area} />)
                         break;
                     default:
-                    return <div>OK</div>
+                    return <div> </div>
                 }
             })}
         </main>
@@ -91,11 +91,9 @@ export const pageQuery = graphql`
         ... on ContentfulListContainer {
           id
           __typename
-          codeId
-          externalName
+          codeId          
             title
-            listItems {
-              externalName
+            listItems {              
               icon {
                 title
                 file {
@@ -195,12 +193,7 @@ export const pageQuery = graphql`
                 }
             }
           }
-        }
-        ... on ContentfulNormalContainer {
-          id
-          __typename
-          codeId
-        }
+        }        
         ... on ContentfulStaticListContainer {
           id
           __typename
@@ -218,12 +211,18 @@ export const pageQuery = graphql`
                  srcSetWebp
                  srcWebp
                }                    
-              }
-              textRef {
+             }
+             textRef {
                  summary
                  externalName
-              }
-              id
+             }
+             linkRef {
+                 page {
+                    slug
+                 }
+                 externalName
+             }
+             id
              }
              codeId                
              subText

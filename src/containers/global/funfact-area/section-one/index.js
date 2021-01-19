@@ -4,21 +4,8 @@ import { useStaticQuery, graphql } from "gatsby"
 import Section, {Row, Col} from '../../../../components/ui/wrapper'
 import Counter from '../../../../components/counter/layout-one'
 
-const FunFactArea = ({sectionStyle, counterStyle}) => {
-    const funFactQueryData = useStaticQuery(graphql `
-        query GloablFunFactQuery {
-            allFunFactJson {
-                edges {
-                    node {
-                        count
-                        title
-                    }
-                }
-            }
-        }
-    `);
-
-    const data = funFactQueryData.allFunFactJson.edges;
+const FunFactArea = ({sectionStyle, counterStyle, containerData}) => {
+    const data = containerData.content[0].listItems
     return(
         <Section {...sectionStyle}>
             <Row>
@@ -26,8 +13,8 @@ const FunFactArea = ({sectionStyle, counterStyle}) => {
                     <Col md={3} sm={6} key={`fun-fact-${i}`}>
                         <Counter
                             {...counterStyle}
-                            text={item.node.title}
-                            countTo={item.node.count}
+                            text={item.title}
+                            countTo={item.count}
                         />
                     </Col>
                 ))}

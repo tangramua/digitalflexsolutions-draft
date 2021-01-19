@@ -8,20 +8,12 @@ import Heading from '../../../components/ui/heading'
 import BoxIcon from '../../../components/box-icon/layout-four'
 import {SolutionsWrapper, SolutionBox, SolutionBoxItem} from './solutions-area.style'
 
-const Solutions = ({headingStyle}) => {
-    const solutionsData = useStaticQuery(graphql `
-        query AboutSolutionsQuery {
-            aboutUsJson(id: {eq: "about-page-solutions"}) {
-                title
-                solutions {
-                    id
-                    title
-                    text
-                }
-            }
-        }      
-    `);
-    const {title, solutions} = solutionsData.aboutUsJson;
+const Solutions = ({headingStyle, containerData}) => {
+    const title = containerData.accentTitle ? `${containerData.title} <span>${containerData.accentTitle}</span>` : containerData.title
+    const solutions = containerData.content[0].listItems
+
+    headingStyle.color = 'black' // new
+
     return (
         <SolutionsWrapper>
             <Container>
@@ -37,8 +29,8 @@ const Solutions = ({headingStyle}) => {
                                 <SolutionBoxItem key={solution.id}>
                                     <BoxIcon 
                                         icon={<MdDone/>}
-                                        title={solution.title}
-                                        desc={solution.text}
+                                        title={solution.externalName}
+                                        desc={solution.summary}
                                     />
                                 </SolutionBoxItem>
                             ))}

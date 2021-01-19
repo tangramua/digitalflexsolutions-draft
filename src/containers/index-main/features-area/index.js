@@ -33,7 +33,7 @@ const FeaturesArea = (props) => {
                                 title={feature.textRef.externalName}
                                 imageSrc={feature.icon.fixed.src}
                                 desc={feature.textRef.summary}
-                                path={`/services`}
+                                path={feature.linkRef.page.slug}
                             />
                         </Col>
                     ))}

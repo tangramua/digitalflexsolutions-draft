@@ -5,26 +5,35 @@ import {Container, Row, Col} from '../../../components/ui/wrapper'
 import Heading from '../../../components/ui/heading'
 import {PageHeaderWrap} from './page-header.style'
 
-const PageHeader = ({sectionStyle, titleStyle, descStyle}) => {
-    const PageHeaderData = useStaticQuery(graphql `
-        query AboutPageHeaderQuery {
-            aboutUsJson(id: {eq: "about-page-header-data"}) {
-                title
-                desc
-                bg_image {
-                    childImageSharp {
-                      fluid(maxWidth: 1920, maxHeight: 570, quality: 100) {
-                        ...GatsbyImageSharpFluid_withWebp
-                        presentationWidth
-                        presentationHeight
-                      }
-                    }
-                }
-            }
-        } 
-    `);
-    const {title, desc, bg_image} = PageHeaderData.aboutUsJson
-    const imageData = bg_image.childImageSharp.fluid;
+const PageHeader = ({sectionStyle, titleStyle, descStyle, containerData}) => {
+    // const PageHeaderData = useStaticQuery(graphql `
+    //     query AboutPageHeaderQuery {
+    //         aboutUsJson(id: {eq: "about-page-header-data"}) {
+    //             title
+    //             desc
+    //             bg_image {
+    //                 childImageSharp {
+    //                   fluid(maxWidth: 1920, maxHeight: 570, quality: 100) {
+    //                     ...GatsbyImageSharpFluid_withWebp
+    //                     presentationWidth
+    //                     presentationHeight
+    //                   }
+    //                 }
+    //             }
+    //         }
+    //     }
+    // `);
+    // const {title, desc, bg_image} = PageHeaderData.aboutUsJson
+
+
+    // const {title, desc, bg_image} = PageHeaderData.aboutUsJson
+    // console.log('bg_image**', bg_image)
+    // const imageData = bg_image.childImageSharp.fluid;
+
+    const title = containerData.title
+    const desc = containerData.subTitle
+    const imageData = containerData.content[0].media.fluid
+
     return (
         <PageHeaderWrap fluid={imageData}>
             <Container>

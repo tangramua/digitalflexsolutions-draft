@@ -8,25 +8,21 @@ import Text from '../../../components/ui/text'
 import Button from '../../../components/ui/button'
 import SectionTitle from '../../../components/ui/section-title'
 import {AboutWrapper, LeftBox, RightBox} from './about-area.style'
+import styled from "styled-components";
 
-const AboutDesc = ({sectionTitleStyle, headingStyle, textStyle, descStyle, btnStyle}) => {
-    const AboutDescData = useStaticQuery(graphql `
-        query AboutPageDescQuery {
-            aboutUsJson(id: {eq: "about-page-intro"}) {
-                section_title {
-                    title
-                    subtitle
-                }
-                heading
-                text
-                desc
-                path
-            }
-        } 
-    `);
-    const {section_title: {title, subtitle}, heading, text, desc, path} = AboutDescData.aboutUsJson;
+export const SubHeading = styled.div`
+    font-size: ${props => props.fontSize};
+    `
 
-    // console.log('heading**', heading)
+const AboutDesc = ({sectionTitleStyle, headingStyle, textStyle, descStyle, btnStyle, containerData}) => {
+    const title =  containerData.accentTitle ? `${containerData.title} <span>${containerData.accentTitle}</span>` : containerData.title
+    const heading = containerData.content[0].headText
+    const text = containerData.content[0].subHeadText
+
+    const desc = containerData.content[0].description.description
+    const path = containerData.content[0].link.page.slug
+    const textLink = containerData.content[0].link.externalName
+
     return (
         <AboutWrapper>
             <Container>
@@ -35,7 +31,7 @@ const AboutDesc = ({sectionTitleStyle, headingStyle, textStyle, descStyle, btnSt
                         <SectionTitle
                             {...sectionTitleStyle}
                             title={title}
-                            subtitle={subtitle}
+                            subtitle={containerData.subTitle}
                         />
                     </Col>
                 </Row>
@@ -43,13 +39,13 @@ const AboutDesc = ({sectionTitleStyle, headingStyle, textStyle, descStyle, btnSt
                     <Col lg={{span: 4, offset: 1}}>
                         <LeftBox>
                             {heading && <Heading {...headingStyle}>{parse(heading)}</Heading>}
-                            {text && <Heading {...textStyle}>{parse(text)}</Heading>}
+                            {text && <SubHeading {...textStyle}>{parse(text)}</SubHeading>}
                         </LeftBox>
                     </Col>
                     <Col lg={{span: 5, offset: 1}}>
                         <RightBox>
                             {desc && <Text {...descStyle}>{parse(desc)}</Text>}
-                            {path && <Button {...btnStyle} to={`/${path}`}>Discover More</Button>}
+                            {path && <Button {...btnStyle} to={path}>{textLink}</Button>}
                         </RightBox>
                     </Col>
                 </Row>
