@@ -7,7 +7,7 @@ export const TeamMemberInner = styled.div `
     margin-right: auto;
     @media ${device.small}{
         .gatsby-image-wrapper {
-            max-width: 100% !important;
+            max-width: 100% ;
         }
     }
 `;

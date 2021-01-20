@@ -264,7 +264,7 @@ export const MainMenuWrap = styled.nav`
                     & > ${AnchorTag},
                     & > ${SmoothScroll},
                     .icon{
-                        color: #fff !important;
+                        color: #fff ;
                     }
                 }
             }

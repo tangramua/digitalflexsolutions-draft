@@ -114,3 +114,7 @@ export const TextWrapper = styled.p `
         `}
     `}
 `;
+
+export const TextWrapperAmp = styled.p`
+            
+`

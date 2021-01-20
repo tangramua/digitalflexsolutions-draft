@@ -19,24 +19,24 @@ const sectionStyle = css `
     margin-left: ${props => props.ml};
     margin-right: ${props => props.mr};
     ${props => props.bgrepeat && css `
-        background-repeat: ${props => props.bgrepeat} !important;
+        background-repeat: ${props => props.bgrepeat} ;
     `}
     ${props => props.bgposition && css `
-        background-position: ${props => props.bgposition} !important;
+        background-position: ${props => props.bgposition} ;
     `}
     ${props => props.bgsize && css `
-        background-size: ${props => props.bgsize} !important;
+        background-size: ${props => props.bgsize} ;
     `}
     &:before,
     &:after{
         ${props => props.bgrepeat && css `
-            background-repeat: ${props => props.bgrepeat} !important;
+            background-repeat: ${props => props.bgrepeat} ;
         `}
         ${props => props.bgposition && css `
-            background-position: ${props => props.bgposition} !important;
+            background-position: ${props => props.bgposition} ;
         `}
         ${props => props.bgsize && css `
-            background-size: ${props => props.bgsize} !important;
+            background-size: ${props => props.bgsize} ;
         `}
     }
     ${props => props.responsive && css `

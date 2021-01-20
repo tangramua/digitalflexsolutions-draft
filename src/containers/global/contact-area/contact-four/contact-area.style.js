@@ -6,8 +6,8 @@ export const SectionWrap = styled(BackgroundImage) `
     padding-top: 100px;
     padding-bottom: 100px;
     background-color: #002fa6;
-    background-position: left bottom !important;
-    background-size: auto !important;
+    background-position: left bottom ;
+    background-size: auto ;
     @media ${device.medium}{
         padding-top: 80px;
         padding-bottom: 80px;

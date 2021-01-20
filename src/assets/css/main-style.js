@@ -107,7 +107,7 @@ a, button, img, input, span {
   transition: ${props => props.theme.transition};
 }
 *:focus {
-  outline: none !important;
+  outline: none ;
 }
 a:focus {
   color: inherit;
@@ -148,7 +148,7 @@ select {
     -moz-appearance: none;
     -webkit-appearance: none;
     &:focus {
-        background: ${props => props.theme.colors.borderColorTwo} url(${SelectorIcon}) no-repeat center right 20px !important;
+        background: ${props => props.theme.colors.borderColorTwo} url(${SelectorIcon}) no-repeat center right 20px ;
     }
 }
 

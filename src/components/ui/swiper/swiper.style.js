@@ -143,11 +143,11 @@ export const SwiperWrap = styled.div`
     }
     .swiper-container-free-mode{
         .swiper-slide{
-            width: auto !important;
+            width: auto ;
         }
         .swiper-wrapper{
             margin: 0 auto;
-            transition-timing-function: linear !important;
+            transition-timing-function: linear ;
         }
     }
 `;

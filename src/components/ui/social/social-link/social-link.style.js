@@ -65,7 +65,7 @@ export const SocialLinkWrap = styled.a`
     `}
     ${props => props.varient === 'texted' && css`
         padding: 5px 8px;
-        margin-right: 0 !important;
+        margin-right: 0 ;
         color: #333;
         &:not(:first-child){
             &:before{

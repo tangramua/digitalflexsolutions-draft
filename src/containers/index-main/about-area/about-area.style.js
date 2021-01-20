@@ -33,7 +33,7 @@ export const ImageBox1 = styled.div `
         @media ${device.xlarge}{
             left: 6%;
             top: -50px;
-            width: 200px !important;
+            width: 200px ;
         }
         @media ${device.large}{
             left: 0%;
@@ -41,17 +41,17 @@ export const ImageBox1 = styled.div `
         @media ${device.medium}{
             left: 6%;
             top: -70px;
-            width: 310px !important;
+            width: 310px ;
         }
         @media ${device.small}{
             left: 10%;
             top: -30px;
-            width: 184px !important;
+            width: 184px ;
         }
         @media ${device.xsmall}{
             left: 0%;
             top: -30px;
-            width: 140px !important;
+            width: 140px ;
         }
     }
 `;
@@ -62,7 +62,7 @@ export const ImageBox2 = styled.div `
         top: -103px;
         @media ${device.small}{
             top: -65px;
-            width: 130px !important;
+            width: 130px ;
         }
     }
 `;
@@ -73,12 +73,12 @@ export const ImageBox3 = styled.div `
         bottom: 0px;
         @media ${device.small}{
             bottom: 0;
-            width: 120px !important;
+            width: 120px ;
             top: inherit;
         }
         @media ${device.small}{
             left: 5%;
-            width: 110px !important;
+            width: 110px ;
         }
     }
 `;
@@ -89,17 +89,17 @@ export const ImageBox4 = styled.div `
         top: 100%;
         @media ${device.large}{
             right: 35px;
-            width: 150px !important;
+            width: 150px ;
         }
         @media ${device.small}{
             right: 15px;
             top: 80%;
-            width: 140px !important;
+            width: 140px ;
         }
         @media ${device.xsmall}{
             right: 15px;
             top: 80%;
-            width: 120px !important;
+            width: 120px ;
         }
     }
 `;

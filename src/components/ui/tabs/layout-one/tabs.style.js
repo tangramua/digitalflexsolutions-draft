@@ -23,13 +23,13 @@ export const NavItem = styled(Nav.Link)`
     line-height: 1.3;
     text-transform: uppercase;
     letter-spacing: 1px;
-    border: 1px solid #ededed !important;
+    border: 1px solid #ededed ;
     border: #ededed;
     background: #fff;
     color: #696969;
     padding: 21px 20px 19px;
     min-width: 200px;
-    border-radius: 5px !important;
+    border-radius: 5px ;
     @media ${device.large}{
         padding: 21px 10px 19px;
     }
@@ -50,7 +50,7 @@ export const NavItem = styled(Nav.Link)`
     }
     &.active{
         color: ${props => props.theme.colors.themeColor};
-        border-color: ${props => props.theme.colors.themeColor} !important;
+        border-color: ${props => props.theme.colors.themeColor} ;
     }
 `;
 

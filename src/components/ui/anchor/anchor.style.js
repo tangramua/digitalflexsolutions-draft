@@ -129,3 +129,14 @@ export const LinkWrapper = styled(Link)`
 export const AnchorTag = styled.a`
     ${LinkStyled}
 `;
+
+export const LinkWrapperAmp = styled(Link)`
+    ${LinkStyled}
+    color: ${props => props.theme.colors.footerTextColor};
+
+`;
+
+export const AnchorTagAmp = styled.a`
+    ${LinkStyled}
+    color: ${props => props.theme.colors.footerTextColor};
+`;

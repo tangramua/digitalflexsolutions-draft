@@ -26,7 +26,7 @@ export const HeaderFormWrap = styled.div`
             background-color: #eee;
             border-radius: 0;
             &:focus{
-                background-color: #eee !important;
+                background-color: #eee ;
             }
         }
     }

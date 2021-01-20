@@ -6,11 +6,11 @@ export const SectionWrap = styled(BackgroundImage) `
     padding-top: 120px;
     padding-bottom: 120px;
     background-color: #002fa6;
-    background-size: auto !important;
+    background-size: auto ;
     background-position: top right;
     &:before,
     &:after{
-        background-size: auto !important;
+        background-size: auto ;
         background-position: top right;
     }
     @media ${device.medium}{

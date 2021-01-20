@@ -18,10 +18,10 @@ export const SearchFromWrap = styled.div `
         height: 100px;
         &::placeholder,
         &::-webkit-input-placeholder {
-            color: ${props => props.theme.colors.themeColor} !important;
+            color: ${props => props.theme.colors.themeColor} ;
         }
         &:-ms-input-placeholder {
-            color: ${props => props.theme.colors.themeColor} !important;
+            color: ${props => props.theme.colors.themeColor} ;
         }
     }
 `;

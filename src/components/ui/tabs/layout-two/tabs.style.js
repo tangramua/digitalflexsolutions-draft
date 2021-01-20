@@ -20,17 +20,17 @@ export const NavItem = styled(Nav.Link)`
     border-radius: 0;
     text-align: center;
     &:first-child{
-        border-top-left-radius: 5px !important;
-        border-bottom-left-radius: 5px !important;
+        border-top-left-radius: 5px ;
+        border-bottom-left-radius: 5px ;
     }
     &:last-child{
-        border-top-right-radius: 5px !important;
-        border-bottom-right-radius: 5px !important;
+        border-top-right-radius: 5px ;
+        border-bottom-right-radius: 5px ;
     }
     &.active{
         color: #fff;
         background-color: ${props => props.theme.colors.themeColor};
-        border-color: ${props => props.theme.colors.themeColor} !important;
+        border-color: ${props => props.theme.colors.themeColor} ;
     }
 `;
 

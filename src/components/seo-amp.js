@@ -28,13 +28,11 @@ const SEOAMP = ({ title, description, image, pathname }) => (
           <Helmet title={titleTemplate} titleTemplate={`%s | ${seo.title}`}>
             <doctype html />
             <html amp lang="en" />
-            <meta charset="utf-8"/>
             <meta name="description" content={seo.description} />
             <meta name="image" content={seo.image} />
             <meta property="og:type" content="website" />
             <meta property="og:image:width" content="400" />
             <meta property="og:image:height" content="300" />
-            <meta name="viewport" content="width=device-width" minimum-scale="1" initial-scale="1"/>
             {seo.url && <meta property="og:url" content={seo.url} />}
             {seo.title && <meta property="og:title" content={seo.title} />}
             {seo.description && (
@@ -51,6 +49,9 @@ const SEOAMP = ({ title, description, image, pathname }) => (
             )}
             {seo.image && <meta name="twitter:image" content={seo.image} />}
             <link rel="preload" as="script" href="https://cdn.ampproject.org/v0.js"></link>
+            <script async custom-element="amp-list" src="https://cdn.ampproject.org/v0/amp-list-0.1.js"></script>
+            <script async custom-template="amp-mustache" src="https://cdn.ampproject.org/v0/amp-mustache-0.2.js"></script>
+            <script async custom-element="amp-bind" src="https://cdn.ampproject.org/v0/amp-bind-0.1.js"></script>
 
           </Helmet>
         </>

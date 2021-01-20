@@ -31,7 +31,7 @@ export const VideoThumbWrapper = styled.div `
         border: 6px solid #fff;
         color: #fff;
         position: relative;
-        transition: all 1s cubic-bezier(0,0,.2,1) !important;
+        transition: all 1s cubic-bezier(0,0,.2,1) ;
         border-radius: 50%;
     }
     .video-play-icon{

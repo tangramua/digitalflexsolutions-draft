@@ -44,7 +44,7 @@ export const AccordionWrapper = styled.div`
             &__item{
                 border-bottom: none;
                 margin-bottom: 20px;
-                border: none !important;
+                border: none ;
                 box-shadow: 0 18px 40px rgba(51,51,51,0.1);
             }
             &__heading{
@@ -112,7 +112,7 @@ export const AccordionWrapper = styled.div`
                 border-bottom: none;
                 margin-bottom: 20px;
                 border: none;
-                border-top: 0 !important;
+                border-top: 0 ;
                 border-bottom: 1px solid #ebebeb;
             }
             &__heading{

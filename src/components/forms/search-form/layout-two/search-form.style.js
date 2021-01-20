@@ -26,15 +26,15 @@ export const HeaderFormWrap = styled.div`
             background: transparent;
             color: #000;
             &:hover, &:focus{
-                background: transparent !important;
-                color: #000 !important;
+                background: transparent ;
+                color: #000 ;
             }
             &::placeholder,
             &::-webkit-input-placeholder {
-                color: #000 !important;
+                color: #000 ;
             }
             &:-ms-input-placeholder {
-                color: #000 !important;
+                color: #000 ;
             }
         }
         button{

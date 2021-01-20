@@ -3,11 +3,11 @@ import styled from "styled-components";
 export const PopupVideoWrap = styled.div`
     position: relative;
     .gatsby-image-wrapper{
-        max-width: 100% !important;
+        max-width: 100% ;
     }
     img{
         border-radius: 5px;
-        width: 100% !important;
+        width: 100% ;
     }
     &:before{
         position: absolute;
