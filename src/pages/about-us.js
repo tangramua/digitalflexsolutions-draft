@@ -17,38 +17,53 @@ import FeaturesArea from "./index";
 
 const AboutPage = ({ location, data }) => {
     const areas = data.contentfulPage.contentContainers
+    // console.log('areas**', areas)
+
+    const headerContainerData = areas.find(node => node.backgroundImage && !node.content)
+    // console.log('headerContainerData**', headerContainerData)
+
     return (
         <Layout location={location}>
             <SEO title="About Us"/>
             <Header/>
+            <PageHeader key={headerContainerData.codeId} containerData={headerContainerData} />
             <main className="site-wrapper-reveal">
                 {areas.map((area, i) => {
-                    switch (area.content[0].__typename) {
-                        case 'ContentfulMedia':
-                            return (<PageHeader key={area.codeId} containerData={area} />)
-                            break
-                        case 'ContentfulTextLinkContainer':
-                            return (<AboutArea key={area.codeId} containerData={area} />)
-                            break
-                        case 'ContentfulStaticListContainer':
-                            return (<ServicesArea key={area.codeId} containerData={area} />)
-                            break
-                        case 'ContentfulSimpleContainer':
-                            return (<ResourcesArea key={area.codeId} containerData={area} />)
-                            break;
-                        case 'ContentfulSimpleListContainer':
-                            return (<SolutionsArea key={area.codeId} containerData={area} />)
-                            break;
-                        case 'ContentfulFunFactListContainer':
-                            return (<FunFactArea key={area.codeId} containerData={area} />)
-                            break;
-                        default:
-                            return <div key={i}> </div>
+                    if (area.content){
+                        switch (area.content[0].__typename) {
+                            case 'ContentfulTextLinkContainer':
+                                return (<AboutArea key={area.codeId} containerData={area} />)
+                                break
+                            case 'ContentfulStaticListContainer':
+                                return (<ServicesArea key={area.codeId} containerData={area} />)
+                                break
+                            case 'ContentfulSimpleContainer':
+                                return (<ResourcesArea key={area.codeId} containerData={area} />)
+                                break;
+                            case 'ContentfulSimpleListContainer':
+                                return (<SolutionsArea key={area.codeId} containerData={area} />)
+                                break;
+                            case 'ContentfulFunFactListContainer':
+                                return (<FunFactArea key={area.codeId} containerData={area} />)
+                                break;
+                            case 'ContentfulCarouselContainer':
+                                if (area.content[0].content && area.content[0].content[0].__typename === "ContentfulTestimonialCard"){
+                                    return (<TestimonialArea key={area.codeId} containerData={area} />)
+                                } else if (area.content[0].content && area.content[0].content[0].__typename === "ContentfulCarouselContainer"){
+                                    return (<ClientsArea key={area.codeId} containerData={area} />)
+                                } else return null
+                                break;
+                            case 'ContentfulMedia':
+                                return (<ContactArea key={area.codeId} containerData={area} />)
+                                break
+                            default:
+                                return null
+                        }
                     }
+                    return null
+
                 })}
-                <TestimonialArea/>
-                <ClientsArea/>
-                <ContactArea/>
+
             </main>
             <Footer/>
         </Layout>
@@ -66,6 +81,17 @@ query AboutUsPageQuery {
             subTitle
             accentTitle
             codeId
+            backgroundImage{
+                fluid(maxWidth: 1920, maxHeight: 570, quality: 100) {
+                  aspectRatio
+                  base64
+                  sizes
+                  src
+                  srcSet
+                  srcSetWebp
+                  srcWebp
+                }
+            }
             content {
             ... on ContentfulMedia {
                     __typename
@@ -184,6 +210,48 @@ query AboutUsPageQuery {
                 summary
               }
             }
+            ... on ContentfulCarouselContainer {
+              codeId
+              __typename
+              numberToDisplayAtOneTime
+              content {
+                ... on ContentfulMediaContainer {              
+                  __typename
+                  codeId
+                  medias {
+                    fluid {
+                      aspectRatio
+                      base64
+                      sizes
+                      src
+                      srcSet
+                      srcSetWebp
+                      srcWebp
+                    }
+                  }
+                }
+                ... on ContentfulTestimonialCard {
+                  __typename
+                  codeId
+                  authorDesignation
+                  authorName
+                  authorImage {
+                    fluid {
+                      aspectRatio
+                      base64
+                      sizes
+                      src
+                      srcSet
+                      srcSetWebp
+                      srcWebp
+                    }
+                  }
+                  rating
+                  review
+                }
+              }
+            }
+            
             
             
           }

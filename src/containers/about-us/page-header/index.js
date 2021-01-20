@@ -32,7 +32,7 @@ const PageHeader = ({sectionStyle, titleStyle, descStyle, containerData}) => {
 
     const title = containerData.title
     const desc = containerData.subTitle
-    const imageData = containerData.content[0].media.fluid
+    const imageData = containerData.backgroundImage.fluid
 
     return (
         <PageHeaderWrap fluid={imageData}>
