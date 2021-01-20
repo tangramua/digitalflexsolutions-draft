@@ -7,39 +7,7 @@ import SwiperSlider from '../../../components/ui/swiper'
 import { SectionWrap, ClientLogoWrap } from './style'
 
 const ClientsArea = (props) => {
-    const partnersQueryData = useStaticQuery(graphql`
-        query AboutPartnersDataQuery{
-            allPartnersJson {
-                edges {
-                  node {
-                    id
-                    path
-                    image {
-                      childImageSharp {
-                        fluid(quality: 100) {
-                          ...GatsbyImageSharpFluid_tracedSVG
-                          presentationWidth
-                          presentationHeight
-                          aspectRatio
-                        }
-                      }
-                    }
-                    hover_image {
-                      childImageSharp {
-                        fluid(quality: 100) {
-                            ...GatsbyImageSharpFluid_tracedSVG
-                            presentationWidth
-                            presentationHeight
-                            aspectRatio
-                        }
-                      }
-                    }
-                  }
-                }
-            }
-        }
-    `);
-    const partnersData = partnersQueryData.allPartnersJson.edges;
+    const partnersData = props.containerData.content[0].content
     const { slider, sliderStyle } = props
     return (
         <SectionWrap>
@@ -49,13 +17,13 @@ const ClientsArea = (props) => {
                         <SwiperSlider settings={slider} {...sliderStyle}>
                             {partnersData.map((data, i) => {
                                 return (
-                                    <ClientLogoWrap key={data.node.id}>
+                                    <ClientLogoWrap key={data.id + i}>
                                         <ClientLogo
                                             layout={1}
-                                            title={data.node.id}
-                                            path={data.node.path}
-                                            brandImage={data.node.image.childImageSharp}
-                                            hoverImage={data.node.hover_image.childImageSharp}
+                                            title={data.altText}
+                                            path={data.link.externalUrl ? data.link.externalUrl : data.link.page.slug}
+                                            brandImage={data.image.fluid.src}
+                                            hoverImage={data.hoverImage.fluid.src}
                                         />
                                     </ClientLogoWrap>
                                 )

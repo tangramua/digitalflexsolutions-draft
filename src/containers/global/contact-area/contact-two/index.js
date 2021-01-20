@@ -11,49 +11,30 @@ import BoxIcon from '../../../../components/box-icon/layout-four'
 import Anchor from '../../../../components/ui/anchor'
 import {SectionWrap, ImageBox, ContactInfoBox} from './contact.style'
 
-const ContactArea = ({sectionStyle, imgBoxStyle, rightBoxStyle, boxIconStyle, ratingStyle, textStyle}) => {
-    const contactData = useStaticQuery(graphql `
-        query AboutContactQuery {
-            info: site {
-                siteMetadata {
-                    contact {
-                        phone
-                        email
-                        rating
-                        customers
-                        clients
-                    }
-                }
-            }
-            bgImage: file(relativePath: {eq: "images/bg/contact-bg.jpg"}) {
-                childImageSharp {
-                    fluid(maxHeight: 520, maxWidth: 1920, quality: 100) {
-                        ...GatsbyImageSharpFluid_tracedSVG
-                    }
-                }
-            }
-            contactImg: file(relativePath: {eq: "images/contact-image.png"}) {
-                childImageSharp {
-                    fluid(maxHeight: 572, maxWidth: 587, quality: 100) {
-                        ...GatsbyImageSharpFluid_tracedSVG
-                        presentationWidth
-                        presentationHeight
-                    }
-                }
-            }
-        }
-    `)
-    const {phone, email, rating, customers, clients} = contactData.info.siteMetadata.contact;
-    const bg_image = contactData.bgImage.childImageSharp.fluid;
-    const contact_image = contactData.contactImg.childImageSharp.fluid;
-    
+const ContactArea = ({sectionStyle, imgBoxStyle, rightBoxStyle, boxIconStyle, ratingStyle, textStyle, containerData}) => {
+    const bg_image = containerData.bgArea.sizes;
+    const contact_image = containerData.content[0].media.fluid;
+
+    let rating = containerData.globalData.find(el => el.node.codeId === 'rating')
+    let clients = containerData.globalData.find(el => el.node.codeId === 'clients-number')
+    let customers = containerData.globalData.find(el => el.node.codeId === 'customers-number')
+    let phone = containerData.globalData.find(el => el.node.codeId === 'phone')
+    let email = containerData.globalData.find(el => el.node.codeId === 'email')
+
+    rating = rating ? rating.node.value.value : null
+    clients = clients ? clients.node.value.value : null
+    customers = customers ? customers.node.value.value : null
+    phone = phone ? phone.node.value.value : null
+    email = email ? email.node.value.value : null
+
     return (
         <SectionWrap fluid={bg_image}>
             <Container>
                 <Row alignitems="center">
                     <Col lg={7}>
                         <ImageBox>
-                            <Image fluid={contact_image} alt="Contact Us"/>
+                            <Image fluid={contact_image} presentationHeight={572}
+                            presentationWidth={587} alt="Contact Us"/>
                         </ImageBox>
                     </Col>
                     <Col lg={4} ml="auto">

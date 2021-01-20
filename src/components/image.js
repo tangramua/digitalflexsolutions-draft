@@ -5,8 +5,6 @@ const NonStretchedImage = props => {
     let newprops = props
     let normalizedProps = props
 
-    // console.log('props**', props)
-
     let alignment;
     if(newprops.align === 'right'){
         alignment = '0 0 0 auto'

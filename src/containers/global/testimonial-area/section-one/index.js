@@ -7,31 +7,12 @@ import SwiperSlider from '../../../../components/ui/swiper'
 import Testimonial from '../../../../components/testimonial/layout-one'
 import {TestimonialWrapper} from './section.style'
 
-const TestimonialSection = ({sectionTitleStyle, slider, sliderStyle}) => {
-    const testimonialData = useStaticQuery(graphql `
-    query GlobalTestimonialQuery {
-        allTestimonialsJson {
-            edges {
-              node {
-                id
-                author_name
-                author_designation
-                rating
-                review
-                author_image {
-                  childImageSharp {
-                    fixed(width: 90, height: 90, quality: 100){
-                        ...GatsbyImageSharpFixed_withWebp
-                    }
-                  }
-                }
-              }
-            }
-        }
-    }
-    `); 
-    // const testimonialSecData = testimonialData.appointmentJson;
-    const testimonials = testimonialData.allTestimonialsJson.edges;
+const TestimonialSection = ({sectionTitleStyle, slider, sliderStyle, containerData}) => {
+    const testimonials = containerData.content[0].content
+
+    const title =  containerData.accentTitle ? `${containerData.title} <span>${containerData.accentTitle}</span>` : containerData.title
+    const subTitle =  containerData.subTitle ? containerData.subTitle : 'TESTIMONIALS'
+
     return (
         <TestimonialWrapper>
             <Container>
@@ -39,8 +20,8 @@ const TestimonialSection = ({sectionTitleStyle, slider, sliderStyle}) => {
                     <Col lg={12}>
                         <SectionTitle
                             {...sectionTitleStyle}
-                            title="What do people praise about <span>Mitech?</span>"
-                            subtitle="TESTIMONIALS"
+                            title={title}
+                            subtitle={subTitle}
                         />
                     </Col>
                 </Row>
@@ -48,13 +29,13 @@ const TestimonialSection = ({sectionTitleStyle, slider, sliderStyle}) => {
                     <Col lg={12}>
                         <SwiperSlider {...sliderStyle} settings={slider}>
                             {testimonials.map(testimonial => (
-                                <div className="item" key={testimonial.node.id}>
+                                <div className="item" key={testimonial.codeId}>
                                     <Testimonial
-                                        authorName={testimonial.node.author_name}
-                                        authroRole={testimonial.node.author_designation}
-                                        authorImg={testimonial.node.author_image.childImageSharp}
-                                        rating={testimonial.node.rating}
-                                        review={testimonial.node.review}
+                                        authorName={testimonial.authorName}
+                                        authroRole={testimonial.authorDesignation}
+                                        authorImg={testimonial.authorImage.fixed.src}
+                                        rating={testimonial.rating}
+                                        review={testimonial.review}
                                     />
                                 </div>
                             ))}

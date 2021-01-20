@@ -27,8 +27,6 @@ import {
 } from './about-area.style'
 
 const AboutArea = ({ sectionTitleStyle, containerData }) => {
-    // console.log('containerData**', containerData)
-
     const AboutData = useStaticQuery(graphql`
         query MainAboutQuery {
             indexProcessingJson(id: {eq: "processing-about-content"}) {

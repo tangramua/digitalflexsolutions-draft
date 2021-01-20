@@ -17,14 +17,16 @@ import FeaturesArea from "./index";
 
 const AboutPage = ({ location, data }) => {
     const areas = data.contentfulPage.contentContainers
-    // console.log('areas**', areas)
+    const headerContainerData = areas.find(node => node.bgPage && !node.content)
 
-    const headerContainerData = areas.find(node => node.backgroundImage && !node.content)
-    // console.log('headerContainerData**', headerContainerData)
+    let titlePage = data.contentfulPage.metadata.find(node => node.name.codeId === 'title')
+    let descriptionPage = data.contentfulPage.metadata.find(node => node.name.codeId === 'description')
+    titlePage = titlePage ? titlePage.content.content : null
+    descriptionPage = descriptionPage ? descriptionPage.content.content : null
 
     return (
         <Layout location={location}>
-            <SEO title="About Us"/>
+            <SEO title={titlePage} description={descriptionPage}/>
             <Header/>
             <PageHeader key={headerContainerData.codeId} containerData={headerContainerData} />
             <main className="site-wrapper-reveal">
@@ -32,29 +34,30 @@ const AboutPage = ({ location, data }) => {
                     if (area.content){
                         switch (area.content[0].__typename) {
                             case 'ContentfulTextLinkContainer':
-                                return (<AboutArea key={area.codeId} containerData={area} />)
+                                return (<AboutArea key={area.id} containerData={area} />)
                                 break
                             case 'ContentfulStaticListContainer':
-                                return (<ServicesArea key={area.codeId} containerData={area} />)
+                                return (<ServicesArea key={area.id} containerData={area} />)
                                 break
                             case 'ContentfulSimpleContainer':
-                                return (<ResourcesArea key={area.codeId} containerData={area} />)
+                                return (<ResourcesArea key={area.id} containerData={area} />)
                                 break;
                             case 'ContentfulSimpleListContainer':
-                                return (<SolutionsArea key={area.codeId} containerData={area} />)
+                                return (<SolutionsArea key={area.id} containerData={area} />)
                                 break;
                             case 'ContentfulFunFactListContainer':
-                                return (<FunFactArea key={area.codeId} containerData={area} />)
+                                return (<FunFactArea key={area.id} containerData={area} />)
                                 break;
                             case 'ContentfulCarouselContainer':
                                 if (area.content[0].content && area.content[0].content[0].__typename === "ContentfulTestimonialCard"){
-                                    return (<TestimonialArea key={area.codeId} containerData={area} />)
-                                } else if (area.content[0].content && area.content[0].content[0].__typename === "ContentfulCarouselContainer"){
-                                    return (<ClientsArea key={area.codeId} containerData={area} />)
+                                    return (<TestimonialArea key={area.id} containerData={area} />)
+                                } else if (area.content[0].content && area.content[0].content[0].__typename === "ContentfulMediaCard"){
+                                    return (<ClientsArea key={area.id} containerData={area} />)
                                 } else return null
                                 break;
                             case 'ContentfulMedia':
-                                return (<ContactArea key={area.codeId} containerData={area} />)
+                                let dataArea = {...area, globalData: data.allContentfulGlobalSettings.edges}
+                                return (<ContactArea key={area.id} containerData={dataArea} />)
                                 break
                             default:
                                 return null
@@ -76,12 +79,23 @@ export default AboutPage
 export const pageQuery = graphql`
 query AboutUsPageQuery {
     contentfulPage(codeId: {eq: "about-us-page"}) {
+        metadata {
+          id
+          name {
+            codeId
+          }
+          content {
+            content
+          }
+        }
+        
         contentContainers {
             title
             subTitle
             accentTitle
             codeId
-            backgroundImage{
+            id
+            bgPage: backgroundImage {
                 fluid(maxWidth: 1920, maxHeight: 570, quality: 100) {
                   aspectRatio
                   base64
@@ -91,13 +105,25 @@ query AboutUsPageQuery {
                   srcSetWebp
                   srcWebp
                 }
-            }
+             }
+             bgArea: backgroundImage {
+                sizes(maxHeight: 520, maxWidth: 1920, quality: 100) {                       
+                  aspectRatio
+                  base64
+                  sizes
+                  src
+                  srcSet
+                  srcSetWebp
+                  srcWebp
+                }
+             }
+              
             content {
             ... on ContentfulMedia {
                     __typename
                     codeId
                     media {
-                        fluid(maxWidth: 1920, maxHeight: 570, quality: 100) {
+                        fluid(maxHeight: 572, maxWidth: 587, quality: 100) {
                             aspectRatio
                             base64
                             sizes
@@ -215,27 +241,36 @@ query AboutUsPageQuery {
               __typename
               numberToDisplayAtOneTime
               content {
-                ... on ContentfulMediaContainer {              
-                  __typename
-                  codeId
-                  medias {
-                    fluid {
-                      aspectRatio
-                      base64
-                      sizes
-                      src
-                      srcSet
-                      srcSetWebp
-                      srcWebp
-                    }
-                  }
-                }
+                
                 ... on ContentfulTestimonialCard {
                   __typename
                   codeId
                   authorDesignation
                   authorName
                   authorImage {
+                    fixed(width: 90, height: 90, quality: 100) {
+                                aspectRatio
+                                base64
+                                src
+                                srcSet
+                                srcSetWebp
+                                srcWebp
+                            }
+                  }
+                  rating
+                  review
+                }
+                
+                ... on ContentfulMediaCard {
+                  id
+                  altText
+                  link {
+                    externalUrl
+                    page {
+                      slug
+                    }
+                  }
+                  hoverImage {
                     fluid {
                       aspectRatio
                       base64
@@ -246,9 +281,19 @@ query AboutUsPageQuery {
                       srcWebp
                     }
                   }
-                  rating
-                  review
+                  image {
+                    fluid {
+                      aspectRatio
+                      base64
+                      sizes
+                      src
+                      srcSet
+                      srcSetWebp
+                      srcWebp
+                    }
+                  }
                 }
+                
               }
             }
             
@@ -257,5 +302,17 @@ query AboutUsPageQuery {
           }
         }
     }
+    
+    allContentfulGlobalSettings(filter: {codeId: {in: ["email", "phone", "rating", "customers-number", "clients-number"]}}) {
+    edges {
+      node {
+        codeId
+        internalName
+        value {
+          value
+        }
+      }
+    }
+  }
 
 }`

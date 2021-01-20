@@ -2,7 +2,6 @@ import React from "react"
 import SEO from "../components/seo"
 import Layout from '../containers/layout/layout'
 
-// new 2
 import Header from '../containers/layout/header/header-three'
 // import Header from '../containers/layout/header/header-one'
 import Footer from '../containers/layout/footer/footer-one'
@@ -12,43 +11,30 @@ import FeaturesArea from '../containers/index-main/features-area'
 import ServicesArea from '../containers/index-main/services-area'
 import {Col} from "../components/ui/wrapper/col";
 
-
-// //new
-// import Header from '../containers/layout/header/header-three'
-// import Footer from '../containers/layout/footer/footer-one'
-// import HeroArea from '../containers/index-processing/hero-area'
-// import AboutArea from '../containers/index-processing/about-area'
-// // import FeaturesArea from '../containers/index-processing/features-area'
-// import FeaturesArea from '../containers/index-infotechno/features-area'
-// // import FunFactArea from '../containers/global/funfact-area/section-three'
-// // import CTAArea from '../containers/index-processing/cta-area'
-// // import ServicesArea from '../containers/index-processing/services-area'
-// // import TestimonialArea from '../containers/global/testimonial-area/section-one'
-// // import ClientsArea from '../containers/global/clients-area'
-// // import ContactArea from '../containers/global/contact-area/contact-three'
-// import ServicesArea from '../containers/index-appointment/services-area'
-
-
 const IndexPage = ({location, data}) => {
-    // console.log('data**', data)
     const areas = data.contentfulPage.contentContainers
+
+    let titlePage = data.contentfulPage.metadata.find(node => node.name.codeId === 'title')
+    let descriptionPage = data.contentfulPage.metadata.find(node => node.name.codeId === 'description')
+    titlePage = titlePage ? titlePage.content.content : null
+    descriptionPage = descriptionPage ? descriptionPage.content.content : null
 
     return(
     <Layout location={location}>
-        <SEO title="Home" />
+        <SEO title={titlePage} description={descriptionPage} />
         <Header />
         <main className="site-wrapper-reveal">
             <HeroArea />
             {areas.map((area, i) => {
                 switch (area.content[0].__typename) {
                     case 'ContentfulTextsMediaContainer':
-                        return (<AboutArea containerData={area} />)
+                        return (<AboutArea key={area.id} containerData={area} />)
                         break
                     case 'ContentfulListContainer':
-                        return (<ServicesArea containerData={area} />)
+                        return (<ServicesArea key={area.id} containerData={area} />)
                         break
                     case 'ContentfulStaticListContainer':
-                        return (<FeaturesArea containerData={area} />)
+                        return (<FeaturesArea key={area.id} containerData={area} />)
                         break;
                     default:
                     return <div> </div>
@@ -60,33 +46,27 @@ const IndexPage = ({location, data}) => {
     )
 }
 
-// const IndexPage = ({ location }) => (
-//     <Layout location={location}>
-//         <SEO title="Processing" />
-//         <Header />
-//         <main className="site-wrapper-reveal">
-//             <HeroArea />
-//             <AboutArea />
-//             <ServicesArea/>
-//             <FeaturesArea />
-//         </main>
-//         <Footer />
-//     </Layout>
-// )
-
-
-
 export default IndexPage
 
-// new
 export const pageQuery = graphql`
   query HomePageQuery {
   contentfulPage(codeId: {eq: "home-page"}) {
+    metadata {
+          id
+          name {
+            codeId
+          }
+          content {
+            content
+          }
+    }
+    
     contentContainers {
       title
       subTitle
       accentTitle
       codeId
+      id
       content {
         ... on ContentfulListContainer {
           id
