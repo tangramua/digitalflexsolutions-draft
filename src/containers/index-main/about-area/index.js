@@ -40,21 +40,21 @@ const AboutArea = ({ sectionTitleStyle, containerData }) => {
     // const { video_link, image1, image2, image3, image4, main_image } = AboutData.indexProcessingJson;
     // const { video_link } = AboutData.indexProcessingJson;
 
-    const mediBlock = containerData && containerData.content && containerData.content[0].mediaBlock
+    const mediaBlock = containerData && containerData.content && containerData.content[0].mediaBlock
         ? containerData.content[0].mediaBlock
         : null
 
-    const image1 = mediBlock && mediBlock.image1 ? mediBlock.image1 : null
-    const image2 = mediBlock && mediBlock.image2 ? mediBlock.image2 : null
-    const image3 = mediBlock && mediBlock.image3 ? mediBlock.image3 : null
-    const image4 = mediBlock && mediBlock.image4 ? mediBlock.image4 : null
-    const main_image = mediBlock && mediBlock.mainImage ? mediBlock.mainImage : null
+    const image1 = mediaBlock && mediaBlock.image1 ? mediaBlock.image1 : null
+    const image2 = mediaBlock && mediaBlock.image2 ? mediaBlock.image2 : null
+    const image3 = mediaBlock && mediaBlock.image3 ? mediaBlock.image3 : null
+    const image4 = mediaBlock && mediaBlock.image4 ? mediaBlock.image4 : null
+    const main_image = mediaBlock && mediaBlock.mainImage ? mediaBlock.mainImage : null
 
     const textList = containerData && containerData.content && containerData.content[0].textsList ? containerData.content[0].textsList : null
     const title = containerData && containerData.title ? containerData.title : null
     const subtitle = containerData && containerData.subtitle ? containerData.subtitle : null
 
-    const video_link = mediBlock && mediBlock.videoLink ? mediBlock.videoLink : null
+    const video_link = mediaBlock && mediaBlock.videoLink ? mediaBlock.videoLink.externalUrl : null
 
     let video_arr, video_id, video_channel;
     if (video_link) {

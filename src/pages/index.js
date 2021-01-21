@@ -110,6 +110,12 @@ export const pageQuery = graphql`
           }
           mediaBlock {
             altText
+            videoLink {
+                externalUrl
+                page {
+                  slug
+                }
+            }
             mainImage {            
                 fluid(maxWidth: 570, maxHeight: 350, quality: 100) {
                 ...GatsbyContentfulFluid_withWebp
