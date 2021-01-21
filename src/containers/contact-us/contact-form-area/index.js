@@ -5,16 +5,21 @@ import Heading from '../../../components/ui/heading'
 import Text from '../../../components/ui/text'
 import ContactForm from '../../../components/forms/contact-form'
 import {ContactFormWrapper, LeftBox} from './contact-form-area.style'
+import parse from "html-react-parser";
 
-const ContactFormArea = ({headingStyle, textStyle}) => {
+const ContactFormArea = ({headingStyle, textStyle, containerData}) => {
+    let headText = containerData && containerData.title ? containerData.title : `To make requests for <br/> further information, <br/> <span>contact us</span> via our social channels.`
+    let text = containerData && containerData.subTitle ? containerData.subTitle : `We just need a couple of hours! No more than 2 working days since receiving your issue ticket`
+    headingStyle.color = '#1e1c1c'
+
     return (
         <ContactFormWrapper>
             <Container>
                 <Row alignitems="center">
                     <Col lg={6}>
                         <LeftBox>
-                            <Heading {...headingStyle}>To make requests for <br/> further information, <br/> <span>contact us</span> via our social channels.</Heading>
-                            <Text {...textStyle}>We just need a couple of hours! No more than 2 working days since receiving your issue ticket</Text>
+                            <Heading {...headingStyle}>{parse(headText)}</Heading>
+                            <Text {...textStyle}>{text}</Text>
                         </LeftBox>
                     </Col>
                     <Col lg={6}>

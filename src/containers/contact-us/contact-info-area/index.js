@@ -1,31 +1,35 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { useStaticQuery, graphql } from "gatsby"
+// import { useStaticQuery, graphql } from "gatsby"
 import {Container, Row, Col} from '../../../components/ui/wrapper'
 import Heading from '../../../components/ui/heading'
 import Text from '../../../components/ui/text'
 import Anchor from '../../../components/ui/anchor'
 import {ContactInfoWrapper, InfoBoxWrap, InfoBox} from './contact-info-area.style'
 
-const ContactInfoArea = ({headingStyle, textStyle, phoneStyle}) => {
-    const contactInfo = useStaticQuery(graphql `
-        query {
-            site {
-                siteMetadata {
-                    contact {
-                        addressInfos {
-                            id
-                            state
-                            address
-                            email
-                            phone
-                        }
-                    }
-                }
-            }
-        }      
-    `);
-    const {addressInfos} = contactInfo.site.siteMetadata.contact;
+const ContactInfoArea = ({headingStyle, textStyle, phoneStyle, containerData}) => {
+    // const contactInfo = useStaticQuery(graphql `
+    //     query {
+    //         site {
+    //             siteMetadata {
+    //                 contact {
+    //                     addressInfos {
+    //                         id
+    //                         state
+    //                         address
+    //                         email
+    //                         phone
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //     }
+    // `);
+    // const {addressInfos} = contactInfo.site.siteMetadata.contact;
+    const addressInfos = containerData && containerData.content ? containerData.content : null
+
+    const linkStyle = {...textStyle, color: '#fd5b01'}
+
     return (
         <ContactInfoWrapper>
             <Container>
@@ -36,7 +40,7 @@ const ContactInfoArea = ({headingStyle, textStyle, phoneStyle}) => {
                                 {info.state && <Heading {...headingStyle}>{info.state}</Heading>}
                                 <InfoBox>
                                     {info.address && <Text {...textStyle}>{info.address}</Text>}
-                                    {info.email && <Anchor {...textStyle} path={`mailto:${info.email}`}>{info.email}</Anchor>}
+                                    {info.email && <Anchor {...linkStyle} path={`mailto:${info.email}`}>{info.email}</Anchor>}
                                     {info.phone && <Text {...textStyle} {...phoneStyle}>{info.phone}</Text>}
                                 </InfoBox>
                             </InfoBoxWrap>

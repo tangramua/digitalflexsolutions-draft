@@ -22,8 +22,8 @@ const AboutPage = ({ location, data }) => {
 
     let titlePage = data.contentfulPage.metadata.find(node => node.name.codeId === 'title')
     let descriptionPage = data.contentfulPage.metadata.find(node => node.name.codeId === 'description')
-    titlePage = titlePage ? titlePage.content.content : null
-    descriptionPage = descriptionPage ? descriptionPage.content.content : null
+    titlePage = titlePage ? titlePage.content.content : 'About Us'
+    descriptionPage = descriptionPage ? descriptionPage.content.content : 'About Us'
 
     return (
         <Layout location={location}>

@@ -3,7 +3,7 @@ import { Breadcrumb } from 'gatsby-plugin-breadcrumb'
 import { useStaticQuery, graphql } from "gatsby"
 import {PageHeaderWrap} from './page-header.style';
 
-const PageHeader = ({pageContext, location, title}) => {
+const PageHeader = ({pageContext, location, title, containerData}) => {
     const { breadcrumb: { crumbs } } = pageContext;
     const disableLinks = [
         "/elements", 
@@ -17,6 +17,7 @@ const PageHeader = ({pageContext, location, title}) => {
         "/blogs",
         "/services"
     ]
+
     const customCrumbLabel = location.pathname.toLowerCase();
     const crumbLabelArr = customCrumbLabel.split('/');
     const label = crumbLabelArr[crumbLabelArr.length - 1]
@@ -33,8 +34,11 @@ const PageHeader = ({pageContext, location, title}) => {
         }
       
     `);
+
+    const bgImg = containerData && containerData.fluid ? containerData.fluid : imageData.file.childImageSharp.fluid
+
     return (
-        <PageHeaderWrap fluid={imageData.file.childImageSharp.fluid}>
+        <PageHeaderWrap fluid={bgImg}>
             <Breadcrumb
                 title={title}
                 crumbs={crumbs}
