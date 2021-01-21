@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types'
-import { useStaticQuery, graphql } from "gatsby"
 import {Container, Row, Col} from '../../../../components/ui/wrapper'
 import SectionTitle from '../../../../components/ui/section-title'
 import SwiperSlider from '../../../../components/ui/swiper'

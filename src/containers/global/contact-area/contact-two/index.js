@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { useStaticQuery, graphql } from "gatsby"
 import { MdPhone, MdEmail } from "react-icons/md";
 import {Container, Row, Col, Box} from '../../../../components/ui/wrapper'
 import Heading from '../../../../components/ui/heading'

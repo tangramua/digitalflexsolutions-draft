@@ -1,9 +1,9 @@
 import React from "react"
+import { graphql } from "gatsby"
 import SEO from "../components/seo"
 import Layout from '../containers/layout/layout'
 
 import Header from '../containers/layout/header/header-three'
-// import Header from '../containers/layout/header/header-one'
 import Footer from '../containers/layout/footer/footer-one'
 import HeroArea from '../containers/index-main/hero-area'
 import AboutArea from '../containers/index-main/about-area'
@@ -29,13 +29,10 @@ const IndexPage = ({location, data}) => {
                 switch (area.content[0].__typename) {
                     case 'ContentfulTextsMediaContainer':
                         return (<AboutArea key={area.id} containerData={area} />)
-                        break
                     case 'ContentfulListContainer':
                         return (<ServicesArea key={area.id} containerData={area} />)
-                        break
                     case 'ContentfulStaticListContainer':
                         return (<FeaturesArea key={area.id} containerData={area} />)
-                        break;
                     default:
                     return <div> </div>
                 }

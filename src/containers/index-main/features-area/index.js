@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { useStaticQuery, graphql } from "gatsby"
 import Heading from '../../../components/ui/heading'
 import Anchor from '../../../components/ui/anchor'
 import { Container, Row, Col } from '../../../components/ui/wrapper'

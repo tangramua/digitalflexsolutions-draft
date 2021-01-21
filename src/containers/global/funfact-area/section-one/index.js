@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types'
-import { useStaticQuery, graphql } from "gatsby"
 import Section, {Row, Col} from '../../../../components/ui/wrapper'
 import Counter from '../../../../components/counter/layout-one'
 

@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { useStaticQuery, graphql } from "gatsby"
 import parse from "html-react-parser"
 import { MdDone } from "react-icons/md";
 import {Container, Row, Col} from '../../../components/ui/wrapper'

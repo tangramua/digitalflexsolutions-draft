@@ -1,5 +1,6 @@
 import React from "react"
 import SEO from "../components/seo"
+import { graphql } from "gatsby"
 import Layout from '../containers/layout/layout'
 // import Header from '../containers/layout/header/header-one'
 import Header from '../containers/layout/header/header-three'
@@ -35,30 +36,24 @@ const AboutPage = ({ location, data }) => {
                         switch (area.content[0].__typename) {
                             case 'ContentfulTextLinkContainer':
                                 return (<AboutArea key={area.id} containerData={area} />)
-                                break
                             case 'ContentfulStaticListContainer':
                                 return (<ServicesArea key={area.id} containerData={area} />)
-                                break
                             case 'ContentfulSimpleContainer':
                                 return (<ResourcesArea key={area.id} containerData={area} />)
-                                break;
                             case 'ContentfulSimpleListContainer':
                                 return (<SolutionsArea key={area.id} containerData={area} />)
-                                break;
                             case 'ContentfulFunFactListContainer':
                                 return (<FunFactArea key={area.id} containerData={area} />)
-                                break;
                             case 'ContentfulCarouselContainer':
                                 if (area.content[0].content && area.content[0].content[0].__typename === "ContentfulTestimonialCard"){
                                     return (<TestimonialArea key={area.id} containerData={area} />)
                                 } else if (area.content[0].content && area.content[0].content[0].__typename === "ContentfulMediaCard"){
                                     return (<ClientsArea key={area.id} containerData={area} />)
                                 } else return null
-                                break;
                             case 'ContentfulMedia':
                                 let dataArea = {...area, globalData: data.allContentfulGlobalSettings.edges}
                                 return (<ContactArea key={area.id} containerData={dataArea} />)
-                                break
+
                             default:
                                 return null
                         }
