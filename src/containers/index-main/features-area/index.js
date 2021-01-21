@@ -9,11 +9,11 @@ import { SectionWrap } from './features-area.style'
 
 const FeaturesArea = (props) => {
     const { featureBoxStyles, linkStyle, headingStyle, containerData } = props;
-    const contentData = containerData.content[0]
-    const featureData = contentData.listItems;
-    const headingLinkLabel = contentData.subLink && contentData.subLink.externalName ? contentData.subLink.externalName : 'Take the challenge!'
+    const contentData = containerData && containerData.content ? containerData.content[0] : null
+    const featureData = contentData && contentData.listItems ? contentData.listItems : null
+    const headingLinkLabel = contentData && contentData.subLink && contentData.subLink.externalName ? contentData.subLink.externalName : 'Take the challenge!'
 
-    return (
+    return containerData && featureData ? (
         <SectionWrap>
             <Container>
                 <Row>
@@ -44,7 +44,7 @@ const FeaturesArea = (props) => {
                 </Row>
             </Container>
         </SectionWrap>
-    )
+    ) : null
 }
 
 FeaturesArea.propTypes = {

@@ -7,12 +7,20 @@ import Testimonial from '../../../../components/testimonial/layout-one'
 import {TestimonialWrapper} from './section.style'
 
 const TestimonialSection = ({sectionTitleStyle, slider, sliderStyle, containerData}) => {
-    const testimonials = containerData.content[0].content
+    const testimonials = containerData && containerData.content && containerData.content[0].content
+        ? containerData.content[0].content
+        : null
 
-    const title =  containerData.accentTitle ? `${containerData.title} <span>${containerData.accentTitle}</span>` : containerData.title
-    const subTitle =  containerData.subTitle ? containerData.subTitle : 'TESTIMONIALS'
+    const title =  containerData ? containerData.accentTitle
+        ? `${containerData.title} <span>${containerData.accentTitle}</span>`
+        : containerData.title
+        : null
+    const subTitle =  containerData ? containerData.subTitle
+        ? containerData.subTitle
+        : 'TESTIMONIALS'
+        : null
 
-    return (
+    return containerData ? (
         <TestimonialWrapper>
             <Container>
                 <Row>
@@ -43,7 +51,7 @@ const TestimonialSection = ({sectionTitleStyle, slider, sliderStyle, containerDa
                 </Row>
             </Container>
         </TestimonialWrapper>
-    )
+    ) : null
 }
  
 TestimonialSection.propTypes = {

@@ -37,10 +37,10 @@ import {ServicesWrapper} from './services-area.style'
 
 const Services = (props) => {
     const { serviceBoxStyle, linkStyle, headingStyle, containerData } = props
-    const contentData = containerData.content[0]
-    const services = contentData.listItems
-    const headingLinkLabel = contentData.subLink && contentData.subLink.externalName ? contentData.subLink.externalName : 'Take the challenge!'
-    return (
+    const contentData = containerData && containerData.content ? containerData.content[0] : null
+    const services = contentData && contentData.listItems ? contentData.listItems : null
+    const headingLinkLabel = contentData && contentData.subLink && contentData.subLink.externalName ? contentData.subLink.externalName : 'Take the challenge!'
+    return containerData ? (
         <ServicesWrapper> 
             <Container>
                 <Row>
@@ -63,7 +63,7 @@ const Services = (props) => {
                 </Row>
             </Container>
         </ServicesWrapper>
-    )
+    ) : null
 }
 
 Services.propTypes = {

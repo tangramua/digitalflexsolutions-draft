@@ -89,6 +89,7 @@ export const pageQuery = graphql`
             buttons {
               label
               link {
+                externalUrl
                 page {
                   slug
                 }
@@ -194,6 +195,7 @@ export const pageQuery = graphql`
                  externalName
              }
              linkRef {
+                 externalUrl
                  page {
                     slug
                  }
@@ -204,6 +206,7 @@ export const pageQuery = graphql`
              codeId                
              subText
              subLink {
+                  externalUrl
                   page {
                     slug
                   }

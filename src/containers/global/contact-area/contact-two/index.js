@@ -11,20 +11,28 @@ import Anchor from '../../../../components/ui/anchor'
 import {SectionWrap, ImageBox, ContactInfoBox} from './contact.style'
 
 const ContactArea = ({sectionStyle, imgBoxStyle, rightBoxStyle, boxIconStyle, ratingStyle, textStyle, containerData}) => {
-    const bg_image = containerData.bgArea.sizes;
-    const contact_image = containerData.content[0].media.fluid;
+    let bg_image, contact_image, rating, clients, customers, phone, email
 
-    let rating = containerData.globalData.find(el => el.node.codeId === 'rating')
-    let clients = containerData.globalData.find(el => el.node.codeId === 'clients-number')
-    let customers = containerData.globalData.find(el => el.node.codeId === 'customers-number')
-    let phone = containerData.globalData.find(el => el.node.codeId === 'phone')
-    let email = containerData.globalData.find(el => el.node.codeId === 'email')
+    if (containerData){
+        bg_image = containerData.bgArea ? containerData.bgArea.sizes
+            : containerData.backgroundImage
+            ? containerData.backgroundImage.fluid
+                : null
+        contact_image = containerData.content && containerData.content[0].media ? containerData.content[0].media.fluid : null
 
-    rating = rating ? rating.node.value.value : null
-    clients = clients ? clients.node.value.value : null
-    customers = customers ? customers.node.value.value : null
-    phone = phone ? phone.node.value.value : null
-    email = email ? email.node.value.value : null
+        rating = containerData.globalData ? containerData.globalData.find(el => el.node.codeId === 'rating') : null
+        clients = containerData.globalData ? containerData.globalData.find(el => el.node.codeId === 'clients-number') : null
+        customers = containerData.globalData ? containerData.globalData.find(el => el.node.codeId === 'customers-number') : null
+        phone = containerData.globalData ? containerData.globalData.find(el => el.node.codeId === 'phone') : null
+        email = containerData.globalData ? containerData.globalData.find(el => el.node.codeId === 'email') : null
+
+        rating = rating ? rating.node.value.value : null
+        clients = clients ? clients.node.value.value : null
+        customers = customers ? customers.node.value.value : null
+        phone = phone ? phone.node.value.value : null
+        email = email ? email.node.value.value : null
+    }
+
 
     return (
         <SectionWrap fluid={bg_image}>

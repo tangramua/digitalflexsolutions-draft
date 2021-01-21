@@ -7,15 +7,26 @@ import Image from '../../../components/image'
 import {ResourcesWrapper, LeftBox, ImageBox} from './resources-area.style'
 
 const Resources = ({sectionTitleStyle, containerData}) => {
-    const title = containerData.accentTitle ? `${containerData.subTitle} <span>${containerData.accentTitle}</span>` : containerData.subTitle
-    const subtitle = containerData.title
-    const buttonLabel = containerData.content[0].button.label
-    const download_link = containerData.content[0].button.link.page.slug
-    const image = containerData.content[0].image
+    const title = containerData && containerData.subTitle
+        ? containerData.accentTitle
+        ? `${containerData.subTitle} <span>${containerData.accentTitle}</span>`
+        : containerData.subTitle
+        : null
+    const subtitle = containerData && containerData.title ? containerData.title : null
+    const buttonLabel = containerData && containerData.content && containerData.content[0].button && containerData.content[0].button.label
+        ? containerData.content[0].button.label
+        : null
 
-    const ImageData = containerData.content[0].backgroundImage.fluid
+    const download_link = containerData && containerData.content && containerData.content[0].button.link
+        ? containerData.content[0].button.link.page
+        ? containerData.content[0].button.link.page.slug
+            : containerData.content[0].button.link.externalUrl
+        : null
+    const image = containerData && containerData.content && containerData.content[0].image ? containerData.content[0].image : null
 
-    return (
+    const ImageData = containerData && containerData.content && containerData.content[0].backgroundImage ? containerData.content[0].backgroundImage.fluid : null
+
+    return containerData ? (
         <ResourcesWrapper fluid={ImageData}>
             <Container fluid>
                 <Row alignitems="center">
@@ -44,7 +55,7 @@ const Resources = ({sectionTitleStyle, containerData}) => {
                 </Row>
             </Container>
         </ResourcesWrapper>
-    )
+    ) : null
 }
 
 // return (

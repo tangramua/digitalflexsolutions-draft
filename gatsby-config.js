@@ -193,18 +193,7 @@ module.exports = {
           `/about-us/`,
           `/case-studies/`,
           `/contact-us/`,
-          `/index-appointment/`,
-          `/index-infotechno/`,
-          `/index-processing/`,
-          `/index-resolutions/`,
-          `/index-services/`,
-          `/it-services/`,
-          `/it-solutions/`,
-          `/leadership/`,
-          `/it-service/*`,
-          `/case-study/*`,
-          `/case-study/*`,
-          `/blogs/*`
+          `/index/`
         ]
       }
     },

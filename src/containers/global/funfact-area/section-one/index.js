@@ -4,8 +4,8 @@ import Section, {Row, Col} from '../../../../components/ui/wrapper'
 import Counter from '../../../../components/counter/layout-one'
 
 const FunFactArea = ({sectionStyle, counterStyle, containerData}) => {
-    const data = containerData.content[0].listItems
-    return(
+    const data = containerData && containerData.content && containerData.content[0].listItems ? containerData.content[0].listItems : null
+    return data ? (
         <Section {...sectionStyle}>
             <Row>
                 {data.map((item,i) => (
@@ -19,7 +19,7 @@ const FunFactArea = ({sectionStyle, counterStyle, containerData}) => {
                 ))}
             </Row>
         </Section>
-    )
+    ) : null
 }
 
 FunFactArea.propTypes = {

@@ -15,15 +15,27 @@ export const SubHeading = styled.div`
     `
 
 const AboutDesc = ({sectionTitleStyle, headingStyle, textStyle, descStyle, btnStyle, containerData}) => {
-    const title =  containerData.accentTitle ? `${containerData.title} <span>${containerData.accentTitle}</span>` : containerData.title
-    const heading = containerData.content[0].headText
-    const text = containerData.content[0].subHeadText
+    const title =  containerData && containerData.title
+    ? containerData.accentTitle
+        ? `${containerData.title} <span>${containerData.accentTitle}</span>`
+        : containerData.title
+        : null
+    const heading = containerData && containerData.content && containerData.content[0].headText ? containerData.content[0].headText : null
+    const text = containerData && containerData.content && containerData.content[0].subHeadText ? containerData.content[0].subHeadText : null
 
-    const desc = containerData.content[0].description.description
-    const path = containerData.content[0].link.page.slug
-    const textLink = containerData.content[0].link.externalName
+    const desc = containerData && containerData.content && containerData.content[0].description
+    ? containerData.content[0].description.description
+        : null
+    const path = containerData && containerData.content && containerData.content[0].link
+        ? containerData.content[0].link.page && containerData.content[0].link.page.slug
+        ? containerData.content[0].link.page.slug
+            : containerData.content[0].link.externalUrl
+        : null
+    const textLink = containerData && containerData.content && containerData.content[0].link
+    ? containerData.content[0].link.externalName
+        : null
 
-    return (
+    return containerData ? (
         <AboutWrapper>
             <Container>
                 <Row>
@@ -51,7 +63,7 @@ const AboutDesc = ({sectionTitleStyle, headingStyle, textStyle, descStyle, btnSt
                 </Row>
             </Container>
         </AboutWrapper>
-    )
+    ) : null
 }
 
 AboutDesc.propTypes = {

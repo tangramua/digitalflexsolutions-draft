@@ -27,30 +27,34 @@ import {
 } from './about-area.style'
 
 const AboutArea = ({ sectionTitleStyle, containerData }) => {
-    const AboutData = useStaticQuery(graphql`
-        query MainAboutQuery {
-            indexProcessingJson(id: {eq: "processing-about-content"}) {
-                title
-                subtitle
-                video_link   
-            }
-        }      
-    `);
+    // const AboutData = useStaticQuery(graphql`
+    //     query MainAboutQuery {
+    //         indexProcessingJson(id: {eq: "processing-about-content"}) {
+    //             title
+    //             subtitle
+    //             video_link
+    //         }
+    //     }
+    // `);
 
     // const { video_link, image1, image2, image3, image4, main_image } = AboutData.indexProcessingJson;
-    const { video_link } = AboutData.indexProcessingJson;
+    // const { video_link } = AboutData.indexProcessingJson;
 
-    const mediBlock = containerData.content[0].mediaBlock
+    const mediBlock = containerData && containerData.content && containerData.content[0].mediaBlock
+        ? containerData.content[0].mediaBlock
+        : null
 
-    const image1 = mediBlock.image1
-    const image2 = mediBlock.image2
-    const image3 = mediBlock.image3
-    const image4 = mediBlock.image4
-    const main_image = mediBlock.mainImage
+    const image1 = mediBlock && mediBlock.image1 ? mediBlock.image1 : null
+    const image2 = mediBlock && mediBlock.image2 ? mediBlock.image2 : null
+    const image3 = mediBlock && mediBlock.image3 ? mediBlock.image3 : null
+    const image4 = mediBlock && mediBlock.image4 ? mediBlock.image4 : null
+    const main_image = mediBlock && mediBlock.mainImage ? mediBlock.mainImage : null
 
-    const textList = containerData.content[0].textsList
-    const title = containerData.title
-    const subtitle = containerData.subtitle
+    const textList = containerData && containerData.content && containerData.content[0].textsList ? containerData.content[0].textsList : null
+    const title = containerData && containerData.title ? containerData.title : null
+    const subtitle = containerData && containerData.subtitle ? containerData.subtitle : null
+
+    const video_link = mediBlock && mediBlock.videoLink ? mediBlock.videoLink : null
 
     let video_arr, video_id, video_channel;
     if (video_link) {
@@ -58,6 +62,7 @@ const AboutArea = ({ sectionTitleStyle, containerData }) => {
         video_id = video_arr[1];
         video_channel = video_link.split(".")[1];
     }
+
     const [videoOpen, setVideoOpen] = useState(false);
     const modalVideoOpen = () => {
         setVideoOpen(true)
@@ -66,7 +71,7 @@ const AboutArea = ({ sectionTitleStyle, containerData }) => {
     const modalVideoClose = () => {
         setVideoOpen(false)
     }
-    return (
+    return containerData ? (
         <Fragment>
             <AboutAreaWrap>
                 <Container fluid>
@@ -156,7 +161,7 @@ const AboutArea = ({ sectionTitleStyle, containerData }) => {
                 onClose={modalVideoClose}
             />
         </Fragment>
-    )
+    ) : null
 }
 
 AboutArea.propTypes = {

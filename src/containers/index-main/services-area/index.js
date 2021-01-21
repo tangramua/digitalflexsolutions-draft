@@ -13,11 +13,11 @@ const Services = ({
   buttonTwoStyle,
   containerData}) => {
 
-  const contentData = containerData.content[0]
-  const secdata = contentData.buttons
-  const serviceData = contentData.listItems
+  const contentData = containerData && containerData.content ? containerData.content[0] : null
+  const secdata = contentData && contentData.buttons ? contentData.buttons : null
+  const serviceData = contentData && contentData.listItems ? contentData.listItems : null
 
-  return (
+  return containerData && serviceData ? (
     <ServicesWrapper>
       <Container>
         <Row>
@@ -54,7 +54,7 @@ const Services = ({
         </Row>
       </Container>
     </ServicesWrapper>
-  )
+  ) : null
 }
 
 Services.propTypes = {

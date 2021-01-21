@@ -8,12 +8,17 @@ import PageHeader from '../components/pageheader'
 import CaseStudyArea from '../containers/global/case-study-area'
 import CTAArea from '../containers/global/cta-area/section-one'
 
+
+// const CaseStudiesPage = ({ pageContext, location }) => (
+//     <div>CaseStudies</div>
+// )
+
 const CaseStudiesPage = ({ pageContext, location }) => (
   <Layout location={location}>
     <SEO title="Case Studies"/>
     <Header/>
-    <PageHeader 
-        pageContext={pageContext} 
+    <PageHeader
+        pageContext={pageContext}
         location={location}
         title="Case Studies"
     />

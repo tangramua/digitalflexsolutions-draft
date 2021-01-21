@@ -8,12 +8,16 @@ import BoxIcon from '../../../components/box-icon/layout-four'
 import {SolutionsWrapper, SolutionBox, SolutionBoxItem} from './solutions-area.style'
 
 const Solutions = ({headingStyle, containerData}) => {
-    const title = containerData.accentTitle ? `${containerData.title} <span>${containerData.accentTitle}</span>` : containerData.title
-    const solutions = containerData.content[0].listItems
+    const title = containerData && containerData.title
+        ? containerData.accentTitle
+        ? `${containerData.title} <span>${containerData.accentTitle}</span>`
+        : containerData.title
+        : null
+    const solutions = containerData && containerData.content && containerData.content[0].listItems ? containerData.content[0].listItems : null
 
     headingStyle.color = 'black' // new
 
-    return (
+    return containerData ? (
         <SolutionsWrapper>
             <Container>
                 <Row>
@@ -38,7 +42,7 @@ const Solutions = ({headingStyle, containerData}) => {
                 </Row>
             </Container>
         </SolutionsWrapper>
-    )
+    ) : null
 }
 
 Solutions.propTypes = {

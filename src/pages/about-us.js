@@ -146,6 +146,7 @@ query AboutUsPageQuery {
                     button {
                         label
                         link {
+                            externalUrl
                             page {
                                 slug
                             }
@@ -168,6 +169,7 @@ query AboutUsPageQuery {
                     codeId
                     subText
                     subLink {
+                        externalUrl
                         page {
                             slug
                         }
@@ -191,6 +193,7 @@ query AboutUsPageQuery {
                             externalName
                         }
                         linkRef {
+                          externalUrl
                           page {
                             slug
                           }
@@ -202,6 +205,7 @@ query AboutUsPageQuery {
                     __typename
                     codeId
                     link {
+                        externalUrl
                         externalName
                         page {
                             slug

@@ -12,21 +12,25 @@ import ContactArea from '../containers/global/contact-area/contact-two'
 import Header from '../containers/layout/header/header-three'
 
 const Technology = ({ pageContext, location }) => (
-  <Layout location={location}>
-    <SEO title="Why Choose Us" />
-    <Header />
-    <PageHeader
-      pageContext={pageContext}
-      location={location}
-      title="Why Choose Us"
-    />
-    <main className="site-wrapper-reveal">
-      <SkillArea />
-      <ServicesArea />
-      <ContactArea />
-    </main>
-    <Footer />
-  </Layout>
+    <div>Technology</div>
 )
+
+// const Technology = ({ pageContext, location }) => (
+//   <Layout location={location}>
+//     <SEO title="Why Choose Us" />
+//     <Header />
+//     <PageHeader
+//       pageContext={pageContext}
+//       location={location}
+//       title="Why Choose Us"
+//     />
+//     <main className="site-wrapper-reveal">
+//       <SkillArea />
+//       <ServicesArea />
+//       <ContactArea />
+//     </main>
+//     <Footer />
+//   </Layout>
+// )
 
 export default Technology

@@ -6,7 +6,7 @@ import SwiperSlider from '../../../components/ui/swiper'
 import { SectionWrap, ClientLogoWrap } from './style'
 
 const ClientsArea = (props) => {
-    const partnersData = props.containerData.content[0].content
+    const partnersData = props.containerData && props.containerData.content && props.containerData.content[0].content ? props.containerData.content[0].content : null
     const { slider, sliderStyle } = props
     return (
         <SectionWrap>
@@ -14,7 +14,7 @@ const ClientsArea = (props) => {
                 <Row>
                     <Col lg={12}>
                         <SwiperSlider settings={slider} {...sliderStyle}>
-                            {partnersData.map((data, i) => {
+                            {partnersData && partnersData.map((data, i) => {
                                 return (
                                     <ClientLogoWrap key={data.id + i}>
                                         <ClientLogo
