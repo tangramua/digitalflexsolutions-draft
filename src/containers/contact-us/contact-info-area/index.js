@@ -61,7 +61,8 @@ ContactInfoArea.propTypes = {
 ContactInfoArea.defaultProps = {
     headingStyle: {
         as: "h5",
-        mb: "20px"
+        mb: "20px",
+        color: '#1e1c1c'
     },
     textStyle: {
         mb: "7px"

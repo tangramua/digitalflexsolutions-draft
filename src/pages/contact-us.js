@@ -36,10 +36,10 @@ const ContactUsPage = ({ pageContext, location, data }) => {
                         switch (area.content[0].__typename) {
                             case 'ContentfulAddressItemContainer':
                                 return (
-                                    <>
+                                    <div key={area.id} >
                                         <ContactFormArea key={area.id} containerData={area} />
-                                        <ContactInfoArea key={area.id+1} containerData={area}/>
-                                    </>
+                                        <ContactInfoArea key={area.id+i} containerData={area}/>
+                                    </div>
                                 )
                             case 'ContentfulButton':
                                 return (<CTAArea key={area.id} containerData={area} />)
