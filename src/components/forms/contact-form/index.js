@@ -33,10 +33,6 @@ const ContactForm = () => {
     };
 
     const onSubmit = (data, e) => {
-        console.log('form data**', data)
-        console.log('form e', e)
-        console.log('form e.target', e.target)
-
         const form = e.target;
         setServerState({ submitting: true });
 
@@ -44,7 +40,6 @@ const ContactForm = () => {
             'form-name': form.getAttribute('name'),
             ...data,
         })
-        console.log('tmp**',tmp)
 
         // axios({
         //     method: "post",
@@ -81,6 +76,7 @@ const ContactForm = () => {
               data-netlify-honeypot="bot-field"
         >
             <input type="hidden" name="form-name" value="contact" />
+            <input type="hidden" name="bot-field" />
             <Row gutters={{ lg: 20 }}>
                 <Col lg={6}>
                     <FormGroup mb="20px">
