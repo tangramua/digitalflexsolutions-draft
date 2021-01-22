@@ -6,6 +6,12 @@ import useFormUrl from '../useFormUrl'
 import Form, { FormGroup, Input, Textarea, Error } from '../../ui/form'
 import Button from '../../ui/button'
 
+function encode(data) {
+    return Object.keys(data)
+        .map((key) => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
+        .join('&')
+}
+
 const ContactForm = () => {
     const formUrl = useFormUrl();
     const { register, handleSubmit, errors, reset } = useForm({
@@ -27,22 +33,54 @@ const ContactForm = () => {
     };
 
     const onSubmit = (data, e) => {
+        console.log('form data**', data)
+        console.log('form e', e)
+        console.log('form e.target', e.target)
+
         const form = e.target;
         setServerState({ submitting: true });
-        axios({
-            method: "post",
-            url: formUrl,
-            data: data
+
+        let tmp = encode({
+            'form-name': form.getAttribute('name'),
+            ...data,
         })
-            .then(r => {
+        console.log('tmp**',tmp)
+
+        // axios({
+        //     method: "post",
+        //     url: formUrl,
+        //     data: data
+        // })
+        //     .then(r => {
+        //         handleServerResponse(true, "Thanks! for contact with us", form);
+        //     })
+        //     .catch(r => {
+        //         handleServerResponse(false, r.response.data.error, form);
+        //     });
+
+        fetch('/', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: encode({
+                'form-name': form.getAttribute('name'),
+                ...data,
+            }),
+        })
+            .then(() => {
                 handleServerResponse(true, "Thanks! for contact with us", form);
             })
-            .catch(r => {
-                handleServerResponse(false, r.response.data.error, form);
-            });
+            .catch((error) => {
+                handleServerResponse(false, error, form);
+            })
     }
     return (
-        <Form onSubmit={handleSubmit(onSubmit)}>
+        <Form onSubmit={handleSubmit(onSubmit)}
+              name="contact"
+              method="post"
+              data-netlify="true"
+              data-netlify-honeypot="bot-field"
+        >
+            <input type="hidden" name="form-name" value="contact" />
             <Row gutters={{ lg: 20 }}>
                 <Col lg={6}>
                     <FormGroup mb="20px">
@@ -50,7 +88,7 @@ const ContactForm = () => {
                             type="text"
                             name="name"
                             id="name"
-                            placeholder="Name *"
+                            placeholder="Name **"
                             ref={register({ required: 'Name is required' })}
                         />
                         <Error>{errors.name && errors.name.message}</Error>
