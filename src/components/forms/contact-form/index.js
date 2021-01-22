@@ -36,11 +36,6 @@ const ContactForm = () => {
         const form = e.target;
         setServerState({ submitting: true });
 
-        let tmp = encode({
-            'form-name': form.getAttribute('name'),
-            ...data,
-        })
-
         // axios({
         //     method: "post",
         //     url: formUrl,
@@ -76,7 +71,7 @@ const ContactForm = () => {
               data-netlify-honeypot="bot-field"
         >
             <input type="hidden" name="form-name" value="contact" />
-            <input type="hidden" name="bot-field" />
+            <input type="hidden" name="bot-field" ref={register} />
             <Row gutters={{ lg: 20 }}>
                 <Col lg={6}>
                     <FormGroup mb="20px">
@@ -84,7 +79,7 @@ const ContactForm = () => {
                             type="text"
                             name="name"
                             id="name"
-                            placeholder="Name **"
+                            placeholder="Name *"
                             ref={register({ required: 'Name is required' })}
                         />
                         <Error>{errors.name && errors.name.message}</Error>
